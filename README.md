@@ -25,6 +25,26 @@ Monorepo-Mixte/nexploy/
 
 Cloning one without the other leaves `pnpm install` unable to resolve the links.
 
+## Singleton packages are peer dependencies
+
+`react`, `react-dom`, `next`, `next-intl`, `react-hook-form` and `@xyflow/react` are declared as
+peer dependencies and deliberately **not installed here**. Each of them carries React context;
+two physical copies mean two contexts, and a panel calling `useTranslations` or `useFormContext`
+throws at runtime even when both copies are the same version.
+
+Turbopack resolves linked packages through their real path, so node sources look for these
+packages by walking up from this repository. A symlink at the shared parent points that walk at
+Nexploy's copies:
+
+```
+Monorepo-Mixte/nexploy/
+├── node_modules -> nexploy/apps/nexploy/node_modules
+├── nexploy/
+└── nodes/
+```
+
+`pnpm check:nodes` and the `preinstall` hook in the `nexploy` repository both verify this link.
+
 ## Shared dependency versions must stay in lockstep
 
 `node-ui` and `nodes` compile against `@workspace/ui`, which is linked from `../nexploy`. TypeScript treats two copies of a type-bearing

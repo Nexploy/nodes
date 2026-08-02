@@ -12,10 +12,7 @@
   "dependencies": {
     "@nexploy/node-core": "workspace:*",
     "@workspace/ui": "link:../../../nexploy/packages/ui",
-    "@xyflow/react": "^12.11.1",
     "lucide-react": "^1.17.0",
-    "next-intl": "^4.9.1",
-    "react": "^19.2.3",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -25,5 +22,10 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@xyflow/react": "^12.11.1",
+    "next-intl": "^4.9.1",
+    "react": "^19.2.3"
   }
 }
