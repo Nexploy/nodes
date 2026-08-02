@@ -3,6 +3,22 @@
   "version": "0.1.0",
   "description": "Pipeline node library for Nexploy \u2014 descriptors, executors and configuration panels.",
   "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nexploy/nodes.git"
+  },
+  "homepage": "https://github.com/Nexploy/nodes#readme",
+  "bugs": {
+    "url": "https://github.com/Nexploy/nodes/issues"
+  },
+  "keywords": [
+    "nexploy",
+    "pipeline",
+    "ci",
+    "cd",
+    "docker",
+    "deployment"
+  ],
   "type": "module",
   "sideEffects": false,
   "files": [

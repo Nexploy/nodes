@@ -1,33 +1,44 @@
-name: Publish
+name: Publish to npm
 
 on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+    environment: npm-publish
+    defaults:
+      run:
+        working-directory: nodes
     steps:
-      - uses: actions/checkout@v5
-      - name: Check out nexploy (the vendored sources come from it)
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
-          repository: ${{ github.repository_owner }}/nexploy
-          path: ../nexploy
-          token: ${{ secrets.NEXPLOY_REPO_TOKEN }}
+          path: nodes
+
+      # scripts/vendor.mjs copies the slices of nexploy's private packages the
+      # library uses, so the build needs a checkout beside this one.
+      - uses: actions/checkout@v6
+        with:
+          repository: Nexploy/nexploy
+          path: nexploy
+
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+          cache-dependency-path: nodes/pnpm-lock.yaml
+
+      - run: npm install -g npm@latest
       - run: pnpm install --frozen-lockfile
       - run: pnpm run typecheck
       - run: pnpm run build
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --provenance
