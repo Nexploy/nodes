@@ -41,19 +41,30 @@ the outputs that can be dragged onto a downstream node. None of that is declared
 
 ## Build
 
-`src/vendor/` holds the slices of Nexploy's private packages the library uses — a dozen shadcn
-components and a few pure helpers. `scripts/vendor.mjs` recomputes that copy from the Nexploy
-checkout before every build, following imports transitively and rewriting specifiers, so the
-published package is self-contained and the copy cannot drift.
-
 ```bash
-pnpm build       # vendor + tsc → dist/
+pnpm build       # tsc → dist/
 pnpm typecheck
 ```
 
-The build needs a Nexploy checkout beside this repository, or `NEXPLOY_APP_ROOT` pointing at one.
-`dist/` keeps one file per source file so the `'use client'` directive survives on each of the 62
-configuration panels — a bundler would hoist or drop it.
+The build needs nothing but this repository. `dist/` keeps one file per source file so the
+`'use client'` directive survives on each of the 62 configuration panels — a bundler would hoist
+or drop it.
+
+### The vendored sources
+
+`src/vendor/` holds the slices of Nexploy's private packages the library uses — a dozen shadcn
+components and a few pure helpers — rewritten to import from `@nexploy/nodes/vendor/*`. It is
+**committed**, so publishing never depends on the state of another repository.
+
+`scripts/vendor.mjs` regenerates it from a Nexploy checkout, following imports transitively:
+
+```bash
+pnpm vendor:sync    # refresh the copy, then commit it
+pnpm vendor:check   # fail if it has drifted from nexploy
+```
+
+Both need a Nexploy checkout beside this repository, or `NEXPLOY_APP_ROOT` pointing at one. Run
+`vendor:sync` when the design system changes; the build itself never calls it.
 
 ## Working on a node from Nexploy
 
