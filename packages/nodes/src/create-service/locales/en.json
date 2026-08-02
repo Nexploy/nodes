@@ -4,5 +4,19 @@
       "name": "Create Service",
       "description": "Create a new Docker Swarm service from an image"
     }
+  },
+  "config": {
+    "createServiceName": "Service Name",
+    "createServiceNamePlaceholder": "e.g. my-service",
+    "createServiceMode": "Mode",
+    "createServiceModeReplicated": "Replicated",
+    "createServiceModeGlobal": "Global (one per node)",
+    "createServiceReplicas": "Replicas",
+    "createServiceNetworks": "Overlay Networks",
+    "createServiceNetworkPlaceholder": "e.g. my-overlay-network",
+    "createServiceAddNetwork": "Add Network",
+    "createServiceConstraints": "Placement Constraints",
+    "createServiceConstraintPlaceholder": "e.g. node.role==worker",
+    "createServiceAddConstraint": "Add Constraint"
   }
 }

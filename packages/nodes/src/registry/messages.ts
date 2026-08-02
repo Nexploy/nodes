@@ -1,3 +1,4 @@
+import sharedEn from './locales/en.json';
 import addDomainEn from '../add-domain/locales/en.json';
 import addSslCertificateEn from '../add-ssl-certificate/locales/en.json';
 import backupVolumeBucketStorageEn from '../backup-volume-bucket-storage/locales/en.json';
@@ -61,6 +62,7 @@ import waitForPortEn from '../wait-for-port/locales/en.json';
 import waitForUrlEn from '../wait-for-url/locales/en.json';
 import webhookCloneEn from '../webhook-clone/locales/en.json';
 
+import sharedFr from './locales/fr.json';
 import addDomainFr from '../add-domain/locales/fr.json';
 import addSslCertificateFr from '../add-ssl-certificate/locales/fr.json';
 import backupVolumeBucketStorageFr from '../backup-volume-bucket-storage/locales/fr.json';
@@ -142,6 +144,7 @@ function mergeMessages(sources: MessageTree[]): MessageTree {
 
 export const builtinNodeMessages: Record<string, MessageTree> = {
     en: mergeMessages([
+        sharedEn,
         addDomainEn,
         addSslCertificateEn,
         backupVolumeBucketStorageEn,
@@ -206,6 +209,7 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         webhookCloneEn,
     ]),
     fr: mergeMessages([
+        sharedFr,
         addDomainFr,
         addSslCertificateFr,
         backupVolumeBucketStorageFr,

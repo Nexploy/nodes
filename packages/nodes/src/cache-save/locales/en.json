@@ -4,5 +4,8 @@
       "name": "Cache Save",
       "description": "Save a directory from the work directory into a Docker volume cache"
     }
+  },
+  "config": {
+    "cacheSourcePath": "Source Path"
   }
 }

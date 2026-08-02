@@ -4,5 +4,8 @@
       "name": "Sauvegarder le cache",
       "description": "Sauvegarde un répertoire du dossier de travail dans un volume Docker"
     }
+  },
+  "config": {
+    "cacheSourcePath": "Chemin source"
   }
 }

@@ -4,5 +4,15 @@
       "name": "Fusionner une branche",
       "description": "Fusionner une branche dans la branche courante"
     }
+  },
+  "config": {
+    "mergeSourceBranch": "Branche source",
+    "mergeTargetBranch": "Branche cible",
+    "mergeStrategy": "Stratégie",
+    "mergeStrategyMerge": "Commit de merge",
+    "mergeStrategySquash": "Squash",
+    "mergeMessage": "Message de commit",
+    "mergeMessagePlaceholder": "Merge feature/ma-branche dans main",
+    "mergePush": "Pousser après le merge"
   }
 }

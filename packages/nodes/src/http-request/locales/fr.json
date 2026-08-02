@@ -4,5 +4,11 @@
       "name": "Requête HTTP",
       "description": "Effectue une requête HTTP vers une URL externe"
     }
+  },
+  "config": {
+    "httpHeaders": "En-têtes",
+    "httpBody": "Corps de la requête",
+    "jsonBodyPlaceholder": "'{'\"key\": \"value\"'}'",
+    "httpUrlPlaceholder": "https://example.com/webhook"
   }
 }

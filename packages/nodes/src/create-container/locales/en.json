@@ -4,5 +4,12 @@
       "name": "Create Container",
       "description": "Create and start a Docker container from an image"
     }
+  },
+  "config": {
+    "createContainerName": "Container Name",
+    "createContainerNamePlaceholder": "e.g. my-app (leave empty to auto-generate)",
+    "createContainerRestartPolicy": "Restart Policy",
+    "createContainerNetwork": "Network",
+    "createContainerNetworkPlaceholder": "e.g. my-network (leave empty for default)"
   }
 }

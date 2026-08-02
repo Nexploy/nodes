@@ -4,5 +4,8 @@
       "name": "Prune Images",
       "description": "Remove unused Docker images to free disk space"
     }
+  },
+  "config": {
+    "pruneOnlyDangling": "Only Dangling Images"
   }
 }

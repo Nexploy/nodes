@@ -4,5 +4,11 @@
       "name": "Run Command in Container",
       "description": "Execute a command inside a running Docker container"
     }
+  },
+  "config": {
+    "workdir": "Working Directory",
+    "execUser": "User",
+    "workdirPlaceholder": "/app",
+    "execUserPlaceholder": "user[:group] or uid[:gid]"
   }
 }

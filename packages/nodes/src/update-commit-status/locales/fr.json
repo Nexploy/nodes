@@ -4,5 +4,12 @@
       "name": "Mettre à jour le statut du commit",
       "description": "Met à jour le statut d'un commit GitHub ou GitLab"
     }
+  },
+  "config": {
+    "commitStatusContext": "Nom du statut",
+    "commitStatusState": "État du statut",
+    "commitStatusDescription": "Description",
+    "commitStatusDescriptionPlaceholder": "Build réussi",
+    "commitStatusContextPlaceholder": "nexploy/pipeline"
   }
 }

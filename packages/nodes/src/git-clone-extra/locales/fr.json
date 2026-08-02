@@ -4,5 +4,14 @@
       "name": "Cloner un dépôt supplémentaire",
       "description": "Clone un dépôt supplémentaire dans un sous-répertoire du dossier de travail"
     }
+  },
+  "config": {
+    "gitCloneUrl": "URL du dépôt",
+    "gitCloneTargetDir": "Répertoire cible",
+    "gitCloneToken": "Jeton d'accès",
+    "gitCloneTokenPlaceholder": "Laisser vide pour les dépôts publics",
+    "gitCloneUrlExtraPlaceholder": "https://github.com/org/repo.git",
+    "branchNamePlaceholder": "main",
+    "gitCloneTargetDirPlaceholder": "extra-repo"
   }
 }

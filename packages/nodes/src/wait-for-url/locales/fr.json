@@ -4,5 +4,8 @@
       "name": "Attendre une URL",
       "description": "Interroge une URL jusqu'à ce qu'elle retourne le statut HTTP attendu"
     }
+  },
+  "config": {
+    "healthUrlPlaceholder": "https://example.com/health"
   }
 }

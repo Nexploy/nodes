@@ -4,5 +4,12 @@
       "name": "Créer un conteneur",
       "description": "Créer et démarrer un conteneur Docker à partir d'une image"
     }
+  },
+  "config": {
+    "createContainerName": "Nom du conteneur",
+    "createContainerNamePlaceholder": "ex. mon-app (laisser vide pour auto-générer)",
+    "createContainerRestartPolicy": "Politique de redémarrage",
+    "createContainerNetwork": "Réseau",
+    "createContainerNetworkPlaceholder": "ex. mon-réseau (laisser vide pour le réseau par défaut)"
   }
 }

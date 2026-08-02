@@ -4,5 +4,12 @@
       "name": "Secrets Doppler",
       "description": "Récupère les secrets depuis Doppler. Les variables s'accumulent tout au long du pipeline."
     }
+  },
+  "config": {
+    "dopplerServiceToken": "Token de service",
+    "dopplerProject": "Projet (optionnel)",
+    "dopplerConfig": "Config / Environnement (optionnel)",
+    "dopplerProjectPlaceholder": "my-project",
+    "dopplerConfigPlaceholder": "prd"
   }
 }

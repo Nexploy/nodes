@@ -4,5 +4,11 @@
       "name": "Télécharger une image",
       "description": "Télécharger une image Docker depuis Docker Hub ou un registre privé"
     }
+  },
+  "config": {
+    "dockerHubLabel": "Docker Hub (public)",
+    "pullImageName": "Nom de l'image",
+    "pullImageNamePlaceholderHub": "ex. image:version",
+    "pullImageNamePlaceholderPrivate": "ex. monapp:1.0.0"
   }
 }

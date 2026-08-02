@@ -4,5 +4,18 @@
       "name": "Compose Run",
       "description": "Run a one-off command in a Compose service"
     }
+  },
+  "config": {
+    "composeService": "Service",
+    "composeServicePlaceholder": "api",
+    "composeServiceDescription": "Name of the service, as declared in the compose file",
+    "composeRunCommand": "Command",
+    "composeRunCommandPlaceholder": "python manage.py migrate",
+    "composeRunCommandDescription": "Leave empty to use the image default command. Runs without a TTY (-T): the command must be non-interactive.",
+    "composeRunWorkingDir": "Working Directory",
+    "composeRunUser": "User",
+    "composeRunNoDeps": "Without dependencies",
+    "composeRunNoDepsDescription": "Do not start the services this one depends on (--no-deps)",
+    "composeRunContinueOnErrorDescription": "Continue the pipeline even if the command exits with a non-zero code"
   }
 }

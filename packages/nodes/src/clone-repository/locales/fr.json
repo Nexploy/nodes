@@ -4,5 +4,11 @@
       "name": "Cloner le dépôt",
       "description": "Clone le dépôt Git lié dans l’espace de travail du build"
     }
+  },
+  "config": {
+    "branchNotExist": "La branche n'existe plus",
+    "cloneCommitHash": "Hash du commit",
+    "cloneCommitHashPlaceholder": "ex. abc1234",
+    "cloneCommitHashDescription": "Laisser vide pour utiliser le dernier commit de la branche"
   }
 }

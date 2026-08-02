@@ -4,5 +4,8 @@
       "name": "Delay",
       "description": "Pause the pipeline for a fixed number of seconds"
     }
+  },
+  "config": {
+    "delaySeconds": "Delay (seconds)"
   }
 }

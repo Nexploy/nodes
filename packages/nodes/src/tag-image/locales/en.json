@@ -4,5 +4,8 @@
       "name": "Tag Image",
       "description": "Add a tag to a Docker image"
     }
+  },
+  "config": {
+    "targetTag": "Target Tag"
   }
 }

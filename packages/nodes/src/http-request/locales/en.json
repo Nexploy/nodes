@@ -4,5 +4,11 @@
       "name": "HTTP Request",
       "description": "Make an HTTP request to an external URL"
     }
+  },
+  "config": {
+    "httpHeaders": "Headers",
+    "httpBody": "Request Body",
+    "jsonBodyPlaceholder": "'{'\"key\": \"value\"'}'",
+    "httpUrlPlaceholder": "https://example.com/webhook"
   }
 }

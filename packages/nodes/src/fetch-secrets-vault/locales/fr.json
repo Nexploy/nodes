@@ -4,5 +4,15 @@
       "name": "Secrets Vault",
       "description": "Récupère les secrets depuis HashiCorp Vault KV. Les variables s'accumulent tout au long du pipeline."
     }
+  },
+  "config": {
+    "vaultEndpoint": "Endpoint Vault",
+    "vaultToken": "Token Vault",
+    "vaultSecretPath": "Chemin du secret",
+    "vaultKvVersion": "Version du moteur KV",
+    "vaultNamespace": "Namespace (Enterprise)",
+    "vaultEndpointPlaceholder": "https://vault.example.com",
+    "vaultSecretPathPlaceholder": "SandBox/myapp",
+    "vaultNamespacePlaceholder": "admin/team-a"
   }
 }

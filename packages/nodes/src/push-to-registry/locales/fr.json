@@ -4,5 +4,9 @@
       "name": "Pousser une image vers un registre",
       "description": "Pousser une image Docker vers un registre privé ou public"
     }
+  },
+  "config": {
+    "registriesLoading": "Chargement des registres...",
+    "registryUnavailable": "Registre non disponible"
   }
 }

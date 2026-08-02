@@ -4,5 +4,8 @@
       "name": "Wait for URL",
       "description": "Poll a URL until it returns the expected HTTP status"
     }
+  },
+  "config": {
+    "healthUrlPlaceholder": "https://example.com/health"
   }
 }

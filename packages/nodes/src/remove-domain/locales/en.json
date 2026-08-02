@@ -4,5 +4,8 @@
       "name": "Remove Domain",
       "description": "Remove a domain from the repository"
     }
+  },
+  "config": {
+    "removeDomainHost": "Domain to Remove"
   }
 }

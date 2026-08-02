@@ -4,5 +4,25 @@
       "name": "Infisical Secrets",
       "description": "Fetch secrets from Infisical (cloud or self-hosted). Variables accumulate throughout the pipeline."
     }
+  },
+  "config": {
+    "infisicalSiteUrl": "Instance URL",
+    "infisicalSiteUrlPlaceholder": "https://app.infisical.com",
+    "infisicalSiteUrlDescription": "Use https://eu.infisical.com for the EU region, or your own URL for a self-hosted instance.",
+    "infisicalAuthMethod": "Authentication Method",
+    "infisicalAuthMethodUniversal": "Machine Identity (Universal Auth)",
+    "infisicalAuthMethodToken": "Access Token",
+    "infisicalClientId": "Client ID",
+    "infisicalClientIdPlaceholder": "Machine identity client ID",
+    "infisicalClientSecret": "Client Secret",
+    "infisicalAccessToken": "Access Token",
+    "infisicalProjectId": "Project ID",
+    "infisicalProjectIdPlaceholder": "Infisical project ID",
+    "infisicalEnvironment": "Environment Slug",
+    "infisicalEnvironmentPlaceholder": "dev",
+    "infisicalSecretPath": "Secret Path",
+    "infisicalRecursive": "Include subfolders",
+    "infisicalExpandReferences": "Expand secret references",
+    "infisicalIncludeImports": "Include imported secrets"
   }
 }

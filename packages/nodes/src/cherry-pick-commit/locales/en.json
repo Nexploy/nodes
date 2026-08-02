@@ -4,5 +4,11 @@
       "name": "Cherry-pick Commit",
       "description": "Apply a specific commit to the current branch"
     }
+  },
+  "config": {
+    "cherryPickCommitHash": "Commit Hash",
+    "cherryPickCommitHashPlaceholder": "abc1234",
+    "cherryPickTargetBranch": "Target Branch",
+    "cherryPickNoCommit": "Apply without committing (--no-commit)"
   }
 }

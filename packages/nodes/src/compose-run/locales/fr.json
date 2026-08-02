@@ -4,5 +4,18 @@
       "name": "Compose Run",
       "description": "Exécuter une commande ponctuelle dans un service Compose"
     }
+  },
+  "config": {
+    "composeService": "Service",
+    "composeServicePlaceholder": "api",
+    "composeServiceDescription": "Nom du service, tel que déclaré dans le fichier compose",
+    "composeRunCommand": "Commande",
+    "composeRunCommandPlaceholder": "python manage.py migrate",
+    "composeRunCommandDescription": "Laisser vide pour utiliser la commande par défaut de l'image. Exécutée sans TTY (-T) : la commande doit être non interactive.",
+    "composeRunWorkingDir": "Répertoire de travail",
+    "composeRunUser": "Utilisateur",
+    "composeRunNoDeps": "Sans les dépendances",
+    "composeRunNoDepsDescription": "Ne pas démarrer les services dont celui-ci dépend (--no-deps)",
+    "composeRunContinueOnErrorDescription": "Poursuivre le pipeline même si la commande sort avec un code non nul"
   }
 }

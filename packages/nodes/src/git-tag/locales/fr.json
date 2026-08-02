@@ -4,5 +4,10 @@
       "name": "Tag Git",
       "description": "Crée et pousse un tag Git vers le dépôt distant"
     }
+  },
+  "config": {
+    "gitTagName": "Nom du tag",
+    "gitTagMessage": "Message",
+    "gitTagMessagePlaceholder": "Laisser vide pour un tag léger"
   }
 }

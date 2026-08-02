@@ -4,5 +4,14 @@
       "name": "Git Clone Extra",
       "description": "Clone an additional repository into a work directory subdirectory"
     }
+  },
+  "config": {
+    "gitCloneUrl": "Repository URL",
+    "gitCloneTargetDir": "Target Directory",
+    "gitCloneToken": "Access Token",
+    "gitCloneTokenPlaceholder": "Leave empty for public repositories",
+    "gitCloneUrlExtraPlaceholder": "https://github.com/org/repo.git",
+    "branchNamePlaceholder": "main",
+    "gitCloneTargetDirPlaceholder": "extra-repo"
   }
 }

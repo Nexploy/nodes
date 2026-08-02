@@ -4,5 +4,8 @@
       "name": "Nettoyer les images",
       "description": "Supprime les images Docker inutilisées pour libérer de l'espace disque"
     }
+  },
+  "config": {
+    "pruneOnlyDangling": "Uniquement les images orphelines"
   }
 }

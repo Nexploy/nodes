@@ -4,5 +4,8 @@
       "name": "Supprimer un domaine",
       "description": "Supprimer un domaine du dépôt"
     }
+  },
+  "config": {
+    "removeDomainHost": "Domaine à supprimer"
   }
 }

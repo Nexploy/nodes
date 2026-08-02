@@ -4,5 +4,12 @@
       "name": "Télécharger un fichier",
       "description": "Télécharge un fichier depuis une URL dans le répertoire de travail"
     }
+  },
+  "config": {
+    "downloadDestination": "Répertoire de destination",
+    "downloadFilename": "Nom du fichier",
+    "downloadFilenamePlaceholder": "Laisser vide pour utiliser le nom du fichier depuis l'URL",
+    "fileUrlPlaceholder": "https://example.com/file",
+    "downloadDestinationPlaceholder": "downloads/files"
   }
 }

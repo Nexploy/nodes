@@ -4,5 +4,13 @@
       "name": "Compose Up",
       "description": "Start the Compose stack built beforehand"
     }
+  },
+  "config": {
+    "composeUpRecreate": "Recreate containers",
+    "composeUpRecreateDescription": "Run docker compose down before starting the stack",
+    "composeUpRemoveOrphans": "Remove orphans",
+    "composeUpRemoveOrphansDescription": "Remove containers of services no longer declared in the compose file (--remove-orphans)",
+    "composeUpKeepComposeFile": "Keep the generated compose file",
+    "composeUpKeepComposeFileDescription": "Keep the processed compose file in the working directory for debugging"
   }
 }

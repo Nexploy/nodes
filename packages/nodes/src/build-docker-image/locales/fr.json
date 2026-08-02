@@ -4,5 +4,10 @@
       "name": "Construire l'image Docker",
       "description": "Construire une image Docker depuis un Dockerfile"
     }
+  },
+  "config": {
+    "dockerfileFilePath": "Chemin du fichier",
+    "dockerfileFilePathPlaceholder": "Laisser vide pour la racine du dépôt",
+    "buildImageNamePlaceholder": "Laisser vide pour un nom auto-généré"
   }
 }

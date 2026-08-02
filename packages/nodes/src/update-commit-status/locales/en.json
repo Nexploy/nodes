@@ -4,5 +4,12 @@
       "name": "Update Commit Status",
       "description": "Update a GitHub or GitLab commit status"
     }
+  },
+  "config": {
+    "commitStatusContext": "Status Name",
+    "commitStatusState": "Status State",
+    "commitStatusDescription": "Description",
+    "commitStatusDescriptionPlaceholder": "Build succeeded",
+    "commitStatusContextPlaceholder": "nexploy/pipeline"
   }
 }

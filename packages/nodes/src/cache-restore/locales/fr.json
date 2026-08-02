@@ -4,5 +4,8 @@
       "name": "Restaurer le cache",
       "description": "Restaure un cache de build depuis un volume Docker vers le répertoire de travail"
     }
+  },
+  "config": {
+    "cachePath": "Chemin du cache"
   }
 }

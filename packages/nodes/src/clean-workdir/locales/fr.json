@@ -4,5 +4,8 @@
       "name": "Nettoyer le répertoire de travail",
       "description": "Supprime le répertoire du dépôt cloné"
     }
+  },
+  "config": {
+    "cleanWorkdirInfo": "Supprime le répertoire du dépôt cloné du disque après l'exécution du pipeline."
   }
 }

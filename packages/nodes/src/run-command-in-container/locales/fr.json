@@ -4,5 +4,11 @@
       "name": "Exécuter une commande dans un conteneur",
       "description": "Exécute une commande dans un conteneur Docker en cours d'exécution"
     }
+  },
+  "config": {
+    "workdir": "Répertoire de travail",
+    "execUser": "Utilisateur",
+    "workdirPlaceholder": "/app",
+    "execUserPlaceholder": "utilisateur[:groupe] ou uid[:gid]"
   }
 }

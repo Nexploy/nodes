@@ -4,5 +4,16 @@
       "name": "Send Notification",
       "description": "Send a webhook notification"
     }
+  },
+  "config": {
+    "webhookUrlTooltipDesc": "A POST request with the following JSON body will be sent to this URL:",
+    "messagePlaceholder": "Leave empty for default message",
+    "triggerOn": "Trigger on",
+    "triggerOnSuccess": "Success",
+    "triggerOnSuccessDesc": "only if the pipeline completed without errors",
+    "triggerOnFailureDesc": "only if at least one node failed",
+    "triggerOnAlways": "Always",
+    "triggerOnAlwaysDesc": "regardless of the pipeline result",
+    "webhookUrlPlaceholder": "https://hooks.example.com/…"
   }
 }

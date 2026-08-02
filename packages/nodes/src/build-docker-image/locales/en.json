@@ -4,5 +4,10 @@
       "name": "Build Docker Image",
       "description": "Build a Docker image from a Dockerfile"
     }
+  },
+  "config": {
+    "dockerfileFilePath": "File Path",
+    "dockerfileFilePathPlaceholder": "Leave empty for repository root",
+    "buildImageNamePlaceholder": "Leave empty for auto-generated name"
   }
 }

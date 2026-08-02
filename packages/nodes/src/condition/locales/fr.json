@@ -6,5 +6,12 @@
       "outputTrue": "Vrai",
       "outputFalse": "Faux"
     }
+  },
+  "config": {
+    "conditionMode": "Opérateur",
+    "conditionModeAndDesc": "Toutes les entrées doivent réussir",
+    "conditionModeOrDesc": "Au moins une doit réussir",
+    "conditionInputNodes": "Nœuds d'entrée connectés",
+    "conditionNoInputs": "Aucun nœud d'entrée connecté"
   }
 }

@@ -4,5 +4,9 @@
       "name": "Mettre à jour un service",
       "description": "Met à jour un service Docker Swarm vers une nouvelle image"
     }
+  },
+  "config": {
+    "serviceImage": "Image",
+    "serviceForceUpdate": "Forcer la mise à jour"
   }
 }

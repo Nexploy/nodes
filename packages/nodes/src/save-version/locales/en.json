@@ -4,5 +4,8 @@
       "name": "Save Version",
       "description": "Save the current build as a new version"
     }
+  },
+  "config": {
+    "saveVersionInfo": "Saves the current build as a new numbered version using the built image tag and commit info."
   }
 }

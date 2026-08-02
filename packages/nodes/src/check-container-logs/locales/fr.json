@@ -4,5 +4,13 @@
       "name": "Vérifier les logs du conteneur",
       "description": "Recherche un pattern regex dans les logs d'un conteneur"
     }
+  },
+  "config": {
+    "logPattern": "Pattern (regex)",
+    "logPatternPlaceholder": "ex. .*prêt.*",
+    "logSince": "Depuis",
+    "logSinceTooltip": "Filtre les logs à partir de ce point dans le temps. Accepte une durée relative (ex. 30s, 5m, 2h) ou un timestamp ISO (ex. 2024-01-15T10:30:00). Utile pour éviter de matcher d'anciens logs antérieurs au déploiement en cours.",
+    "logSincePlaceholder": "ex. 10s",
+    "logFailIfFound": "Échouer si le pattern est trouvé"
   }
 }

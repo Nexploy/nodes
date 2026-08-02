@@ -6,5 +6,12 @@
       "outputTrue": "True",
       "outputFalse": "False"
     }
+  },
+  "config": {
+    "conditionMode": "Operator",
+    "conditionModeAndDesc": "All inputs must succeed",
+    "conditionModeOrDesc": "At least one must succeed",
+    "conditionInputNodes": "Connected input nodes",
+    "conditionNoInputs": "No input nodes connected"
   }
 }

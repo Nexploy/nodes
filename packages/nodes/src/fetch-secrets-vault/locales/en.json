@@ -4,5 +4,15 @@
       "name": "Vault Secrets",
       "description": "Fetch secrets from HashiCorp Vault KV engine. Variables accumulate throughout the pipeline."
     }
+  },
+  "config": {
+    "vaultEndpoint": "Vault Endpoint",
+    "vaultToken": "Vault Token",
+    "vaultSecretPath": "Secret Path",
+    "vaultKvVersion": "KV Engine Version",
+    "vaultNamespace": "Namespace (Enterprise)",
+    "vaultEndpointPlaceholder": "https://vault.example.com",
+    "vaultSecretPathPlaceholder": "SandBox/myapp",
+    "vaultNamespacePlaceholder": "admin/team-a"
   }
 }

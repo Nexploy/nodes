@@ -4,5 +4,15 @@
       "name": "Merge Branch",
       "description": "Merge a branch into the current branch"
     }
+  },
+  "config": {
+    "mergeSourceBranch": "Source Branch",
+    "mergeTargetBranch": "Target Branch",
+    "mergeStrategy": "Strategy",
+    "mergeStrategyMerge": "Merge commit",
+    "mergeStrategySquash": "Squash",
+    "mergeMessage": "Commit Message",
+    "mergeMessagePlaceholder": "Merge feature/my-branch into main",
+    "mergePush": "Push after merge"
   }
 }

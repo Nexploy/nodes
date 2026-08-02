@@ -4,5 +4,10 @@
       "name": "Git Tag",
       "description": "Create and push a git tag to the remote"
     }
+  },
+  "config": {
+    "gitTagName": "Tag Name",
+    "gitTagMessage": "Message",
+    "gitTagMessagePlaceholder": "Leave empty for lightweight tag"
   }
 }

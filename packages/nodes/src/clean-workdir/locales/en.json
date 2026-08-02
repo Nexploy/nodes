@@ -4,5 +4,8 @@
       "name": "Clean Work Dir",
       "description": "Removes the cloned repository directory"
     }
+  },
+  "config": {
+    "cleanWorkdirInfo": "Removes the cloned repository directory from disk after the pipeline completes."
   }
 }

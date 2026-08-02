@@ -4,5 +4,8 @@
       "name": "Valider Compose",
       "description": "Vérifier la syntaxe du fichier Docker Compose"
     }
+  },
+  "config": {
+    "composePath": "Chemin du fichier Compose"
   }
 }

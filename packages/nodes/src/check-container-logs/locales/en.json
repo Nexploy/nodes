@@ -4,5 +4,13 @@
       "name": "Check Container Logs",
       "description": "Search container logs for a regex pattern"
     }
+  },
+  "config": {
+    "logPattern": "Pattern (regex)",
+    "logPatternPlaceholder": "e.g. .*ready.*",
+    "logSince": "Since",
+    "logSinceTooltip": "Filter logs starting from this point in time. Accepts a relative duration (e.g. 30s, 5m, 2h) or an ISO timestamp (e.g. 2024-01-15T10:30:00). Useful to avoid matching old logs that predate the current deployment.",
+    "logSincePlaceholder": "e.g. 10s",
+    "logFailIfFound": "Fail if Pattern Found"
   }
 }

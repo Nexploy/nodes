@@ -4,5 +4,12 @@
       "name": "Download File",
       "description": "Download a file from a URL into the work directory"
     }
+  },
+  "config": {
+    "downloadDestination": "Destination Directory",
+    "downloadFilename": "Filename",
+    "downloadFilenamePlaceholder": "Leave empty to use filename from URL",
+    "fileUrlPlaceholder": "https://example.com/file",
+    "downloadDestinationPlaceholder": "downloads/files"
   }
 }

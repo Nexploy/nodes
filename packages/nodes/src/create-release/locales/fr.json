@@ -4,5 +4,16 @@
       "name": "Créer une release",
       "description": "Créer une nouvelle release sur GitHub ou GitLab"
     }
+  },
+  "config": {
+    "releaseTagName": "Nom du tag",
+    "releaseTagNamePlaceholder": "v1.0.0",
+    "releaseTargetBranch": "Branche cible",
+    "releaseTitle": "Titre de la release",
+    "releaseTitlePlaceholder": "Release v1.0.0",
+    "releaseNotes": "Notes de release",
+    "releaseNotesPlaceholder": "Décrivez les changements inclus dans cette release...",
+    "releaseDraft": "Sauvegarder comme brouillon",
+    "releasePrerelease": "Marquer comme pré-release"
   }
 }

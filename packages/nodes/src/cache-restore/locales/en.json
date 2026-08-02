@@ -4,5 +4,8 @@
       "name": "Cache Restore",
       "description": "Restore a build cache from a Docker volume into the work directory"
     }
+  },
+  "config": {
+    "cachePath": "Cache Path"
   }
 }

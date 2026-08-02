@@ -4,5 +4,13 @@
       "name": "Trigger Stage Build",
       "description": "Start a build on another stage when this pipeline succeeds"
     }
+  },
+  "config": {
+    "targetStage": "Target stage",
+    "selectTargetStage": "Select a stage",
+    "stagesLoading": "Loading stages...",
+    "stageUnavailable": "Stage unavailable",
+    "stageStaleWarning": "This stage is no longer available.",
+    "noStagesFound": "No other stage available."
   }
 }

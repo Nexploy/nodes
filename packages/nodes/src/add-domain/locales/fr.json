@@ -4,5 +4,14 @@
       "name": "Ajouter un domaine",
       "description": "Ajouter un domaine au dépôt"
     }
+  },
+  "config": {
+    "addDomainHost": "Domaine",
+    "addDomainContainerPort": "Port du conteneur",
+    "addDomainPath": "Chemin",
+    "addDomainInternalPath": "Chemin interne",
+    "addDomainHttps": "Activer HTTPS",
+    "addDomainStripPath": "Supprimer le préfixe de chemin",
+    "pathPlaceholder": "/"
   }
 }

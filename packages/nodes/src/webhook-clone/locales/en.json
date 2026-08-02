@@ -4,5 +4,29 @@
       "name": "Webhook Clone",
       "description": "Clone the repository when a webhook push event is received"
     }
+  },
+  "config": {
+    "webhookStatusConfigured": "Webhook configured",
+    "webhookStatusNotConfigured": "Webhook not configured",
+    "webhookStatusNotConfiguredDescription": "The webhook is not yet set up. Click the button to configure it manually.",
+    "webhookSetupButton": "Configure webhook",
+    "webhookBranchFilter": "Branch Filter",
+    "webhookBranchFilterPlaceholder": "e.g. main, develop, feature/*",
+    "webhookBranchFilterDescription": "Only trigger builds for matching branches — the pushed branch for a push, the destination branch for a merge request. Supports comma-separated values and wildcards (e.g. feature/*). Leave empty to accept all branches.",
+    "webhookTriggerEvents": "Trigger events",
+    "webhookTriggerEventsDescription": "Git events that start a build. Re-run the webhook setup after enabling new events so the provider sends them.",
+    "webhookEventPush": "Push",
+    "webhookEventMergeRequest": "Merge request",
+    "webhookEventTag": "Tag",
+    "webhookMergeRequestActions": "Merge request actions",
+    "webhookMergeRequestActionsDescription": "Merge request states that start a build. Merge requests coming from a fork are ignored.",
+    "webhookMergeRequestActionOpened": "Opened",
+    "webhookMergeRequestActionUpdated": "Updated",
+    "webhookMergeRequestActionMerged": "Merged",
+    "webhookMergeRequestActionClosed": "Closed",
+    "webhookTagFilter": "Tag filter",
+    "webhookTagFilterPlaceholder": "v*, release-*",
+    "webhookTagFilterDescription": "Comma-separated tag names. A trailing * matches a prefix. Leave empty to accept every tag.",
+    "webhookResyncButton": "Re-sync events"
   }
 }

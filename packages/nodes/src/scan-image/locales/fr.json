@@ -4,5 +4,12 @@
       "name": "Scanner l'image",
       "description": "Analyse de sécurité d'une image Docker avec Trivy"
     }
+  },
+  "config": {
+    "scanImagePlaceholder": "ex. image:version",
+    "trivyVersion": "Version Trivy",
+    "scanSeverity": "Sévérité minimale",
+    "exitOnVulnerabilities": "Échouer si vulnérabilités trouvées",
+    "trivyVersionPlaceholder": "canary"
   }
 }

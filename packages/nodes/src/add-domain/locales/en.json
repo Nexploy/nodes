@@ -4,5 +4,14 @@
       "name": "Add Domain",
       "description": "Add a domain to the repository"
     }
+  },
+  "config": {
+    "addDomainHost": "Domain",
+    "addDomainContainerPort": "Container Port",
+    "addDomainPath": "Path",
+    "addDomainInternalPath": "Internal Path",
+    "addDomainHttps": "Enable HTTPS",
+    "addDomainStripPath": "Strip Path Prefix",
+    "pathPlaceholder": "/"
   }
 }

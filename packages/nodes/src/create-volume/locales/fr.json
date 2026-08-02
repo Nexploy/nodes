@@ -4,5 +4,8 @@
       "name": "Créer un volume",
       "description": "Crée un volume Docker"
     }
+  },
+  "config": {
+    "volumeDriver": "Driver"
   }
 }

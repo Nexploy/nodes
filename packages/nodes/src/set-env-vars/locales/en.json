@@ -4,5 +4,8 @@
       "name": "Set Env Vars",
       "description": "Inject additional environment variables into the pipeline. Variables accumulate throughout the pipeline."
     }
+  },
+  "config": {
+    "vars": "Environment Variables"
   }
 }

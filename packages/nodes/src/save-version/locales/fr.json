@@ -4,5 +4,8 @@
       "name": "Sauvegarder la version",
       "description": "Enregistrer le build actuel comme nouvelle version"
     }
+  },
+  "config": {
+    "saveVersionInfo": "Sauvegarde ce build comme version numérotée, accessible depuis l'onglet Versions pour effectuer un rollback."
   }
 }

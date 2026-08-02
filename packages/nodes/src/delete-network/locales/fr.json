@@ -4,5 +4,12 @@
       "name": "Supprimer un réseau",
       "description": "Supprime un réseau Docker par nom ou identifiant"
     }
+  },
+  "config": {
+    "networkIdPlaceholder": "Sélectionner un réseau...",
+    "networksLoading": "Chargement des réseaux...",
+    "networksSelectLabel": "Liste des réseaux",
+    "noNetworksFound": "Aucun réseau trouvé",
+    "networkUnavailable": "Réseau indisponible"
   }
 }

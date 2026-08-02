@@ -4,5 +4,12 @@
       "name": "Prune Build Cache",
       "description": "Clear the Docker build cache to free disk space"
     }
+  },
+  "config": {
+    "pruneBuildCacheAll": "Remove All Cache",
+    "pruneBuildCacheKeepStorage": "Keep Storage",
+    "pruneBuildCacheFilter": "Filter",
+    "pruneBuildCacheKeepStoragePlaceholder": "10GB",
+    "pruneBuildCacheFilterPlaceholder": "until=24h"
   }
 }

@@ -4,5 +4,19 @@
       "name": "Add SSL Certificate",
       "description": "Provision an SSL certificate for a domain"
     }
+  },
+  "config": {
+    "sslCertType": "Certificate Type",
+    "sslCustom": "Custom",
+    "sslName": "Name",
+    "sslNamePlaceholder": "e.g. My Certificate",
+    "sslDomain": "Domain",
+    "sslDomainMustPoint": "The domain must point to this server's IP address before issuing",
+    "sslEmail": "Email",
+    "sslAgreeToTos": "I agree to the",
+    "sslTosLink": "Let's Encrypt Terms of Service",
+    "sslCertificate": "Certificate (PEM)",
+    "sslPrivateKey": "Private Key",
+    "sslLetsEncrypt": "Let's Encrypt"
   }
 }
