@@ -48,9 +48,10 @@
     "access": "public"
   },
   "scripts": {
-    "vendor": "node scripts/vendor.mjs",
-    "build": "pnpm run vendor && rm -rf dist && tsc -p tsconfig.build.json",
-    "typecheck": "pnpm run vendor && tsc --noEmit",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "vendor:sync": "node scripts/vendor.mjs",
+    "vendor:check": "node scripts/vendor.mjs --check",
     "format": "biome format --write .",
     "prepublishOnly": "pnpm run build"
   },

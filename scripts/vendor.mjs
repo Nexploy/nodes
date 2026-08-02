@@ -1,6 +1,10 @@
 // Copies the slices of nexploy's private packages that the library actually uses
-// into src/vendor/, rewriting their specifiers. Run before every build so the
-// published package is self-contained and the copy never drifts.
+// into src/vendor/, rewriting their specifiers.
+//
+// src/vendor/ is committed, so building this package needs nothing but this
+// repository. Run this by hand (pnpm vendor:sync) when nexploy's design system
+// changes; --check regenerates into a temporary directory and fails on any
+// difference, without touching the tree.
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,6 +26,10 @@ for (const [name, dir] of Object.entries(SOURCES)) {
 }
 
 const VENDOR_PREFIX = '@nexploy/nodes/vendor/';
+
+function readSafe(path) {
+    return existsSync(path) ? readFileSync(path, 'utf8') : null;
+}
 
 function walk(dir, out = []) {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -79,15 +87,45 @@ while (queue.length) {
     }
 }
 
+const check = process.argv.includes('--check');
 const vendorDir = join(root, 'src', 'vendor');
-rmSync(vendorDir, { recursive: true, force: true });
 
+const rendered = new Map();
 for (const [spec, file] of copied) {
-    const [pkg] = spec.split('/');
-    const target = join(vendorDir, spec.replace(/\.tsx?$/, '') + (file.endsWith('.tsx') ? '.tsx' : '.ts'));
+    const relPath = spec.replace(/\.tsx?$/, '') + (file.endsWith('.tsx') ? '.tsx' : '.ts');
+    rendered.set(relPath, readFileSync(file, 'utf8').replaceAll('@workspace/', VENDOR_PREFIX));
+}
+
+if (check) {
+    const onDisk = new Set();
+    const collect = (dir, prefix = '') => {
+        if (!existsSync(dir)) return;
+        for (const entry of readdirSync(dir, { withFileTypes: true })) {
+            const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
+            if (entry.isDirectory()) collect(join(dir, entry.name), rel);
+            else onDisk.add(rel);
+        }
+    };
+    collect(vendorDir);
+
+    const stale = [...rendered].filter(([rel, body]) => readSafe(join(vendorDir, rel)) !== body).map(([rel]) => rel);
+    const orphan = [...onDisk].filter((rel) => !rendered.has(rel));
+    if (stale.length === 0 && orphan.length === 0) {
+        console.log(`vendor: src/vendor/ matches nexploy (${rendered.size} files)`);
+        process.exit(0);
+    }
+    console.error('vendor: src/vendor/ is out of date with nexploy.\n');
+    for (const rel of stale) console.error(`  changed  ${rel}`);
+    for (const rel of orphan) console.error(`  orphan   ${rel}`);
+    console.error('\nRun pnpm vendor:sync and commit the result.');
+    process.exit(1);
+}
+
+rmSync(vendorDir, { recursive: true, force: true });
+for (const [rel, body] of rendered) {
+    const target = join(vendorDir, rel);
     mkdirSync(dirname(target), { recursive: true });
-    const source = readFileSync(file, 'utf8').replaceAll('@workspace/', VENDOR_PREFIX);
-    writeFileSync(target, source);
+    writeFileSync(target, body);
 }
 
 console.log(`vendor: ${copied.size} files copied into src/vendor/`);

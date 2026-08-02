@@ -16,14 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # scripts/vendor.mjs copies the slices of nexploy's private packages the
-      # library uses, so the build needs a checkout of it. Nested rather than a
-      # sibling: actions/checkout cannot write outside the workspace.
-      - uses: actions/checkout@v6
-        with:
-          repository: Nexploy/nexploy
-          path: .nexploy
-
       - uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v6
@@ -37,6 +29,3 @@ jobs:
       - run: pnpm run typecheck
       - run: pnpm run build
       - run: npm publish --provenance
-
-    env:
-      NEXPLOY_APP_ROOT: ${{ github.workspace }}/.nexploy
