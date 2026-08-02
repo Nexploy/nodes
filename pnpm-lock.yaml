@@ -49,9 +49,6 @@ importers:
       '@nexploy/node-core':
         specifier: workspace:*
         version: link:../node-core
-      '@workspace/typescript-interface':
-        specifier: link:../../../nexploy/packages/typescript-interface
-        version: link:../../../nexploy/packages/typescript-interface
       '@workspace/ui':
         specifier: link:../../../nexploy/packages/ui
         version: link:../../../nexploy/packages/ui

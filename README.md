@@ -9,7 +9,7 @@ services, so nothing here reaches into the Nexploy app.
 | Package | Contents |
 |---|---|
 | `@nexploy/node-core` | Node contracts, Zod schemas, runtime helpers. No workspace dependencies. |
-| `@nexploy/node-ui` | UI adapter, ref-drop primitives, node manifest and theme. |
+| `@nexploy/node-ui` | UI adapter, ref-drop primitives, node manifest and theme. Depends on `@workspace/ui` for the design system. |
 | `@nexploy/nodes` | The 62 built-in nodes — descriptor, executor, config panel, locales. |
 
 ## Layout expected on disk
@@ -27,8 +27,7 @@ Cloning one without the other leaves `pnpm install` unable to resolve the links.
 
 ## Shared dependency versions must stay in lockstep
 
-`node-ui` and `nodes` compile against `@workspace/ui` and `@workspace/typescript-interface`,
-which are linked from `../nexploy`. TypeScript treats two copies of a type-bearing
+`node-ui` and `nodes` compile against `@workspace/ui`, which is linked from `../nexploy`. TypeScript treats two copies of a type-bearing
 package as unrelated types, so a version drift produces hundreds of errors of the form
 *"Two different types with this name exist, but they are unrelated"*.
 
@@ -46,7 +45,8 @@ overrides:
   zod: 4.3.6
 ```
 
-When Nexploy bumps any of these, bump it here in the same change.
+When Nexploy bumps any of these, bump it here in the same change. Running `pnpm check:nodes`
+from the `nexploy` repository reports any drift, with the exact versions on both sides.
 
 ## Commands
 

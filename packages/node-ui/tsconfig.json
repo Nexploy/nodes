@@ -3,7 +3,9 @@
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "paths": {
-      "@nexploy/node-ui/*": ["./src/*"]
+      "@nexploy/node-ui/*": ["./src/*"],
+      "@nexploy/node-core/*": ["../node-core/src/*"],
+      "@workspace/ui/*": ["../../../nexploy/packages/ui/src/*"]
     },
     "types": ["node", "react"]
   },

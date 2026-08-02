@@ -1,10 +1,7 @@
 'use client';
 
 import { createContext, useContext, type ComponentType, type ReactNode } from 'react';
-import type { Containers } from '@workspace/typescript-interface/docker/docker.containers';
-import type { Image } from '@workspace/typescript-interface/docker/docker.image';
-import type { Network } from '@workspace/typescript-interface/docker/docker.network';
-import type { Volume } from '@workspace/typescript-interface/docker/docker.volume';
+import type { NodeContainerRef, NodeImageRef, NodeNetworkRef, NodeVolumeRef } from '@nexploy/node-core/dockerResources';
 
 export interface NodeEnvironmentSummary {
     id: string;
@@ -65,10 +62,10 @@ export interface NodesUIAdapter {
     useStageId(): string | undefined;
     useEnvironments(): NodeEnvironmentSummary[];
     useSwarmServices(): NodeSwarmService[];
-    useContainers(environmentId?: string): { containers: Containers[]; isLoading: boolean };
-    useImages(environmentId?: string): { images: Image[]; isLoading: boolean };
-    useVolumes(environmentId?: string): { volumes: Volume[]; isLoading: boolean };
-    useNetworks(environmentId?: string): { networks: Network[]; isLoading: boolean };
+    useContainers(environmentId?: string): { containers: NodeContainerRef[]; isLoading: boolean };
+    useImages(environmentId?: string): { images: NodeImageRef[]; isLoading: boolean };
+    useVolumes(environmentId?: string): { volumes: NodeVolumeRef[]; isLoading: boolean };
+    useNetworks(environmentId?: string): { networks: NodeNetworkRef[]; isLoading: boolean };
     useResource<T>(url: string | null): ResourceResult<T>;
     useAncestorInputFields(nodeId: string): AncestorWithInputs[];
     useWebhookSetup(onSuccess: () => void): WebhookSetup;
