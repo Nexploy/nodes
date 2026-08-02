@@ -5,10 +5,14 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  '@types/react': 19.2.2
+  '@xyflow/react': 12.11.1
+  lucide-react: 1.17.0
+  next: 16.2.12
   react: 19.2.3
   react-dom: 19.2.3
-  '@types/react': 19.2.2
   react-hook-form: 7.68.0
+  zod: 4.3.6
 
 importers:
 
@@ -27,8 +31,8 @@ importers:
   packages/node-core:
     dependencies:
       zod:
-        specifier: ^4.3.6
-        version: 4.4.3
+        specifier: 4.3.6
+        version: 4.3.6
     devDependencies:
       '@nexploy/typescript-config':
         specifier: workspace:*
@@ -52,11 +56,11 @@ importers:
         specifier: link:../../../nexploy/packages/ui
         version: link:../../../nexploy/packages/ui
       '@xyflow/react':
-        specifier: ^12.11.1
-        version: 12.11.2(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: 12.11.1
+        version: 12.11.1(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       lucide-react:
-        specifier: ^1.17.0
-        version: 1.28.0(react@19.2.3)
+        specifier: 1.17.0
+        version: 1.17.0(react@19.2.3)
       next-intl:
         specifier: ^4.9.1
         version: 4.13.4(next@16.2.12(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(typescript@7.0.2)
@@ -64,8 +68,8 @@ importers:
         specifier: 19.2.3
         version: 19.2.3
       zod:
-        specifier: ^4.3.6
-        version: 4.4.3
+        specifier: 4.3.6
+        version: 4.3.6
     devDependencies:
       '@nexploy/typescript-config':
         specifier: workspace:*
@@ -92,8 +96,8 @@ importers:
         specifier: link:../../../nexploy/packages/ui
         version: link:../../../nexploy/packages/ui
       '@xyflow/react':
-        specifier: ^12.11.1
-        version: 12.11.2(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: 12.11.1
+        version: 12.11.1(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       dayjs:
         specifier: ^1.11.19
         version: 1.11.21
@@ -104,8 +108,8 @@ importers:
         specifier: ^1.14.1
         version: 1.14.3
       lucide-react:
-        specifier: ^1.17.0
-        version: 1.28.0(react@19.2.3)
+        specifier: 1.17.0
+        version: 1.17.0(react@19.2.3)
       next:
         specifier: 16.2.12
         version: 16.2.12(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -122,8 +126,8 @@ importers:
         specifier: ^2.3.6
         version: 2.4.2(react@19.2.3)
       zod:
-        specifier: ^4.3.6
-        version: 4.4.3
+        specifier: 4.3.6
+        version: 4.3.6
     devDependencies:
       '@nexploy/typescript-config':
         specifier: workspace:*
@@ -806,8 +810,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@xyflow/react@12.11.2':
-    resolution: {integrity: sha512-eLAlDWJfWnQEhJwGMjlWdAXO9eYllKpliUmPQlAmOLxz6mExXuzMVDUKLMquixgkrtmMFFtug3jGKmYYld12cA==}
+  '@xyflow/react@12.11.1':
+    resolution: {integrity: sha512-L+zBoLGSXham0MnlY8QqjfR7/C5JNw0zxkaey5aZ5XmCgJBAdH4+WRIu8CR40d3l/BdU635V6YbhBK1jMo8/6Q==}
     peerDependencies:
       '@types/react': 19.2.2
       '@types/react-dom': '>=17'
@@ -819,8 +823,8 @@ packages:
       '@types/react-dom':
         optional: true
 
-  '@xyflow/system@0.0.79':
-    resolution: {integrity: sha512-czLyOh91NF0hIzbNzwi8I6GlqG23BHh2435OddfI6uiaLH3xdrdygO93gqgH1Bv9mhy8XPFQJOBn1FTq4LvEWA==}
+  '@xyflow/system@0.0.78':
+    resolution: {integrity: sha512-lY0z2qP33fUhTva9Vaxrk0lqZta2pkbxB1trHAx1omnJqRtPvDlAQYV2r5fhS6AdpkulYmbNW0svy+A4/t4B/g==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -1001,8 +1005,8 @@ packages:
   long@5.3.2:
     resolution: {integrity: sha512-mNAgZ1GmyNhD7AuqnTG3/VQ26o760+ZYBPKjPvugO8+nLbYfX6TVpJPseBvopbdY+qpZ/lKUnmEc1LeZYS3QAA==}
 
-  lucide-react@1.28.0:
-    resolution: {integrity: sha512-fARAFJULsGuDDydjp6+6blekG/sBIM29TerzLjc9bQUKAcEfrSc4ZQKb25KRz4OMKd87cZTb5dgq0w/T6KufVg==}
+  lucide-react@1.17.0:
+    resolution: {integrity: sha512-9FA9evdox/JQL5PT57fdA1x/yg8T7knJ98+zjTL3UfKza6pflQUUh3XtaQIHKvnsJw1lmsEyHVlt5jchYxOQ5w==}
     peerDependencies:
       react: 19.2.3
 
@@ -1030,7 +1034,7 @@ packages:
   next-intl@4.13.4:
     resolution: {integrity: sha512-jhPAT0u0lahIK6E4gVdZAehugWCosBhLG8sV7xMzgSVoJpxHObP+Fiu+z2FfkEW0XPPtr7uEXoUlLEfhxhNMTg==}
     peerDependencies:
-      next: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+      next: 16.2.12
       react: 19.2.3
       typescript: '*'
     peerDependenciesMeta:
@@ -1222,8 +1226,8 @@ packages:
     resolution: {integrity: sha512-GZtjxm/J/4TSxuL3FNYjCmLktBTnIw/rVmKSIyKeYAZpmJB2ig9VauCC5xsa82GNKVKDAqpOn3KVzNt0zmrU0g==}
     engines: {node: '>=12'}
 
-  zod@4.4.3:
-    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
   zustand@4.5.7:
     resolution: {integrity: sha512-CHOUy7mu3lbD6o6LJLfllpjkzhHXSBlX8B9+qPddUsIfeF5S/UZ5q0kmCsnRqT1UHFQZchNFDDzMbQsuesHWlw==}
@@ -1690,9 +1694,9 @@ snapshots:
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
 
-  '@xyflow/react@12.11.2(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@xyflow/react@12.11.1(@types/react@19.2.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@xyflow/system': 0.0.79
+      '@xyflow/system': 0.0.78
       classcat: 5.0.5
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
@@ -1702,7 +1706,7 @@ snapshots:
     transitivePeerDependencies:
       - immer
 
-  '@xyflow/system@0.0.79':
+  '@xyflow/system@0.0.78':
     dependencies:
       '@types/d3-drag': 3.0.7
       '@types/d3-interpolate': 3.0.4
@@ -1879,7 +1883,7 @@ snapshots:
 
   long@5.3.2: {}
 
-  lucide-react@1.28.0(react@19.2.3):
+  lucide-react@1.17.0(react@19.2.3):
     dependencies:
       react: 19.2.3
 
@@ -2153,7 +2157,7 @@ snapshots:
       y18n: 5.0.8
       yargs-parser: 21.1.1
 
-  zod@4.4.3: {}
+  zod@4.3.6: {}
 
   zustand@4.5.7(@types/react@19.2.2)(react@19.2.3):
     dependencies:
