@@ -5,6 +5,7 @@
 // repository. Run this by hand (pnpm vendor:sync) when nexploy's design system
 // changes; --check regenerates into a temporary directory and fails on any
 // difference, without touching the tree.
+import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,6 +27,23 @@ for (const [name, dir] of Object.entries(SOURCES)) {
 }
 
 const VENDOR_PREFIX = '@nexploy/nodes/vendor/';
+const SOURCE_FILE = 'SOURCE.json';
+
+// Where the copy came from. A checkout on another branch can hold an older
+// version of a file that still resolves, and the copy would silently regress —
+// so record the exact commit and refuse to generate from an ambiguous tree.
+function sourceState() {
+    const git = (...args) => execFileSync('git', args, { cwd: appRoot, encoding: 'utf8' }).trim();
+    try {
+        return {
+            commit: git('rev-parse', 'HEAD'),
+            branch: git('rev-parse', '--abbrev-ref', 'HEAD'),
+            dirty: git('status', '--porcelain', '--', 'packages').length > 0,
+        };
+    } catch {
+        return { commit: null, branch: null, dirty: false };
+    }
+}
 
 function readSafe(path) {
     return existsSync(path) ? readFileSync(path, 'utf8') : null;
@@ -96,6 +114,8 @@ for (const [spec, file] of copied) {
     rendered.set(relPath, readFileSync(file, 'utf8').replaceAll('@workspace/', VENDOR_PREFIX));
 }
 
+const state = sourceState();
+
 if (check) {
     const onDisk = new Set();
     const collect = (dir, prefix = '') => {
@@ -107,6 +127,13 @@ if (check) {
         }
     };
     collect(vendorDir);
+    onDisk.delete(SOURCE_FILE);
+
+    const recorded = JSON.parse(readSafe(join(vendorDir, SOURCE_FILE)) ?? '{}');
+    if (recorded.commit && state.commit && recorded.commit !== state.commit) {
+        console.log(`vendor: copy was generated from ${recorded.commit.slice(0, 8)} (${recorded.branch}),`);
+        console.log(`        this checkout is at ${state.commit.slice(0, 8)} (${state.branch})`);
+    }
 
     const stale = [...rendered].filter(([rel, body]) => readSafe(join(vendorDir, rel)) !== body).map(([rel]) => rel);
     const orphan = [...onDisk].filter((rel) => !rendered.has(rel));
@@ -121,6 +148,12 @@ if (check) {
     process.exit(1);
 }
 
+if (state.dirty) {
+    console.error('vendor: the nexploy checkout has uncommitted changes under packages/.');
+    console.error('        Commit them first, or the copy records a state nobody can reproduce.');
+    process.exit(1);
+}
+
 rmSync(vendorDir, { recursive: true, force: true });
 for (const [rel, body] of rendered) {
     const target = join(vendorDir, rel);
@@ -128,5 +161,11 @@ for (const [rel, body] of rendered) {
     writeFileSync(target, body);
 }
 
+writeFileSync(
+    join(vendorDir, SOURCE_FILE),
+    `${JSON.stringify({ repository: 'Nexploy/nexploy', ...state, generatedAt: new Date().toISOString() }, null, 2)}\n`,
+);
+
 console.log(`vendor: ${copied.size} files copied into src/vendor/`);
+console.log(`vendor: from nexploy ${state.commit?.slice(0, 8) ?? 'unknown'} (${state.branch ?? 'unknown'})`);
 console.log(`vendor: external packages required — ${[...externals].sort().join(', ')}`);

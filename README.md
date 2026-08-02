@@ -66,6 +66,12 @@ pnpm vendor:check   # fail if it has drifted from nexploy
 Both need a Nexploy checkout beside this repository, or `NEXPLOY_APP_ROOT` pointing at one. Run
 `vendor:sync` when the design system changes; the build itself never calls it.
 
+`src/vendor/SOURCE.json` records the Nexploy commit the copy came from. It exists because the copy
+can regress without anything failing: a checkout on another branch may hold an older version of a
+file that still resolves, and the copy would quietly take it. So `vendor:sync` refuses to run
+against a tree with uncommitted changes under `packages/`, and `vendor:check` prints the recorded
+commit next to the one it is comparing against.
+
 ## Working on a node from Nexploy
 
 Nexploy installs the published version. To try a change before publishing:
