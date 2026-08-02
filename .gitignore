@@ -5,3 +5,8 @@ dist/
 
 # Turbo
 .turbo
+
+# Debug
+npm-debug.log*
+
+.idea
