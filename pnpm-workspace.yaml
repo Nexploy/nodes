@@ -1,0 +1,14 @@
+packages:
+  - "packages/*"
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  cpu-features: true
+  protobufjs: true
+  sharp: true
+  ssh2: true
+overrides:
+  react: 19.2.3
+  react-dom: 19.2.3
+  '@types/react': 19.2.2
+  react-hook-form: 7.68.0

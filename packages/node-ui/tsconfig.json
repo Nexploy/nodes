@@ -1,0 +1,12 @@
+{
+  "extends": "@nexploy/typescript-config/react-library.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@nexploy/node-ui/*": ["./src/*"]
+    },
+    "types": ["node", "react"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

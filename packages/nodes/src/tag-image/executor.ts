@@ -1,0 +1,49 @@
+import { getFromClosestAncestor } from '@nexploy/node-core/helpers';
+import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/node-core/pipeline';
+import { tagImageConfigSchema } from '@nexploy/node-core/schemas/nodeConfigs.schema';
+import { ResolveRefs } from '@nexploy/node-core/schemas/nodeFieldRef.schema';
+import { z } from 'zod';
+
+export class TagImageExecutor implements INodeExecutor {
+    readonly type = 'tag-image';
+    readonly configSchema = tagImageConfigSchema;
+
+    async execute(
+        ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof tagImageConfigSchema>>>,
+    ): Promise<NodeExecutionResult> {
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+
+        const sourceImage = nodeConfig.sourceImage.trim();
+        const targetTag = nodeConfig.targetTag.trim();
+
+        const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
+
+        const colonIndex = sourceImage.lastIndexOf(':');
+        const repo = colonIndex !== -1 ? sourceImage.slice(0, colonIndex) : sourceImage;
+
+        await logger.info(nodeId, `Tagging image ${sourceImage} → ${repo}:${targetTag}`);
+
+        try {
+            await ctx.services.docker
+                .post(`images/${encodeURIComponent(sourceImage)}/tag`, {
+                    json: { repo, tag: targetTag },
+                    signal: abortSignal,
+                    environmentId,
+                })
+                .json();
+
+            await logger.info(nodeId, `Image tagged as ${repo}:${targetTag}`);
+            return {
+                output: {
+                    sourceImage,
+                    targetTag,
+                    taggedImage: `${repo}:${targetTag}`,
+                },
+            };
+        } catch (error) {
+            throw new Error(`Failed to tag image: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        }
+    }
+}
+
+export const tagImageExecutor = new TagImageExecutor();
