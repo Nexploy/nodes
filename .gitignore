@@ -1,12 +1,5 @@
 node_modules/
 dist/
+src/vendor/
 *.tsbuildinfo
 .DS_Store
-
-# Turbo
-.turbo
-
-# Debug
-npm-debug.log*
-
-.idea

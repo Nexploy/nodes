@@ -1,0 +1,48 @@
+import { getFromClosestAncestor } from '@nexploy/nodes/core/helpers';
+import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
+import { createGitService } from '@nexploy/nodes/core/gitService';
+import { composeFileConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
+import { z } from 'zod';
+import { ResolveRefs } from '@nexploy/nodes/core/schemas/nodeFieldRef.schema';
+
+export class ValidateComposeExecutor implements INodeExecutor {
+    readonly type = 'validate-compose';
+    readonly configSchema = composeFileConfigSchema;
+
+    async execute(
+        ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof composeFileConfigSchema>>>,
+    ): Promise<NodeExecutionResult> {
+        const { allOutputs, logger, nodeId, nodeConfig, edges, services } = ctx;
+        const gitService = createGitService(services);
+
+        const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
+
+        if (!workDir) {
+            throw new Error('No workDir found in input nodes — connect this node after a Clone Repository node');
+        }
+
+        const composeFileName = nodeConfig.composeFileName;
+        const composeFilePath = nodeConfig.composeFilePath;
+        const composePath = composeFilePath
+            ? `${composeFilePath.replace(/\/$/, '')}/${composeFileName}`
+            : composeFileName;
+
+        await logger.info(nodeId, `Validating Docker Compose file: ${composePath}`);
+
+        try {
+            const resolvedPath = await gitService.validateComposeFile(workDir, composePath);
+            await gitService.validateComposeSyntax(workDir, resolvedPath);
+            await logger.info(nodeId, `Docker Compose file validated: ${resolvedPath}`);
+
+            return {
+                output: { workDir, composePath: resolvedPath },
+            };
+        } catch (error) {
+            throw new Error(
+                `Docker Compose validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            );
+        }
+    }
+}
+
+export const validateComposeExecutor = new ValidateComposeExecutor();
