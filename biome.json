@@ -1,16 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.5.6/schema.json",
   "files": {
-    "includes": [
-      "**",
-      "!**/node_modules",
-      "!**/dist",
-      "!**/staticfiles",
-      "!**/.venv",
-      "!**/.turbo",
-      "!**/data",
-      "!pnpm-lock.yaml"
-    ]
+    "includes": ["**", "!src/vendor/**", "!dist/**"]
   },
   "formatter": {
     "enabled": true,
