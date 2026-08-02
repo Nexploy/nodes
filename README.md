@@ -27,10 +27,16 @@ Cloning one without the other leaves `pnpm install` unable to resolve the links.
 
 ## Singleton packages are peer dependencies
 
-`react`, `react-dom`, `next`, `next-intl`, `react-hook-form` and `@xyflow/react` are declared as
-peer dependencies and deliberately **not installed here**. Each of them carries React context;
-two physical copies mean two contexts, and a panel calling `useTranslations` or `useFormContext`
-throws at runtime even when both copies are the same version.
+Every package shared with Nexploy is a peer dependency and deliberately **not installed here**:
+`react`, `react-dom`, `next`, `next-intl`, `react-hook-form`, `@xyflow/react`, `zod`, `ky`,
+`lucide-react`, `dayjs` and `dockerode`.
+
+Two physical copies mean two module instances, and anything relying on identity breaks silently:
+
+- React context — a panel calling `useTranslations` or `useFormContext` throws, even when both
+  copies are the same version;
+- `instanceof` — `schema instanceof z.ZodObject` and `error instanceof HTTPError` both return
+  false across the boundary, with no error to point at.
 
 Turbopack resolves linked packages through their real path, so node sources look for these
 packages by walking up from this repository. A symlink at the shared parent points that walk at
@@ -43,7 +49,8 @@ Monorepo-Mixte/nexploy/
 └── nodes/
 ```
 
-`pnpm check:nodes` and the `preinstall` hook in the `nexploy` repository both verify this link.
+`pnpm check:nodes` and the `preinstall` hook in the `nexploy` repository both verify this link,
+and `pnpm check:nodes:singletons` fails if any shared package ends up resolving to two copies.
 
 ## Shared dependency versions must stay in lockstep
 

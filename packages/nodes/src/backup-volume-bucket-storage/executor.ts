@@ -18,6 +18,8 @@ export class BackupVolumeBucketStorageExecutor implements INodeExecutor {
         const bucket = nodeConfig.bucket;
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
 
+        await logger.info(nodeId, `Fetching bucket storage credentials for account ${accountId}`);
+
         await logger.info(nodeId, `Downloading volume archive: ${volumeName}`);
         if (abortSignal.aborted) throw new Error('Build cancelled');
 

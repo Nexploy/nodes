@@ -11,9 +11,7 @@
   },
   "dependencies": {
     "@nexploy/node-core": "workspace:*",
-    "@workspace/ui": "link:../../../nexploy/packages/ui",
-    "lucide-react": "^1.17.0",
-    "zod": "^4.3.6"
+    "@workspace/ui": "link:../../../nexploy/packages/ui"
   },
   "devDependencies": {
     "@nexploy/typescript-config": "workspace:*",
@@ -25,7 +23,9 @@
   },
   "peerDependencies": {
     "@xyflow/react": "^12.11.1",
+    "lucide-react": "^1.17.0",
     "next-intl": "^4.9.1",
-    "react": "^19.2.3"
+    "react": "^19.2.3",
+    "zod": "^4.3.6"
   }
 }
