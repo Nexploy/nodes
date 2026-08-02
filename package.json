@@ -33,7 +33,6 @@
   "scripts": {
     "vendor": "node scripts/vendor.mjs",
     "build": "pnpm run vendor && rm -rf dist && tsc -p tsconfig.build.json",
-    "dev": "pnpm run vendor && tsc -p tsconfig.build.json --watch",
     "typecheck": "pnpm run vendor && tsc --noEmit",
     "format": "biome format --write .",
     "prepublishOnly": "pnpm run build"

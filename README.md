@@ -48,7 +48,6 @@ published package is self-contained and the copy cannot drift.
 
 ```bash
 pnpm build       # vendor + tsc → dist/
-pnpm dev         # same, in watch mode
 pnpm typecheck
 ```
 
@@ -61,11 +60,16 @@ configuration panels — a bundler would hoist or drop it.
 Nexploy installs the published version. To try a change before publishing:
 
 ```bash
-cd nexploy && pnpm nodes:link     # points @nexploy/nodes at ../nodes
-cd ../nodes && pnpm dev           # rebuild dist/ on every change
+cd nexploy && pnpm nodes:local    # builds and packs this repo, installs the tarball
 ```
 
-`pnpm nodes:unlink` restores the published version. The link is local and must never be committed.
+`pnpm nodes:npm` restores the published version. Re-run `nodes:local` after each change; the
+`file:` line it writes is local and must never be committed.
+
+It packs a tarball rather than linking the directory on purpose. A `link:` makes this package
+resolve `react`, `next-intl` and `zod` from *its own* store — two copies of each, which silently
+breaks every React context and `instanceof` across the boundary. Extracting a tarball into
+Nexploy's workspace resolves them there, exactly as the published package does.
 
 ## Publishing
 
