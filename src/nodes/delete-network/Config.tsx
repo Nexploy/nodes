@@ -16,7 +16,7 @@ import {
 import { Switch } from '@nexploy/nodes/vendor/ui/components/switch';
 import { Status, StatusIndicator } from '@nexploy/nodes/vendor/ui/components/kibo-ui/status';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@nexploy/nodes/vendor/ui/components/tooltip';
-import { isBuiltinNetwork } from '@nexploy/nodes/vendor/shared/nexployFilter';
+import { isBuiltinNetwork } from '@nexploy/shared/nexployFilter';
 import { AlertTriangle, Loader2 } from 'lucide-react';
 import { isNodeFieldRef } from '@nexploy/nodes/core/nodeFieldRef';
 import { RefAware } from '@nexploy/nodes/ui/RefAware';

@@ -1,10 +1,3 @@
-// Copies the slices of nexploy's private packages that the library actually uses
-// into src/vendor/, rewriting their specifiers.
-//
-// src/vendor/ is committed, so building this package needs nothing but this
-// repository. Run this by hand (pnpm vendor:sync) when nexploy's design system
-// changes; --check regenerates into a temporary directory and fails on any
-// difference, without touching the tree.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
@@ -15,11 +8,10 @@ const appRoot = process.env.NEXPLOY_APP_ROOT ?? resolve(root, '..', 'nexploy');
 
 const SOURCES = {
     ui: join(appRoot, 'packages', 'ui', 'src'),
-    shared: join(appRoot, 'packages', 'shared', 'src'),
     'typescript-interface': join(appRoot, 'packages', 'typescript-interface', 'src'),
 };
 
-for (const [name, dir] of Object.entries(SOURCES)) {
+for (const [_, dir] of Object.entries(SOURCES)) {
     if (!existsSync(dir)) {
         console.error(`vendor: ${dir} not found — set NEXPLOY_APP_ROOT to the nexploy checkout.`);
         process.exit(1);
@@ -29,9 +21,6 @@ for (const [name, dir] of Object.entries(SOURCES)) {
 const VENDOR_PREFIX = '@nexploy/nodes/vendor/';
 const SOURCE_FILE = 'SOURCE.json';
 
-// Where the copy came from. A checkout on another branch can hold an older
-// version of a file that still resolves, and the copy would silently regress —
-// so record the exact commit and refuse to generate from an ambiguous tree.
 function sourceState() {
     const git = (...args) => execFileSync('git', args, { cwd: appRoot, encoding: 'utf8' }).trim();
     try {

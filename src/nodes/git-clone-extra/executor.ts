@@ -2,7 +2,7 @@ import { getFromClosestAncestor } from '@nexploy/nodes/core/helpers';
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
 import { gitCloneExtraConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 import { createGitService } from '@nexploy/nodes/core/gitService';
-import { safeResolvePath } from '@nexploy/nodes/vendor/shared/pathSafety';
+import { safeResolvePath } from '@nexploy/shared/pathSafety';
 import { z } from 'zod';
 
 export class GitCloneExtraExecutor implements INodeExecutor {

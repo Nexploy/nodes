@@ -13,7 +13,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@nexploy/nodes/vendor/ui/components/select';
-import { NETWORK_DRIVERS } from '@nexploy/nodes/vendor/shared/dockerConstants';
+import { NETWORK_DRIVERS } from '@nexploy/shared/dockerConstants';
 import { RefAware } from '@nexploy/nodes/ui/RefAware';
 
 export function CreateNetworkConfig() {
