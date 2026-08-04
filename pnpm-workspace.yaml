@@ -9,4 +9,4 @@ allowBuilds:
   sharp: true
   ssh2: true
 minimumReleaseAgeExclude:
-  - '@nexploy/shared@0.1.0'
+  - '@nexploy/shared@0.1.0 || 0.2.0'
