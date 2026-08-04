@@ -32,6 +32,9 @@ export class CreateContainerExecutor implements INodeExecutor {
 
         const labels: Record<string, string> = {
             [NEXPLOY_LABELS.repositoryId]: buildConfig.repositoryId,
+            ...(buildConfig.organizationId && {
+                [NEXPLOY_LABELS.organizationId]: buildConfig.organizationId,
+            }),
             [NEXPLOY_LABELS.buildId]: buildConfig.buildId,
         };
 

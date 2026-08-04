@@ -28,6 +28,9 @@ export function resolveComposeLabels(ctx: NodeExecutionContext<unknown>): Record
 
     return {
         [NEXPLOY_LABELS.repositoryId]: buildConfig.repositoryId,
+        ...(buildConfig.organizationId && {
+            [NEXPLOY_LABELS.organizationId]: buildConfig.organizationId,
+        }),
         [NEXPLOY_LABELS.buildId]: buildConfig.buildId,
         ...(branch && { [NEXPLOY_LABELS.branch]: branch }),
         ...(commitHash && { [NEXPLOY_LABELS.commitHash]: commitHash }),

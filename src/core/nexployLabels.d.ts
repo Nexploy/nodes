@@ -1,4 +1,5 @@
 export declare const NEXPLOY_LABELS: {
+    organizationId: string;
     repositoryId: string;
     buildId: string;
     buildType: string;
