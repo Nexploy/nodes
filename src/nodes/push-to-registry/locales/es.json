@@ -1,0 +1,12 @@
+{
+  "nodes": {
+    "push-to-registry": {
+      "name": "Publicar una imagen en un registry",
+      "description": "Publica una imagen Docker en un registry privado o público"
+    }
+  },
+  "config": {
+    "registriesLoading": "Cargando los registries...",
+    "registryUnavailable": "Registry no disponible"
+  }
+}

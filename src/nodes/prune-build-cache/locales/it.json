@@ -1,0 +1,15 @@
+{
+  "nodes": {
+    "prune-build-cache": {
+      "name": "Svuota la cache di build",
+      "description": "Svuota la cache di build Docker per liberare spazio su disco"
+    }
+  },
+  "config": {
+    "pruneBuildCacheAll": "Rimuovi tutta la cache",
+    "pruneBuildCacheKeepStorage": "Spazio da conservare",
+    "pruneBuildCacheFilter": "Filtro",
+    "pruneBuildCacheKeepStoragePlaceholder": "10GB",
+    "pruneBuildCacheFilterPlaceholder": "until=24h"
+  }
+}

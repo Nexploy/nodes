@@ -1,0 +1,16 @@
+{
+  "nodes": {
+    "trigger-stage-build": {
+      "name": "Avvia la build di una fase",
+      "description": "Avvia una build su un'altra fase quando questa pipeline riesce"
+    }
+  },
+  "config": {
+    "targetStage": "Fase di destinazione",
+    "selectTargetStage": "Seleziona una fase",
+    "stagesLoading": "Caricamento delle fasi...",
+    "stageUnavailable": "Fase non disponibile",
+    "stageStaleWarning": "Questa fase non è più disponibile.",
+    "noStagesFound": "Nessun'altra fase disponibile."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "nodes": {
+    "sonarqube-scan": {
+      "name": "Análisis de SonarQube",
+      "description": "Analiza la calidad del código con SonarQube o SonarCloud"
+    }
+  },
+  "config": {
+    "sonarqubeMode": "Modo",
+    "sonarqubeModeCustom": "SonarQube / SonarCloud personalizado",
+    "sonarqubeModeLocal": "Local (Docker)",
+    "sonarqubeServerUrl": "URL del servidor",
+    "sonarqubeOrganization": "Organización",
+    "sonarqubeOrganizationDescription": "Obligatoria para SonarCloud. Déjalo vacío para un SonarQube autoalojado.",
+    "sonarqubeVersion": "Versión de SonarQube",
+    "sonarqubeVersionDescription": "Etiqueta de la imagen Docker que se usará, p. ej. community, lts-community, latest.",
+    "sonarqubePort": "Puerto del host",
+    "sonarqubeProjectKey": "Clave del proyecto",
+    "sonarqubeProjectKeyTooltip": "Un identificador único de tu proyecto en SonarQube (p. ej. my-org_my-app). Debe ser único en el servidor y solo puede contener letras, dígitos, '-', '_', '.' y ':'. Déjalo vacío para generar uno automáticamente a partir del nombre del repositorio.",
+    "sonarqubeToken": "Token",
+    "sonarqubeTokenDescription": "Token de usuario o de proyecto de SonarQube. Déjalo vacío para usar las credenciales de admin predeterminadas en modo local.",
+    "sonarqubeSources": "Fuentes",
+    "sonarqubeExclusions": "Exclusiones",
+    "sonarqubeExclusionsDescription": "Patrones glob separados por comas que se excluirán del análisis.",
+    "sonarqubeQualityGate": "Fallar en el quality gate",
+    "sonarqubeQualityGateDescription": "Hace fallar la pipeline si no se supera el quality gate.",
+    "sonarqubeEnforceMinScore": "Exigir una puntuación mínima",
+    "sonarqubeEnforceMinScoreDescription": "Hace fallar la pipeline si la métrica seleccionada está por debajo del mínimo exigido (p. ej. la cobertura debe superar 80).",
+    "sonarqubeScoreMetric": "Métrica de puntuación",
+    "sonarqubeScoreMetricCoverage": "Cobertura (%)",
+    "sonarqubeScoreMetricLineCoverage": "Cobertura de líneas (%)",
+    "sonarqubeScoreMetricBranchCoverage": "Cobertura de ramas (%)",
+    "sonarqubeMinScore": "Puntuación mínima",
+    "sonarqubeMinScoreDescription": "La métrica analizada debe ser mayor o igual que este valor (0-100).",
+    "sonarqubeServerUrlPlaceholder": "https://sonarcloud.io",
+    "sonarqubeOrgPlaceholder": "mi-org",
+    "sonarqubeVersionPlaceholder": "community",
+    "sonarqubeProjectKeyPlaceholder": "mi-proyecto",
+    "sonarqubeSourcesPlaceholder": ".",
+    "sonarqubeExclusionsPlaceholder": "**/*.test.ts,**/node_modules/**"
+  }
+}

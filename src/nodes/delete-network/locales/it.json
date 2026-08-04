@@ -1,0 +1,15 @@
+{
+  "nodes": {
+    "delete-network": {
+      "name": "Elimina rete",
+      "description": "Elimina una rete Docker per nome o ID"
+    }
+  },
+  "config": {
+    "networkIdPlaceholder": "Seleziona una rete...",
+    "networksLoading": "Caricamento delle reti...",
+    "networksSelectLabel": "Elenco delle reti",
+    "noNetworksFound": "Nessuna rete trovata",
+    "networkUnavailable": "Rete non disponibile"
+  }
+}

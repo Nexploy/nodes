@@ -1,0 +1,14 @@
+{
+  "nodes": {
+    "clone-repository": {
+      "name": "Clonar el repositorio",
+      "description": "Clona el repositorio Git vinculado en el espacio de trabajo de la build"
+    }
+  },
+  "config": {
+    "branchNotExist": "La rama ya no existe",
+    "cloneCommitHash": "Hash del commit",
+    "cloneCommitHashPlaceholder": "p. ej. abc1234",
+    "cloneCommitHashDescription": "Déjalo vacío para usar el último commit de la rama"
+  }
+}

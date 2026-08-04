@@ -1,0 +1,16 @@
+{
+  "nodes": {
+    "check-container-logs": {
+      "name": "Comprobar los logs del contenedor",
+      "description": "Busca un patrón regex en los logs del contenedor"
+    }
+  },
+  "config": {
+    "logPattern": "Patrón (regex)",
+    "logPatternPlaceholder": "p. ej. .*ready.*",
+    "logSince": "Desde",
+    "logSinceTooltip": "Filtra los logs a partir de este momento. Acepta una duración relativa (p. ej. 30s, 5m, 2h) o una marca de tiempo ISO (p. ej. 2024-01-15T10:30:00). Útil para evitar coincidencias con logs antiguos anteriores al despliegue actual.",
+    "logSincePlaceholder": "p. ej. 10s",
+    "logFailIfFound": "Fallar si se encuentra el patrón"
+  }
+}

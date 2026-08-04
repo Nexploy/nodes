@@ -1,0 +1,22 @@
+{
+  "nodes": {
+    "add-ssl-certificate": {
+      "name": "Aggiungi certificato SSL",
+      "description": "Fornisce un certificato SSL per un dominio"
+    }
+  },
+  "config": {
+    "sslCertType": "Tipo di certificato",
+    "sslCustom": "Personalizzato",
+    "sslName": "Nome",
+    "sslNamePlaceholder": "es. Il mio certificato",
+    "sslDomain": "Dominio",
+    "sslDomainMustPoint": "Il dominio deve puntare all'indirizzo IP di questo server prima dell'emissione",
+    "sslEmail": "Email",
+    "sslAgreeToTos": "Accetto i",
+    "sslTosLink": "Termini di servizio di Let's Encrypt",
+    "sslCertificate": "Certificato (PEM)",
+    "sslPrivateKey": "Chiave privata",
+    "sslLetsEncrypt": "Let's Encrypt"
+  }
+}

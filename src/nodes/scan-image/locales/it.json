@@ -1,0 +1,15 @@
+{
+  "nodes": {
+    "scan-image": {
+      "name": "Analizza immagine",
+      "description": "Esegue una scansione di sicurezza di un'immagine Docker con Trivy"
+    }
+  },
+  "config": {
+    "scanImagePlaceholder": "es. image:version",
+    "trivyVersion": "Versione di Trivy",
+    "scanSeverity": "Gravità minima",
+    "exitOnVulnerabilities": "Fallisci in caso di vulnerabilità",
+    "trivyVersionPlaceholder": "canary"
+  }
+}

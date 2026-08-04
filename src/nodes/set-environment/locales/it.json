@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "set-environment": {
+      "name": "Imposta ambiente",
+      "description": "Definisce l'ambiente di deployment per tutti i nodi successivi di questa pipeline"
+    }
+  }
+}

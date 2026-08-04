@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "stop-container": {
+      "name": "Arresta container",
+      "description": "Arresta un container Docker in esecuzione"
+    }
+  }
+}

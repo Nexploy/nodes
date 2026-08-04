@@ -1,0 +1,17 @@
+{
+  "nodes": {
+    "condition": {
+      "name": "Condizione",
+      "description": "Blocca la pipeline in base a un valore dell'output di un nodo precedente",
+      "outputTrue": "Vero",
+      "outputFalse": "Falso"
+    }
+  },
+  "config": {
+    "conditionMode": "Operatore",
+    "conditionModeAndDesc": "Tutti gli input devono riuscire",
+    "conditionModeOrDesc": "Almeno uno deve riuscire",
+    "conditionInputNodes": "Nodi di input collegati",
+    "conditionNoInputs": "Nessun nodo di input collegato"
+  }
+}

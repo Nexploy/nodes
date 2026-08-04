@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@nexploy/shared':
-        specifier: file:./nexploy-shared-0.1.0.tgz
-        version: file:nexploy-shared-0.1.0.tgz
+        specifier: ^0.1.0
+        version: 0.1.0
       '@radix-ui/react-checkbox':
         specifier: ^1.3.3
         version: 1.3.11(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -365,9 +365,8 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
-  '@nexploy/shared@file:nexploy-shared-0.1.0.tgz':
-    resolution: {integrity: sha512-+g4TVvZ59xmJKo+Jhl1PxIXlJWTGPmlKrX6GOZjVaJve8QDqKwb8eC8MwlI3+2Kw42qKCHbayWswHRj243Pmxg==, tarball: file:nexploy-shared-0.1.0.tgz}
-    version: 0.1.0
+  '@nexploy/shared@0.1.0':
+    resolution: {integrity: sha512-XpYNqbzp5L+Ho9zP7/VsZds4aAfx2qRWm2uo5tMmsIDpKgTh02DNmSNXQ9B7LnG32oS7gNN3hY4e/F6NMfNi5Q==}
     engines: {node: '>=22.13'}
 
   '@next/env@16.2.12':
@@ -1838,7 +1837,7 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
-  '@nexploy/shared@file:nexploy-shared-0.1.0.tgz': {}
+  '@nexploy/shared@0.1.0': {}
 
   '@next/env@16.2.12': {}
 

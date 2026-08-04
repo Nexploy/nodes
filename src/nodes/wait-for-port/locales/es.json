@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "wait-for-port": {
+      "name": "Esperar al puerto del contenedor",
+      "description": "Comprobación TCP hasta que un puerto esté abierto en el contenedor indicado"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "save-version": {
+      "name": "Salva versione",
+      "description": "Salva la build corrente come nuova versione"
+    }
+  },
+  "config": {
+    "saveVersionInfo": "Salva la build corrente come nuova versione numerata, usando il tag dell'immagine costruita e le informazioni del commit."
+  }
+}

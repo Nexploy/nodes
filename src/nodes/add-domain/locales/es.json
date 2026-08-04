@@ -1,0 +1,17 @@
+{
+  "nodes": {
+    "add-domain": {
+      "name": "Añadir dominio",
+      "description": "Añade un dominio al repositorio"
+    }
+  },
+  "config": {
+    "addDomainHost": "Dominio",
+    "addDomainContainerPort": "Puerto del contenedor",
+    "addDomainPath": "Ruta",
+    "addDomainInternalPath": "Ruta interna",
+    "addDomainHttps": "Activar HTTPS",
+    "addDomainStripPath": "Eliminar el prefijo de la ruta",
+    "pathPlaceholder": "/"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "nodes": {
+    "git-tag": {
+      "name": "Etiqueta Git",
+      "description": "Crea una etiqueta git y la envía al remoto"
+    }
+  },
+  "config": {
+    "gitTagName": "Nombre de la etiqueta",
+    "gitTagMessage": "Mensaje",
+    "gitTagMessagePlaceholder": "Déjalo vacío para una etiqueta ligera"
+  }
+}

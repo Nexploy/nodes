@@ -1,0 +1,28 @@
+{
+  "nodes": {
+    "fetch-secrets-infisical": {
+      "name": "Secretos de Infisical",
+      "description": "Obtiene los secretos de Infisical (cloud o autoalojado). Las variables se acumulan a lo largo de la pipeline."
+    }
+  },
+  "config": {
+    "infisicalSiteUrl": "URL de la instancia",
+    "infisicalSiteUrlPlaceholder": "https://app.infisical.com",
+    "infisicalSiteUrlDescription": "Usa https://eu.infisical.com para la región UE, o tu propia URL para una instancia autoalojada.",
+    "infisicalAuthMethod": "Método de autenticación",
+    "infisicalAuthMethodUniversal": "Machine Identity (Universal Auth)",
+    "infisicalAuthMethodToken": "Access token",
+    "infisicalClientId": "Client ID",
+    "infisicalClientIdPlaceholder": "Client ID de la machine identity",
+    "infisicalClientSecret": "Client secret",
+    "infisicalAccessToken": "Access token",
+    "infisicalProjectId": "ID del proyecto",
+    "infisicalProjectIdPlaceholder": "ID del proyecto de Infisical",
+    "infisicalEnvironment": "Slug del entorno",
+    "infisicalEnvironmentPlaceholder": "dev",
+    "infisicalSecretPath": "Ruta del secreto",
+    "infisicalRecursive": "Incluir las subcarpetas",
+    "infisicalExpandReferences": "Expandir las referencias a secretos",
+    "infisicalIncludeImports": "Incluir los secretos importados"
+  }
+}

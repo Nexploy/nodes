@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "stop-container": {
+      "name": "Detener contenedor",
+      "description": "Detiene un contenedor Docker en ejecución"
+    }
+  }
+}

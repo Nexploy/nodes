@@ -1,0 +1,19 @@
+{
+  "nodes": {
+    "create-release": {
+      "name": "Crea release",
+      "description": "Crea una nuova release su GitHub o GitLab"
+    }
+  },
+  "config": {
+    "releaseTagName": "Nome del tag",
+    "releaseTagNamePlaceholder": "v1.0.0",
+    "releaseTargetBranch": "Branch di destinazione",
+    "releaseTitle": "Titolo della release",
+    "releaseTitlePlaceholder": "Release v1.0.0",
+    "releaseNotes": "Note di rilascio",
+    "releaseNotesPlaceholder": "Descrivi le modifiche di questa release...",
+    "releaseDraft": "Salva come bozza",
+    "releasePrerelease": "Contrassegna come pre-release"
+  }
+}

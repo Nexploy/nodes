@@ -1,0 +1,18 @@
+{
+  "nodes": {
+    "merge-branch": {
+      "name": "Fusionar rama",
+      "description": "Fusiona una rama en la rama actual"
+    }
+  },
+  "config": {
+    "mergeSourceBranch": "Rama de origen",
+    "mergeTargetBranch": "Rama de destino",
+    "mergeStrategy": "Estrategia",
+    "mergeStrategyMerge": "Commit de fusión",
+    "mergeStrategySquash": "Squash",
+    "mergeMessage": "Mensaje del commit",
+    "mergeMessagePlaceholder": "Merge feature/my-branch into main",
+    "mergePush": "Hacer push tras la fusión"
+  }
+}

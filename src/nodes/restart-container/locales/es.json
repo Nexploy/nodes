@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "restart-container": {
+      "name": "Reiniciar contenedor",
+      "description": "Reinicia un contenedor Docker"
+    }
+  }
+}

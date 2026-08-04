@@ -1,0 +1,22 @@
+{
+  "nodes": {
+    "create-service": {
+      "name": "Crea servizio",
+      "description": "Crea un nuovo servizio Docker Swarm da un'immagine"
+    }
+  },
+  "config": {
+    "createServiceName": "Nome del servizio",
+    "createServiceNamePlaceholder": "es. mio-servizio",
+    "createServiceMode": "Modalità",
+    "createServiceModeReplicated": "Replicato",
+    "createServiceModeGlobal": "Globale (uno per nodo)",
+    "createServiceReplicas": "Repliche",
+    "createServiceNetworks": "Reti overlay",
+    "createServiceNetworkPlaceholder": "es. mia-rete-overlay",
+    "createServiceAddNetwork": "Aggiungi rete",
+    "createServiceConstraints": "Vincoli di posizionamento",
+    "createServiceConstraintPlaceholder": "es. node.role==worker",
+    "createServiceAddConstraint": "Aggiungi vincolo"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "nodes": {
+    "git-clone-extra": {
+      "name": "Clone Git aggiuntivo",
+      "description": "Clona un repository aggiuntivo in una sottodirectory della directory di lavoro"
+    }
+  },
+  "config": {
+    "gitCloneUrl": "URL del repository",
+    "gitCloneTargetDir": "Directory di destinazione",
+    "gitCloneToken": "Access token",
+    "gitCloneTokenPlaceholder": "Lascia vuoto per i repository pubblici",
+    "gitCloneUrlExtraPlaceholder": "https://github.com/org/repo.git",
+    "branchNamePlaceholder": "main",
+    "gitCloneTargetDirPlaceholder": "extra-repo"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "nodes": {
+    "update-commit-status": {
+      "name": "Actualizar el estado del commit",
+      "description": "Actualiza el estado de un commit en GitHub o GitLab"
+    }
+  },
+  "config": {
+    "commitStatusContext": "Nombre del estado",
+    "commitStatusState": "Estado",
+    "commitStatusDescription": "Descripción",
+    "commitStatusDescriptionPlaceholder": "Build correcta",
+    "commitStatusContextPlaceholder": "nexploy/pipeline"
+  }
+}

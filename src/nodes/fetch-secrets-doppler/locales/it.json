@@ -1,0 +1,15 @@
+{
+  "nodes": {
+    "fetch-secrets-doppler": {
+      "name": "Segreti Doppler",
+      "description": "Recupera i segreti da Doppler. Le variabili si accumulano lungo tutta la pipeline."
+    }
+  },
+  "config": {
+    "dopplerServiceToken": "Service token",
+    "dopplerProject": "Progetto (facoltativo)",
+    "dopplerConfig": "Config / ambiente (facoltativo)",
+    "dopplerProjectPlaceholder": "mio-progetto",
+    "dopplerConfigPlaceholder": "prd"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "nodes": {
+    "create-container": {
+      "name": "Crea container",
+      "description": "Crea e avvia un container Docker da un'immagine"
+    }
+  },
+  "config": {
+    "createContainerName": "Nome del container",
+    "createContainerNamePlaceholder": "es. mia-app (lascia vuoto per generarlo automaticamente)",
+    "createContainerRestartPolicy": "Politica di riavvio",
+    "createContainerNetwork": "Rete",
+    "createContainerNetworkPlaceholder": "es. mia-rete (lascia vuoto per quella predefinita)"
+  }
+}

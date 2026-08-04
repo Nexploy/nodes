@@ -1,0 +1,14 @@
+{
+  "nodes": {
+    "pull-from-registry": {
+      "name": "Descargar una imagen",
+      "description": "Descarga una imagen Docker de Docker Hub o de un registry privado"
+    }
+  },
+  "config": {
+    "dockerHubLabel": "Docker Hub (público)",
+    "pullImageName": "Nombre de la imagen",
+    "pullImageNamePlaceholderHub": "p. ej. image:version",
+    "pullImageNamePlaceholderPrivate": "p. ej. myapp:1.0.0"
+  }
+}

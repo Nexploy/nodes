@@ -1,0 +1,21 @@
+{
+  "nodes": {
+    "compose-run": {
+      "name": "Esecuzione Compose",
+      "description": "Esegue un comando una tantum in un servizio Compose"
+    }
+  },
+  "config": {
+    "composeService": "Servizio",
+    "composeServicePlaceholder": "api",
+    "composeServiceDescription": "Nome del servizio, così come dichiarato nel file compose",
+    "composeRunCommand": "Comando",
+    "composeRunCommandPlaceholder": "python manage.py migrate",
+    "composeRunCommandDescription": "Lascia vuoto per usare il comando predefinito dell'immagine. Viene eseguito senza TTY (-T): il comando deve essere non interattivo.",
+    "composeRunWorkingDir": "Directory di lavoro",
+    "composeRunUser": "Utente",
+    "composeRunNoDeps": "Senza dipendenze",
+    "composeRunNoDepsDescription": "Non avviare i servizi da cui questo dipende (--no-deps)",
+    "composeRunContinueOnErrorDescription": "Continua la pipeline anche se il comando termina con un codice diverso da zero"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "cache-save": {
+      "name": "Salva cache",
+      "description": "Salva una directory della directory di lavoro in una cache su volume Docker"
+    }
+  },
+  "config": {
+    "cacheSourcePath": "Percorso di origine"
+  }
+}

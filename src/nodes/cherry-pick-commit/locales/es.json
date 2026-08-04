@@ -1,0 +1,14 @@
+{
+  "nodes": {
+    "cherry-pick-commit": {
+      "name": "Cherry-pick de un commit",
+      "description": "Aplica un commit concreto a la rama actual"
+    }
+  },
+  "config": {
+    "cherryPickCommitHash": "Hash del commit",
+    "cherryPickCommitHashPlaceholder": "abc1234",
+    "cherryPickTargetBranch": "Rama de destino",
+    "cherryPickNoCommit": "Aplicar sin hacer commit (--no-commit)"
+  }
+}

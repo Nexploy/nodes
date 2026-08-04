@@ -1,0 +1,16 @@
+{
+  "nodes": {
+    "compose-up": {
+      "name": "Avvia Compose",
+      "description": "Avvia lo stack Compose costruito in precedenza"
+    }
+  },
+  "config": {
+    "composeUpRecreate": "Ricrea i container",
+    "composeUpRecreateDescription": "Esegui docker compose down prima di avviare lo stack",
+    "composeUpRemoveOrphans": "Rimuovi gli orfani",
+    "composeUpRemoveOrphansDescription": "Rimuovi i container dei servizi non più dichiarati nel file compose (--remove-orphans)",
+    "composeUpKeepComposeFile": "Mantieni il file compose generato",
+    "composeUpKeepComposeFileDescription": "Mantieni il file compose elaborato nella directory di lavoro per il debug"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "nodes": {
+    "update-service": {
+      "name": "Aggiorna servizio",
+      "description": "Aggiorna un servizio Docker Swarm a una nuova immagine"
+    }
+  },
+  "config": {
+    "serviceImage": "Immagine",
+    "serviceForceUpdate": "Forza l'aggiornamento"
+  }
+}

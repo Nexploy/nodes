@@ -1,0 +1,19 @@
+{
+  "nodes": {
+    "send-notification": {
+      "name": "Enviar notificación",
+      "description": "Envía una notificación mediante webhook"
+    }
+  },
+  "config": {
+    "webhookUrlTooltipDesc": "A esta URL se enviará una petición POST con el siguiente cuerpo JSON:",
+    "messagePlaceholder": "Déjalo vacío para el mensaje predeterminado",
+    "triggerOn": "Activar en",
+    "triggerOnSuccess": "Éxito",
+    "triggerOnSuccessDesc": "solo si la pipeline ha terminado sin errores",
+    "triggerOnFailureDesc": "solo si al menos un nodo ha fallado",
+    "triggerOnAlways": "Siempre",
+    "triggerOnAlwaysDesc": "independientemente del resultado de la pipeline",
+    "webhookUrlPlaceholder": "https://hooks.example.com/…"
+  }
+}
