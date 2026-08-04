@@ -1,0 +1,13 @@
+{
+  "nodes": {
+    "build-docker-image": {
+      "name": "Construir imagen Docker",
+      "description": "Construye una imagen Docker a partir de un Dockerfile"
+    }
+  },
+  "config": {
+    "dockerfileFilePath": "Ruta del archivo",
+    "dockerfileFilePathPlaceholder": "Déjalo vacío para la raíz del repositorio",
+    "buildImageNamePlaceholder": "Déjalo vacío para un nombre generado automáticamente"
+  }
+}

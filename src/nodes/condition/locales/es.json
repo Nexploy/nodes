@@ -1,0 +1,17 @@
+{
+  "nodes": {
+    "condition": {
+      "name": "Condición",
+      "description": "Bloquea la pipeline según un valor de la salida de un nodo anterior",
+      "outputTrue": "Verdadero",
+      "outputFalse": "Falso"
+    }
+  },
+  "config": {
+    "conditionMode": "Operador",
+    "conditionModeAndDesc": "Todas las entradas deben tener éxito",
+    "conditionModeOrDesc": "Al menos una debe tener éxito",
+    "conditionInputNodes": "Nodos de entrada conectados",
+    "conditionNoInputs": "No hay nodos de entrada conectados"
+  }
+}

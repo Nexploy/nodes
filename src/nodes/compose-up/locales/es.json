@@ -1,0 +1,16 @@
+{
+  "nodes": {
+    "compose-up": {
+      "name": "Iniciar Compose",
+      "description": "Inicia el stack de Compose construido previamente"
+    }
+  },
+  "config": {
+    "composeUpRecreate": "Recrear los contenedores",
+    "composeUpRecreateDescription": "Ejecuta docker compose down antes de iniciar el stack",
+    "composeUpRemoveOrphans": "Eliminar los huérfanos",
+    "composeUpRemoveOrphansDescription": "Elimina los contenedores de servicios que ya no se declaran en el archivo compose (--remove-orphans)",
+    "composeUpKeepComposeFile": "Conservar el archivo compose generado",
+    "composeUpKeepComposeFileDescription": "Conserva el archivo compose procesado en el directorio de trabajo para depurar"
+  }
+}

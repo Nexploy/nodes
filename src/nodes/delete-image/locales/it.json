@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "delete-image": {
+      "name": "Elimina immagine",
+      "description": "Elimina un'immagine Docker specifica per nome o ID"
+    }
+  }
+}

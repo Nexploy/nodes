@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "create-volume": {
+      "name": "Crear volumen",
+      "description": "Crea un volumen Docker"
+    }
+  },
+  "config": {
+    "volumeDriver": "Driver"
+  }
+}

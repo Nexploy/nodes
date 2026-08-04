@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "set-env-vars": {
+      "name": "Imposta variabili d'ambiente",
+      "description": "Inietta variabili d'ambiente supplementari nella pipeline. Le variabili si accumulano lungo tutta la pipeline."
+    }
+  },
+  "config": {
+    "vars": "Variabili d'ambiente"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "tag-image": {
+      "name": "Tagga immagine",
+      "description": "Aggiunge un tag a un'immagine Docker"
+    }
+  },
+  "config": {
+    "targetTag": "Tag di destinazione"
+  }
+}

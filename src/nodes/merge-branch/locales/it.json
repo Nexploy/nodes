@@ -1,0 +1,18 @@
+{
+  "nodes": {
+    "merge-branch": {
+      "name": "Unisci branch",
+      "description": "Unisce un branch nel branch corrente"
+    }
+  },
+  "config": {
+    "mergeSourceBranch": "Branch di origine",
+    "mergeTargetBranch": "Branch di destinazione",
+    "mergeStrategy": "Strategia",
+    "mergeStrategyMerge": "Commit di merge",
+    "mergeStrategySquash": "Squash",
+    "mergeMessage": "Messaggio di commit",
+    "mergeMessagePlaceholder": "Merge feature/my-branch into main",
+    "mergePush": "Push dopo il merge"
+  }
+}

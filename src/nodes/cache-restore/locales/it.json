@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "cache-restore": {
+      "name": "Ripristina cache",
+      "description": "Ripristina una cache di build da un volume Docker nella directory di lavoro"
+    }
+  },
+  "config": {
+    "cachePath": "Percorso della cache"
+  }
+}

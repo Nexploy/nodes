@@ -1,0 +1,32 @@
+{
+  "nodes": {
+    "webhook-clone": {
+      "name": "Clonado por webhook",
+      "description": "Clona el repositorio cuando se recibe un evento push por webhook"
+    }
+  },
+  "config": {
+    "webhookStatusConfigured": "Webhook configurado",
+    "webhookStatusNotConfigured": "Webhook sin configurar",
+    "webhookStatusNotConfiguredDescription": "El webhook aún no está configurado. Haz clic en el botón para configurarlo manualmente.",
+    "webhookSetupButton": "Configurar el webhook",
+    "webhookBranchFilter": "Filtro de ramas",
+    "webhookBranchFilterPlaceholder": "p. ej. main, develop, feature/*",
+    "webhookBranchFilterDescription": "Lanza builds solo para las ramas que coincidan — la rama enviada en un push, la rama de destino en una merge request. Admite valores separados por comas y comodines (p. ej. feature/*). Déjalo vacío para aceptar todas las ramas.",
+    "webhookTriggerEvents": "Eventos desencadenantes",
+    "webhookTriggerEventsDescription": "Eventos Git que inician una build. Vuelve a ejecutar la configuración del webhook después de activar nuevos eventos para que el proveedor los envíe.",
+    "webhookEventPush": "Push",
+    "webhookEventMergeRequest": "Merge request",
+    "webhookEventTag": "Etiqueta",
+    "webhookMergeRequestActions": "Acciones de merge request",
+    "webhookMergeRequestActionsDescription": "Estados de merge request que inician una build. Las merge request procedentes de un fork se ignoran.",
+    "webhookMergeRequestActionOpened": "Abierta",
+    "webhookMergeRequestActionUpdated": "Actualizada",
+    "webhookMergeRequestActionMerged": "Fusionada",
+    "webhookMergeRequestActionClosed": "Cerrada",
+    "webhookTagFilter": "Filtro de etiquetas",
+    "webhookTagFilterPlaceholder": "v*, release-*",
+    "webhookTagFilterDescription": "Nombres de etiquetas separados por comas. Un * final coincide con un prefijo. Déjalo vacío para aceptar todas las etiquetas.",
+    "webhookResyncButton": "Resincronizar los eventos"
+  }
+}

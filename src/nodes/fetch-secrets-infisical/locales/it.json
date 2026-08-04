@@ -1,0 +1,28 @@
+{
+  "nodes": {
+    "fetch-secrets-infisical": {
+      "name": "Segreti Infisical",
+      "description": "Recupera i segreti da Infisical (cloud o self-hosted). Le variabili si accumulano lungo tutta la pipeline."
+    }
+  },
+  "config": {
+    "infisicalSiteUrl": "URL dell'istanza",
+    "infisicalSiteUrlPlaceholder": "https://app.infisical.com",
+    "infisicalSiteUrlDescription": "Usa https://eu.infisical.com per la regione UE, oppure il tuo URL per un'istanza self-hosted.",
+    "infisicalAuthMethod": "Metodo di autenticazione",
+    "infisicalAuthMethodUniversal": "Machine Identity (Universal Auth)",
+    "infisicalAuthMethodToken": "Access token",
+    "infisicalClientId": "Client ID",
+    "infisicalClientIdPlaceholder": "Client ID della machine identity",
+    "infisicalClientSecret": "Client secret",
+    "infisicalAccessToken": "Access token",
+    "infisicalProjectId": "ID del progetto",
+    "infisicalProjectIdPlaceholder": "ID del progetto Infisical",
+    "infisicalEnvironment": "Slug dell'ambiente",
+    "infisicalEnvironmentPlaceholder": "dev",
+    "infisicalSecretPath": "Percorso del segreto",
+    "infisicalRecursive": "Includi le sottocartelle",
+    "infisicalExpandReferences": "Espandi i riferimenti ai segreti",
+    "infisicalIncludeImports": "Includi i segreti importati"
+  }
+}

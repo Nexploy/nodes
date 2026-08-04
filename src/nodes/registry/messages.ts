@@ -125,6 +125,135 @@ import waitForHealthFr from '../wait-for-health/locales/fr.json';
 import waitForPortFr from '../wait-for-port/locales/fr.json';
 import waitForUrlFr from '../wait-for-url/locales/fr.json';
 import webhookCloneFr from '../webhook-clone/locales/fr.json';
+
+import sharedIt from './locales/it.json';
+import addDomainIt from '../add-domain/locales/it.json';
+import addSslCertificateIt from '../add-ssl-certificate/locales/it.json';
+import backupVolumeBucketStorageIt from '../backup-volume-bucket-storage/locales/it.json';
+import buildDockerImageIt from '../build-docker-image/locales/it.json';
+import cacheRestoreIt from '../cache-restore/locales/it.json';
+import cacheSaveIt from '../cache-save/locales/it.json';
+import checkContainerLogsIt from '../check-container-logs/locales/it.json';
+import cherryPickCommitIt from '../cherry-pick-commit/locales/it.json';
+import cleanWorkdirIt from '../clean-workdir/locales/it.json';
+import cloneRepositoryIt from '../clone-repository/locales/it.json';
+import composeBuildIt from '../compose-build/locales/it.json';
+import composeRunIt from '../compose-run/locales/it.json';
+import composeUpIt from '../compose-up/locales/it.json';
+import conditionIt from '../condition/locales/it.json';
+import createContainerIt from '../create-container/locales/it.json';
+import createNetworkIt from '../create-network/locales/it.json';
+import createReleaseIt from '../create-release/locales/it.json';
+import createServiceIt from '../create-service/locales/it.json';
+import createVolumeIt from '../create-volume/locales/it.json';
+import delayIt from '../delay/locales/it.json';
+import deleteContainerIt from '../delete-container/locales/it.json';
+import deleteImageIt from '../delete-image/locales/it.json';
+import deleteNetworkIt from '../delete-network/locales/it.json';
+import deleteVolumeIt from '../delete-volume/locales/it.json';
+import deployComposeIt from '../deploy-compose/locales/it.json';
+import downloadFileIt from '../download-file/locales/it.json';
+import fetchSecretsDopplerIt from '../fetch-secrets-doppler/locales/it.json';
+import fetchSecretsInfisicalIt from '../fetch-secrets-infisical/locales/it.json';
+import fetchSecretsVaultIt from '../fetch-secrets-vault/locales/it.json';
+import gitCloneExtraIt from '../git-clone-extra/locales/it.json';
+import gitTagIt from '../git-tag/locales/it.json';
+import httpRequestIt from '../http-request/locales/it.json';
+import mergeBranchIt from '../merge-branch/locales/it.json';
+import pruneBuildCacheIt from '../prune-build-cache/locales/it.json';
+import pruneContainersIt from '../prune-containers/locales/it.json';
+import pruneImagesIt from '../prune-images/locales/it.json';
+import pruneVolumesIt from '../prune-volumes/locales/it.json';
+import pullFromRegistryIt from '../pull-from-registry/locales/it.json';
+import pushToRegistryIt from '../push-to-registry/locales/it.json';
+import removeContainerIt from '../remove-container/locales/it.json';
+import removeDomainIt from '../remove-domain/locales/it.json';
+import restartContainerIt from '../restart-container/locales/it.json';
+import runCommandInContainerIt from '../run-command-in-container/locales/it.json';
+import saveVersionIt from '../save-version/locales/it.json';
+import scaleServiceIt from '../scale-service/locales/it.json';
+import scanImageIt from '../scan-image/locales/it.json';
+import sendNotificationIt from '../send-notification/locales/it.json';
+import setEnvVarsIt from '../set-env-vars/locales/it.json';
+import setEnvironmentIt from '../set-environment/locales/it.json';
+import sonarqubeScanIt from '../sonarqube-scan/locales/it.json';
+import startContainerIt from '../start-container/locales/it.json';
+import stopContainerIt from '../stop-container/locales/it.json';
+import tagImageIt from '../tag-image/locales/it.json';
+import triggerStageBuildIt from '../trigger-stage-build/locales/it.json';
+import updateCommitStatusIt from '../update-commit-status/locales/it.json';
+import updateServiceIt from '../update-service/locales/it.json';
+import validateComposeIt from '../validate-compose/locales/it.json';
+import validateDockerfileIt from '../validate-dockerfile/locales/it.json';
+import waitForHealthIt from '../wait-for-health/locales/it.json';
+import waitForPortIt from '../wait-for-port/locales/it.json';
+import waitForUrlIt from '../wait-for-url/locales/it.json';
+import webhookCloneIt from '../webhook-clone/locales/it.json';
+
+import sharedEs from './locales/es.json';
+import addDomainEs from '../add-domain/locales/es.json';
+import addSslCertificateEs from '../add-ssl-certificate/locales/es.json';
+import backupVolumeBucketStorageEs from '../backup-volume-bucket-storage/locales/es.json';
+import buildDockerImageEs from '../build-docker-image/locales/es.json';
+import cacheRestoreEs from '../cache-restore/locales/es.json';
+import cacheSaveEs from '../cache-save/locales/es.json';
+import checkContainerLogsEs from '../check-container-logs/locales/es.json';
+import cherryPickCommitEs from '../cherry-pick-commit/locales/es.json';
+import cleanWorkdirEs from '../clean-workdir/locales/es.json';
+import cloneRepositoryEs from '../clone-repository/locales/es.json';
+import composeBuildEs from '../compose-build/locales/es.json';
+import composeRunEs from '../compose-run/locales/es.json';
+import composeUpEs from '../compose-up/locales/es.json';
+import conditionEs from '../condition/locales/es.json';
+import createContainerEs from '../create-container/locales/es.json';
+import createNetworkEs from '../create-network/locales/es.json';
+import createReleaseEs from '../create-release/locales/es.json';
+import createServiceEs from '../create-service/locales/es.json';
+import createVolumeEs from '../create-volume/locales/es.json';
+import delayEs from '../delay/locales/es.json';
+import deleteContainerEs from '../delete-container/locales/es.json';
+import deleteImageEs from '../delete-image/locales/es.json';
+import deleteNetworkEs from '../delete-network/locales/es.json';
+import deleteVolumeEs from '../delete-volume/locales/es.json';
+import deployComposeEs from '../deploy-compose/locales/es.json';
+import downloadFileEs from '../download-file/locales/es.json';
+import fetchSecretsDopplerEs from '../fetch-secrets-doppler/locales/es.json';
+import fetchSecretsInfisicalEs from '../fetch-secrets-infisical/locales/es.json';
+import fetchSecretsVaultEs from '../fetch-secrets-vault/locales/es.json';
+import gitCloneExtraEs from '../git-clone-extra/locales/es.json';
+import gitTagEs from '../git-tag/locales/es.json';
+import httpRequestEs from '../http-request/locales/es.json';
+import mergeBranchEs from '../merge-branch/locales/es.json';
+import pruneBuildCacheEs from '../prune-build-cache/locales/es.json';
+import pruneContainersEs from '../prune-containers/locales/es.json';
+import pruneImagesEs from '../prune-images/locales/es.json';
+import pruneVolumesEs from '../prune-volumes/locales/es.json';
+import pullFromRegistryEs from '../pull-from-registry/locales/es.json';
+import pushToRegistryEs from '../push-to-registry/locales/es.json';
+import removeContainerEs from '../remove-container/locales/es.json';
+import removeDomainEs from '../remove-domain/locales/es.json';
+import restartContainerEs from '../restart-container/locales/es.json';
+import runCommandInContainerEs from '../run-command-in-container/locales/es.json';
+import saveVersionEs from '../save-version/locales/es.json';
+import scaleServiceEs from '../scale-service/locales/es.json';
+import scanImageEs from '../scan-image/locales/es.json';
+import sendNotificationEs from '../send-notification/locales/es.json';
+import setEnvVarsEs from '../set-env-vars/locales/es.json';
+import setEnvironmentEs from '../set-environment/locales/es.json';
+import sonarqubeScanEs from '../sonarqube-scan/locales/es.json';
+import startContainerEs from '../start-container/locales/es.json';
+import stopContainerEs from '../stop-container/locales/es.json';
+import tagImageEs from '../tag-image/locales/es.json';
+import triggerStageBuildEs from '../trigger-stage-build/locales/es.json';
+import updateCommitStatusEs from '../update-commit-status/locales/es.json';
+import updateServiceEs from '../update-service/locales/es.json';
+import validateComposeEs from '../validate-compose/locales/es.json';
+import validateDockerfileEs from '../validate-dockerfile/locales/es.json';
+import waitForHealthEs from '../wait-for-health/locales/es.json';
+import waitForPortEs from '../wait-for-port/locales/es.json';
+import waitForUrlEs from '../wait-for-url/locales/es.json';
+import webhookCloneEs from '../webhook-clone/locales/es.json';
+
 type MessageTree = { [key: string]: string | MessageTree };
 
 function mergeMessages(sources: MessageTree[]): MessageTree {
@@ -272,6 +401,136 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         waitForPortFr,
         waitForUrlFr,
         webhookCloneFr,
+    ]),
+    it: mergeMessages([
+        sharedIt,
+        addDomainIt,
+        addSslCertificateIt,
+        backupVolumeBucketStorageIt,
+        buildDockerImageIt,
+        cacheRestoreIt,
+        cacheSaveIt,
+        checkContainerLogsIt,
+        cherryPickCommitIt,
+        cleanWorkdirIt,
+        cloneRepositoryIt,
+        composeBuildIt,
+        composeRunIt,
+        composeUpIt,
+        conditionIt,
+        createContainerIt,
+        createNetworkIt,
+        createReleaseIt,
+        createServiceIt,
+        createVolumeIt,
+        delayIt,
+        deleteContainerIt,
+        deleteImageIt,
+        deleteNetworkIt,
+        deleteVolumeIt,
+        deployComposeIt,
+        downloadFileIt,
+        fetchSecretsDopplerIt,
+        fetchSecretsInfisicalIt,
+        fetchSecretsVaultIt,
+        gitCloneExtraIt,
+        gitTagIt,
+        httpRequestIt,
+        mergeBranchIt,
+        pruneBuildCacheIt,
+        pruneContainersIt,
+        pruneImagesIt,
+        pruneVolumesIt,
+        pullFromRegistryIt,
+        pushToRegistryIt,
+        removeContainerIt,
+        removeDomainIt,
+        restartContainerIt,
+        runCommandInContainerIt,
+        saveVersionIt,
+        scaleServiceIt,
+        scanImageIt,
+        sendNotificationIt,
+        setEnvVarsIt,
+        setEnvironmentIt,
+        sonarqubeScanIt,
+        startContainerIt,
+        stopContainerIt,
+        tagImageIt,
+        triggerStageBuildIt,
+        updateCommitStatusIt,
+        updateServiceIt,
+        validateComposeIt,
+        validateDockerfileIt,
+        waitForHealthIt,
+        waitForPortIt,
+        waitForUrlIt,
+        webhookCloneIt,
+    ]),
+    es: mergeMessages([
+        sharedEs,
+        addDomainEs,
+        addSslCertificateEs,
+        backupVolumeBucketStorageEs,
+        buildDockerImageEs,
+        cacheRestoreEs,
+        cacheSaveEs,
+        checkContainerLogsEs,
+        cherryPickCommitEs,
+        cleanWorkdirEs,
+        cloneRepositoryEs,
+        composeBuildEs,
+        composeRunEs,
+        composeUpEs,
+        conditionEs,
+        createContainerEs,
+        createNetworkEs,
+        createReleaseEs,
+        createServiceEs,
+        createVolumeEs,
+        delayEs,
+        deleteContainerEs,
+        deleteImageEs,
+        deleteNetworkEs,
+        deleteVolumeEs,
+        deployComposeEs,
+        downloadFileEs,
+        fetchSecretsDopplerEs,
+        fetchSecretsInfisicalEs,
+        fetchSecretsVaultEs,
+        gitCloneExtraEs,
+        gitTagEs,
+        httpRequestEs,
+        mergeBranchEs,
+        pruneBuildCacheEs,
+        pruneContainersEs,
+        pruneImagesEs,
+        pruneVolumesEs,
+        pullFromRegistryEs,
+        pushToRegistryEs,
+        removeContainerEs,
+        removeDomainEs,
+        restartContainerEs,
+        runCommandInContainerEs,
+        saveVersionEs,
+        scaleServiceEs,
+        scanImageEs,
+        sendNotificationEs,
+        setEnvVarsEs,
+        setEnvironmentEs,
+        sonarqubeScanEs,
+        startContainerEs,
+        stopContainerEs,
+        tagImageEs,
+        triggerStageBuildEs,
+        updateCommitStatusEs,
+        updateServiceEs,
+        validateComposeEs,
+        validateDockerfileEs,
+        waitForHealthEs,
+        waitForPortEs,
+        waitForUrlEs,
+        webhookCloneEs,
     ]),
 };
 

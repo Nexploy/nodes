@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "scale-service": {
+      "name": "Scala servizio",
+      "description": "Cambia il numero di repliche di un servizio Swarm"
+    }
+  },
+  "config": {
+    "serviceReplicas": "Repliche"
+  }
+}

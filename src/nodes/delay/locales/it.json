@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "delay": {
+      "name": "Attesa",
+      "description": "Mette in pausa la pipeline per un numero fisso di secondi"
+    }
+  },
+  "config": {
+    "delaySeconds": "Attesa (secondi)"
+  }
+}

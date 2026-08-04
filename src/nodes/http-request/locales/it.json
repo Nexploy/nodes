@@ -1,0 +1,14 @@
+{
+  "nodes": {
+    "http-request": {
+      "name": "Richiesta HTTP",
+      "description": "Effettua una richiesta HTTP verso un URL esterno"
+    }
+  },
+  "config": {
+    "httpHeaders": "Header",
+    "httpBody": "Corpo della richiesta",
+    "jsonBodyPlaceholder": "'{'\"key\": \"value\"'}'",
+    "httpUrlPlaceholder": "https://example.com/webhook"
+  }
+}

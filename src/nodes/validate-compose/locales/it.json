@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "validate-compose": {
+      "name": "Valida Compose",
+      "description": "Verifica la sintassi del file Docker Compose"
+    }
+  },
+  "config": {
+    "composePath": "Percorso del file Compose"
+  }
+}

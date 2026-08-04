@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "compose-build": {
+      "name": "Build di Compose",
+      "description": "Costruisce le immagini dello stack Compose senza avviarlo"
+    }
+  }
+}

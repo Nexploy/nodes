@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "prune-images": {
+      "name": "Elimina le immagini inutilizzate",
+      "description": "Rimuove le immagini Docker inutilizzate per liberare spazio su disco"
+    }
+  },
+  "config": {
+    "pruneOnlyDangling": "Solo le immagini dangling"
+  }
+}

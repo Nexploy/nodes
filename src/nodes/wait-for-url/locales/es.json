@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "wait-for-url": {
+      "name": "Esperar a la URL",
+      "description": "Consulta una URL hasta que devuelva el estado HTTP esperado"
+    }
+  },
+  "config": {
+    "healthUrlPlaceholder": "https://example.com/health"
+  }
+}

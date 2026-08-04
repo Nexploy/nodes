@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "prune-volumes": {
+      "name": "Elimina i volumi inutilizzati",
+      "description": "Rimuove i volumi Docker inutilizzati per liberare spazio su disco"
+    }
+  },
+  "config": {
+    "pruneVolumesAll": "Includi i volumi con nome"
+  }
+}

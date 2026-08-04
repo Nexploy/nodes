@@ -1,0 +1,13 @@
+{
+  "nodes": {
+    "git-tag": {
+      "name": "Tag Git",
+      "description": "Crea un tag git e lo invia al remote"
+    }
+  },
+  "config": {
+    "gitTagName": "Nome del tag",
+    "gitTagMessage": "Messaggio",
+    "gitTagMessagePlaceholder": "Lascia vuoto per un tag leggero"
+  }
+}

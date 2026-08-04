@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "start-container": {
+      "name": "Iniciar contenedor",
+      "description": "Inicia un contenedor Docker existente"
+    }
+  }
+}

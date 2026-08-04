@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "clean-workdir": {
+      "name": "Pulisci la directory di lavoro",
+      "description": "Rimuove la directory del repository clonato"
+    }
+  },
+  "config": {
+    "cleanWorkdirInfo": "Rimuove dal disco la directory del repository clonato al termine della pipeline."
+  }
+}

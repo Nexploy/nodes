@@ -1,0 +1,18 @@
+{
+  "nodes": {
+    "fetch-secrets-vault": {
+      "name": "Segreti Vault",
+      "description": "Recupera i segreti dal motore KV di HashiCorp Vault. Le variabili si accumulano lungo tutta la pipeline."
+    }
+  },
+  "config": {
+    "vaultEndpoint": "Endpoint di Vault",
+    "vaultToken": "Token di Vault",
+    "vaultSecretPath": "Percorso del segreto",
+    "vaultKvVersion": "Versione del motore KV",
+    "vaultNamespace": "Namespace (Enterprise)",
+    "vaultEndpointPlaceholder": "https://vault.example.com",
+    "vaultSecretPathPlaceholder": "SandBox/myapp",
+    "vaultNamespacePlaceholder": "admin/team-a"
+  }
+}

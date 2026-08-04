@@ -1,0 +1,15 @@
+{
+  "nodes": {
+    "download-file": {
+      "name": "Descargar archivo",
+      "description": "Descarga un archivo desde una URL al directorio de trabajo"
+    }
+  },
+  "config": {
+    "downloadDestination": "Directorio de destino",
+    "downloadFilename": "Nombre del archivo",
+    "downloadFilenamePlaceholder": "Déjalo vacío para usar el nombre del archivo de la URL",
+    "fileUrlPlaceholder": "https://example.com/file",
+    "downloadDestinationPlaceholder": "downloads/files"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "nodes": {
+    "create-container": {
+      "name": "Crear contenedor",
+      "description": "Crea e inicia un contenedor Docker a partir de una imagen"
+    }
+  },
+  "config": {
+    "createContainerName": "Nombre del contenedor",
+    "createContainerNamePlaceholder": "p. ej. mi-app (déjalo vacío para generarlo automáticamente)",
+    "createContainerRestartPolicy": "Política de reinicio",
+    "createContainerNetwork": "Red",
+    "createContainerNetworkPlaceholder": "p. ej. mi-red (déjalo vacío para la predeterminada)"
+  }
+}

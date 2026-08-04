@@ -1,0 +1,32 @@
+{
+  "nodes": {
+    "webhook-clone": {
+      "name": "Clone da webhook",
+      "description": "Clona il repository quando viene ricevuto un evento push da webhook"
+    }
+  },
+  "config": {
+    "webhookStatusConfigured": "Webhook configurato",
+    "webhookStatusNotConfigured": "Webhook non configurato",
+    "webhookStatusNotConfiguredDescription": "Il webhook non è ancora stato configurato. Clicca sul pulsante per configurarlo manualmente.",
+    "webhookSetupButton": "Configura il webhook",
+    "webhookBranchFilter": "Filtro sui branch",
+    "webhookBranchFilterPlaceholder": "es. main, develop, feature/*",
+    "webhookBranchFilterDescription": "Avvia le build solo per i branch corrispondenti — il branch inviato per un push, il branch di destinazione per una merge request. Supporta valori separati da virgole e caratteri jolly (es. feature/*). Lascia vuoto per accettare tutti i branch.",
+    "webhookTriggerEvents": "Eventi di attivazione",
+    "webhookTriggerEventsDescription": "Eventi Git che avviano una build. Riesegui la configurazione del webhook dopo aver attivato nuovi eventi, affinché il provider li invii.",
+    "webhookEventPush": "Push",
+    "webhookEventMergeRequest": "Merge request",
+    "webhookEventTag": "Tag",
+    "webhookMergeRequestActions": "Azioni sulle merge request",
+    "webhookMergeRequestActionsDescription": "Stati delle merge request che avviano una build. Le merge request provenienti da un fork vengono ignorate.",
+    "webhookMergeRequestActionOpened": "Aperta",
+    "webhookMergeRequestActionUpdated": "Aggiornata",
+    "webhookMergeRequestActionMerged": "Unita",
+    "webhookMergeRequestActionClosed": "Chiusa",
+    "webhookTagFilter": "Filtro sui tag",
+    "webhookTagFilterPlaceholder": "v*, release-*",
+    "webhookTagFilterDescription": "Nomi di tag separati da virgole. Un * finale corrisponde a un prefisso. Lascia vuoto per accettare tutti i tag.",
+    "webhookResyncButton": "Risincronizza gli eventi"
+  }
+}
