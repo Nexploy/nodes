@@ -113,9 +113,17 @@ export interface DomainRoute {
     https: boolean;
     certificateId?: string;
     environmentId: string;
+    dnsCredentialId?: string;
+    dnsZoneId?: string;
+    dnsZoneName?: string;
+    dnsRecordId?: string;
+    /** @deprecated use dnsCredentialId */
     cloudflareCredentialId?: string;
+    /** @deprecated use dnsZoneId */
     cloudflareZoneId?: string;
+    /** @deprecated use dnsZoneName */
     cloudflareZoneName?: string;
+    /** @deprecated use dnsRecordId */
     cloudflareDnsRecordId?: string;
 }
 

@@ -44,11 +44,11 @@ export function AddDomainConfig() {
     const form = useFormContext();
 
     const httpsEnabled = form.watch('https');
-    const cloudflareZoneId = form.watch('cloudflareZoneId');
+    const dnsZoneId = form.watch('dnsZoneId') ?? form.watch('cloudflareZoneId');
 
     const { data: certificates = [] } = useNodeResource<CertOption[]>(httpsEnabled ? '/api/ssl-certificates' : null);
 
-    const { CloudflareDomainField } = useNodeHostComponents();
+    const { DnsDomainField } = useNodeHostComponents();
     const environmentId = useNodeEnvironmentId();
     const environment = useNodeEnvironments().find((environment) => environment.id === environmentId);
 
@@ -65,7 +65,7 @@ export function AddDomainConfig() {
                     <AlertDescription>{tDomains('remotePortHint')}</AlertDescription>
                 </Alert>
             )}
-            <CloudflareDomainField form={form} />
+            <DnsDomainField form={form} />
             <div className="grid items-start gap-4 md:grid-cols-2">
                 <FormField
                     control={form.control}
@@ -79,13 +79,13 @@ export function AddDomainConfig() {
                                         {...field}
                                         placeholder={t('domainPlaceholder')}
                                         className="font-mono"
-                                        readOnly={!!cloudflareZoneId}
-                                        disabled={!!cloudflareZoneId}
+                                        readOnly={!!dnsZoneId}
+                                        disabled={!!dnsZoneId}
                                     />
                                 </RefAware>
                             </FormControl>
-                            {cloudflareZoneId ? (
-                                <FormDescription>{tDomains('managedByCloudflare')}</FormDescription>
+                            {dnsZoneId ? (
+                                <FormDescription>{tDomains('managedByDnsProvider')}</FormDescription>
                             ) : (
                                 <FormMessage className="text-xs" />
                             )}
