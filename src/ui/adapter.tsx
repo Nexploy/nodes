@@ -46,14 +46,19 @@ export interface PermissionGateProps {
     children: ReactNode;
 }
 
-export interface CloudflareDomainFieldProps {
+export interface DnsDomainFieldProps {
     form: unknown;
     basePath?: string;
 }
 
+/** @deprecated use DnsDomainFieldProps */
+export type CloudflareDomainFieldProps = DnsDomainFieldProps;
+
 export interface NodeHostComponents {
     PermissionGate: ComponentType<PermissionGateProps>;
-    CloudflareDomainField: ComponentType<CloudflareDomainFieldProps>;
+    DnsDomainField: ComponentType<DnsDomainFieldProps>;
+    /** @deprecated use DnsDomainField */
+    CloudflareDomainField?: ComponentType<DnsDomainFieldProps>;
 }
 
 export interface WebhookSetup {

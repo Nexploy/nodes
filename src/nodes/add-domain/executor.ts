@@ -22,10 +22,11 @@ export class AddDomainExecutor implements INodeExecutor {
             containerPort,
             https,
             certificateId,
-            cloudflareCredentialId,
-            cloudflareZoneId,
-            cloudflareZoneName,
         } = nodeConfig;
+
+        const dnsCredentialId = nodeConfig.dnsCredentialId ?? nodeConfig.cloudflareCredentialId;
+        const dnsZoneId = nodeConfig.dnsZoneId ?? nodeConfig.cloudflareZoneId;
+        const dnsZoneName = nodeConfig.dnsZoneName ?? nodeConfig.cloudflareZoneName;
 
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
 
@@ -51,14 +52,14 @@ export class AddDomainExecutor implements INodeExecutor {
             https,
             certificateId,
             environmentId: environmentId ?? '',
-            cloudflareCredentialId,
-            cloudflareZoneId,
-            cloudflareZoneName,
+            dnsCredentialId,
+            dnsZoneId,
+            dnsZoneName,
         };
 
-        if (cloudflareZoneId && cloudflareZoneName && cloudflareCredentialId) {
-            await logger.info(nodeId, `Provisioning Cloudflare DNS for: ${host}`);
-            newDomain.cloudflareDnsRecordId = await services.domain.provisionDns(newDomain, host);
+        if (dnsZoneId && dnsZoneName && dnsCredentialId) {
+            await logger.info(nodeId, `Provisioning DNS record for: ${host}`);
+            newDomain.dnsRecordId = await services.domain.provisionDns(newDomain, host);
         }
 
         const otherDomains = existingDomains.filter((d) => d.host !== host);
