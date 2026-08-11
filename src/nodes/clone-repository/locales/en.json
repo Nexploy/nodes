@@ -6,7 +6,6 @@
     }
   },
   "config": {
-    "branchNotExist": "Branch no longer exists",
     "cloneCommitHash": "Commit Hash",
     "cloneCommitHashPlaceholder": "e.g. abc1234",
     "cloneCommitHashDescription": "Leave empty to use the latest commit of the branch"
