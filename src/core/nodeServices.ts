@@ -169,6 +169,52 @@ export interface EnvironmentHostService {
     getDefaultEnvironmentId(): Promise<string | undefined>;
 }
 
+export interface RunnerBuildSpec {
+    imageName: string;
+    contextPath?: string;
+    dockerfilePath?: string;
+    buildArgs?: Record<string, string>;
+    labels?: Record<string, string>;
+    target?: string;
+    platform?: string;
+    noCache?: boolean;
+    pull?: boolean;
+}
+
+export interface RunnerBuildRequest {
+    runnerId: string;
+    buildConfig: BuildConfig;
+    nodeId?: string;
+    branch?: string;
+    commitHash?: string;
+    submodules?: boolean;
+    build: RunnerBuildSpec;
+    registryId?: string;
+    timeoutMs?: number;
+}
+
+export interface RunnerBuildResult {
+    imageId?: string;
+    imageName: string;
+    pushedImages: string[];
+    digest?: string;
+}
+
+export interface RunnerAvailability {
+    available: boolean;
+    reason?: string;
+}
+
+export interface RunnerDispatchOptions {
+    signal: AbortSignal;
+    onLog: (message: string) => Promise<void> | void;
+}
+
+export interface RunnerHostService {
+    checkAvailability(runnerId: string): Promise<RunnerAvailability>;
+    dispatchBuild(request: RunnerBuildRequest, options: RunnerDispatchOptions): Promise<RunnerBuildResult>;
+}
+
 export interface WebhookClientService {
     setup(repositoryId: string): Promise<void>;
     teardown(repositoryId: string): Promise<void>;
@@ -188,4 +234,5 @@ export interface NodeHostServices {
     bucketStorage: BucketStorageHostService;
     version: VersionHostService;
     environment: EnvironmentHostService;
+    runner?: RunnerHostService;
 }

@@ -108,6 +108,13 @@ export const setEnvironmentConfigSchema = z.object({
     environmentId: z.string().min(1, 'Environment is required').default(''),
 });
 
+export const setRunnerConfigSchema = z.object({
+    runnerId: z.string().min(1, 'Runner is required').default(''),
+    runnerName: z.string().default(''),
+    registryId: z.string().default(''),
+    fallbackToLocal: z.boolean().default(true),
+});
+
 export const sendNotificationConfigSchema = z.object({
     webhookUrl: z.string().min(1, 'Webhook URL is required').default(''),
     triggerOn: z.array(z.enum(['success', 'failure', 'always'])).default(['always']),

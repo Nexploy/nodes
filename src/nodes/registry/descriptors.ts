@@ -48,6 +48,7 @@ import { scanImageDescriptor } from '../scan-image/node';
 import { sendNotificationDescriptor } from '../send-notification/node';
 import { setEnvVarsDescriptor } from '../set-env-vars/node';
 import { setEnvironmentDescriptor } from '../set-environment/node';
+import { setRunnerDescriptor } from '../set-runner/node';
 import { sonarqubeScanDescriptor } from '../sonarqube-scan/node';
 import { startContainerDescriptor } from '../start-container/node';
 import { stopContainerDescriptor } from '../stop-container/node';
@@ -112,6 +113,7 @@ export const ALL_NODE_DESCRIPTORS: NodeDescriptor[] = [
     sendNotificationDescriptor,
     setEnvVarsDescriptor,
     setEnvironmentDescriptor,
+    setRunnerDescriptor,
     sonarqubeScanDescriptor,
     startContainerDescriptor,
     stopContainerDescriptor,

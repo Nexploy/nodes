@@ -95,7 +95,18 @@
     "emailPlaceholder": "you@example.com",
     "tlsCertPlaceholder": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
     "tlsKeyPlaceholder": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
-    "commandPlaceholder": "npm run migrate"
+    "commandPlaceholder": "npm run migrate",
+    "buildRunner": "Runner de build",
+    "selectBuildRunner": "Sélectionner un runner de build",
+    "buildRunnersLoading": "Chargement des runners de build…",
+    "buildRunnerUnavailable": "Runner de build indisponible",
+    "noBuildRunnersFound": "Aucun runner de build enregistré. Ajoutez-en un dans Admin > Serveurs.",
+    "runnerFallbackToLocal": "Repli sur ce serveur",
+    "runnerFallbackToLocalDescription": "Builder ici quand le runner est hors ligne au lieu de faire échouer le pipeline",
+    "runnerRegistry": "Registre pour le runner",
+    "selectRunnerRegistry": "Sélectionner un registre",
+    "noRunnerRegistryFound": "Aucun registre configuré. Ajoutez-en un dans Docker > Registre.",
+    "runnerRegistryDescription": "Le runner y pousse l'image construite pour que ce serveur puisse la récupérer. Sans registre, l'image reste sur le runner."
   },
   "inputs": {
     "workDir": "Répertoire de travail",
@@ -277,6 +288,10 @@
     "provider": "Fournisseur",
     "desc_provider": "Fournisseur Git auquel le statut du commit a été envoyé",
     "sha": "SHA du commit",
-    "desc_sha": "Commit auquel le statut a été rattaché"
+    "desc_sha": "Commit auquel le statut a été rattaché",
+    "runnerId": "ID du runner",
+    "desc_runnerId": "ID du runner de build sélectionné pour les nœuds en aval",
+    "runnerName": "Nom du runner",
+    "desc_runnerName": "Nom du runner de build sélectionné pour les nœuds en aval"
   }
 }

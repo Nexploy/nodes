@@ -5,6 +5,7 @@ import { getComposeProjectName, resolveComposeEnvVars, resolveComposeLabels } fr
 import { composeFileConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 import { z } from 'zod';
 import { ResolveRefs } from '@nexploy/nodes/core/schemas/nodeFieldRef.schema';
+import { buildComposeOnRunner } from '@nexploy/nodes/core/composeRunnerBuild';
 
 export class DeployComposeExecutor implements INodeExecutor {
     readonly type = 'deploy-compose';
@@ -31,6 +32,37 @@ export class DeployComposeExecutor implements INodeExecutor {
 
         const envVars = await resolveComposeEnvVars(ctx);
         const labels = resolveComposeLabels(ctx);
+
+        const runnerId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'runnerId');
+        const runnerFallback = getFromClosestAncestor<boolean>(allOutputs, edges, nodeId, 'runnerFallback');
+
+        let runnerBuiltServices: string[] = [];
+        let runnerPushedImages: string[] = [];
+
+        if (runnerId && services.runner) {
+            try {
+                const runnerResult = await buildComposeOnRunner(ctx, {
+                    workDir,
+                    composePath,
+                    labels,
+                    runnerId,
+                    noCache: nodeConfig.noCache,
+                });
+
+                runnerBuiltServices = runnerResult.builtServices;
+                runnerPushedImages = runnerResult.pushedImages;
+            } catch (error) {
+                if (error instanceof Error && error.name === 'AbortError') throw error;
+
+                const message = error instanceof Error ? error.message : 'Unknown error';
+
+                if (!runnerFallback) {
+                    throw new Error(`Runner compose build failed: ${message}`);
+                }
+
+                await logger.warn(nodeId, `Runner compose build failed (${message}), building on this server instead`);
+            }
+        }
 
         await logger.info(nodeId, `Deploying Docker Compose stack: ${projectName}`);
 
@@ -65,6 +97,11 @@ export class DeployComposeExecutor implements INodeExecutor {
                     projectName,
                     containers: result.containers ?? [],
                     composeConfig: result.composeConfig,
+                    ...(runnerBuiltServices.length > 0 && {
+                        builtServices: runnerBuiltServices,
+                        pushedImages: runnerPushedImages,
+                        runnerId,
+                    }),
                 },
             };
         } catch (error) {
