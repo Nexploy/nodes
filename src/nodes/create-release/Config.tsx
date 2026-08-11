@@ -1,56 +1,17 @@
 'use client';
 
-import { useNodeResource } from '@nexploy/nodes/ui/adapter';
 import { useTranslations } from 'next-intl';
 import { useFormContext } from 'react-hook-form';
-import { useParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { BranchSelect } from '@nexploy/nodes/ui/BranchSelect';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@nexploy/nodes/vendor/ui/components/form';
 import { Input } from '@nexploy/nodes/vendor/ui/components/input';
 import { Textarea } from '@nexploy/nodes/vendor/ui/components/textarea';
 import { Switch } from '@nexploy/nodes/vendor/ui/components/switch';
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from '@nexploy/nodes/vendor/ui/components/select';
 import { RefAware } from '@nexploy/nodes/ui/RefAware';
-import { GitBranch } from '@nexploy/nodes/core/hostResponses';
-import { GitBranchIcon } from 'lucide-react';
-
-interface RepositoryGitMeta {
-    gitProvider: string;
-    gitAccountId: string | null;
-    gitId: string;
-    name: string;
-    branch: string;
-    repositoryUrl: string;
-}
 
 export function CreateReleaseConfig() {
     const t = useTranslations('repository.pipeline.config');
     const form = useFormContext();
-    const params = useParams<{ repositoryId: string }>();
-
-    const { data: repo, isLoading: isLoadingRepo } = useNodeResource<RepositoryGitMeta>(
-        `/api/repositories/${params.repositoryId}`,
-    );
-    const { data: branches, isLoading: isLoadingBranches } = useNodeResource<GitBranch[]>(
-        repo?.gitAccountId
-            ? `/api/git/branches?provider=${repo.gitProvider}&gitAccountId=${repo.gitAccountId}&repoId=${repo.gitId}&owner=${repo.name.split('/')[0]}&repoName=${repo.name.split('/')[1]}&repositoryUrl=${encodeURIComponent(repo.repositoryUrl)}`
-            : null,
-    );
-
-    const currentBranch = form.getValues('targetBranch');
-    useEffect(() => {
-        if (branches && branches.length > 0 && !currentBranch) {
-            form.setValue('targetBranch', branches[0]?.name);
-        }
-    }, [branches]);
 
     return (
         <div className="space-y-4">
@@ -69,46 +30,7 @@ export function CreateReleaseConfig() {
                     </FormItem>
                 )}
             />
-            <FormField
-                control={form.control}
-                name="targetBranch"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>{t('releaseTargetBranch')}</FormLabel>
-                        <Select
-                            {...field}
-                            onValueChange={field.onChange}
-                            disabled={isLoadingRepo || isLoadingBranches || !repo}
-                        >
-                            <FormControl>
-                                <SelectTrigger>
-                                    {isLoadingRepo ? (
-                                        <span className="text-muted-foreground">{t('repoLoading')}</span>
-                                    ) : isLoadingBranches ? (
-                                        <span className="text-muted-foreground">{t('branchLoading')}</span>
-                                    ) : (
-                                        <SelectValue placeholder={t('branchSelect')} />
-                                    )}
-                                </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectLabel>{t('releaseTargetBranch')}</SelectLabel>
-                                    {branches?.map((branch) => (
-                                        <SelectItem key={branch.name} value={branch.name}>
-                                            <div className="flex items-center gap-2">
-                                                <GitBranchIcon />
-                                                {branch.name}
-                                            </div>
-                                        </SelectItem>
-                                    ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
+            <BranchSelect name="targetBranch" label={t('releaseTargetBranch')} autoSelectFirst />
             <FormField
                 control={form.control}
                 name="releaseTitle"
