@@ -5,6 +5,7 @@ import { composeBuildConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfig
 import { z } from 'zod';
 import { ResolveRefs } from '@nexploy/nodes/core/schemas/nodeFieldRef.schema';
 import { getComposeProjectName, resolveComposeEnvVars, resolveComposeLabels } from '@nexploy/nodes/core/composeContext';
+import { buildComposeOnRunner } from '@nexploy/nodes/core/composeRunnerBuild';
 
 export class ComposeBuildExecutor implements INodeExecutor {
     readonly type = 'compose-build';
@@ -31,6 +32,43 @@ export class ComposeBuildExecutor implements INodeExecutor {
         const envVars = await resolveComposeEnvVars(ctx);
         const labels = resolveComposeLabels(ctx);
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
+
+        const runnerId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'runnerId');
+        const runnerFallback = getFromClosestAncestor<boolean>(allOutputs, edges, nodeId, 'runnerFallback');
+
+        if (runnerId && services.runner) {
+            try {
+                const result = await buildComposeOnRunner(ctx, {
+                    workDir,
+                    composePath,
+                    labels,
+                    runnerId,
+                    noCache: nodeConfig.noCache,
+                });
+
+                return {
+                    output: {
+                        projectName,
+                        composeFile: composePath,
+                        services: result.services,
+                        builtServices: result.builtServices,
+                        composeConfig: result.composeConfig,
+                        pushedImages: result.pushedImages,
+                        runnerId,
+                    },
+                };
+            } catch (error) {
+                if (error instanceof Error && error.name === 'AbortError') throw error;
+
+                const message = error instanceof Error ? error.message : 'Unknown error';
+
+                if (!runnerFallback) {
+                    throw new Error(`Runner compose build failed: ${message}`);
+                }
+
+                await logger.warn(nodeId, `Runner compose build failed (${message}), retrying on this server`);
+            }
+        }
 
         await logger.info(nodeId, `Building Docker Compose stack: ${projectName}`);
 

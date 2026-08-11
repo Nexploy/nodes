@@ -55,6 +55,7 @@ import { ScanImageConfig } from '../scan-image/Config';
 import { SendNotificationConfig } from '../send-notification/Config';
 import { SetEnvVarsConfig } from '../set-env-vars/Config';
 import { SetEnvironmentConfig } from '../set-environment/Config';
+import { SetRunnerConfig } from '../set-runner/Config';
 import { SonarqubeScanConfig } from '../sonarqube-scan/Config';
 import { StartContainerConfig } from '../start-container/Config';
 import { StopContainerConfig } from '../stop-container/Config';
@@ -119,6 +120,7 @@ const configPanels: Record<string, ComponentType> = {
     'send-notification': SendNotificationConfig,
     'set-env-vars': SetEnvVarsConfig,
     'set-environment': SetEnvironmentConfig,
+    'set-runner': SetRunnerConfig,
     'sonarqube-scan': SonarqubeScanConfig,
     'start-container': StartContainerConfig,
     'stop-container': StopContainerConfig,

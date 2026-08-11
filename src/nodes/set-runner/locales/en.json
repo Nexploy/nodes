@@ -1,0 +1,8 @@
+{
+  "nodes": {
+    "set-runner": {
+      "name": "Build Runner",
+      "description": "Sends the build work of every downstream node to a remote build runner instead of this server"
+    }
+  }
+}

@@ -95,7 +95,18 @@
     "emailPlaceholder": "tu@example.com",
     "tlsCertPlaceholder": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
     "tlsKeyPlaceholder": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
-    "commandPlaceholder": "npm run migrate"
+    "commandPlaceholder": "npm run migrate",
+    "buildRunner": "Runner de compilación",
+    "selectBuildRunner": "Selecciona un runner de compilación",
+    "buildRunnersLoading": "Cargando runners de compilación…",
+    "buildRunnerUnavailable": "Runner de compilación no disponible",
+    "noBuildRunnersFound": "No hay ningún runner registrado. Añade uno en Admin > Servidores.",
+    "runnerFallbackToLocal": "Recurrir a este servidor",
+    "runnerFallbackToLocalDescription": "Compilar aquí cuando el runner esté desconectado en lugar de fallar la pipeline",
+    "runnerRegistry": "Registro para el runner",
+    "selectRunnerRegistry": "Selecciona un registro",
+    "noRunnerRegistryFound": "No hay ningún registro configurado. Añade uno en Docker > Registro.",
+    "runnerRegistryDescription": "El runner sube ahí la imagen construida para que este servidor pueda descargarla. Sin registro, la imagen se queda en el runner."
   },
   "inputs": {
     "workDir": "Directorio de trabajo",
@@ -277,6 +288,10 @@
     "provider": "Proveedor",
     "desc_provider": "Proveedor Git al que se ha enviado el estado del commit",
     "sha": "SHA del commit",
-    "desc_sha": "Commit al que se ha asociado el estado"
+    "desc_sha": "Commit al que se ha asociado el estado",
+    "runnerId": "ID del runner",
+    "desc_runnerId": "ID del runner de compilación seleccionado para los nodos posteriores",
+    "runnerName": "Nombre del runner",
+    "desc_runnerName": "Nombre del runner de compilación seleccionado para los nodos posteriores"
   }
 }

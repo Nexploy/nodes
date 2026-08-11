@@ -9,7 +9,13 @@ export const buildDockerImageDescriptor: NodeDescriptor = {
         'Builds a Docker image from a Dockerfile. Use ONLY for Dockerfile-only deployments — do NOT use before deploy-compose (compose handles its own build internally).',
     consumesFromUpstream: ['workDir'],
     configSchema: buildDockerImageConfigSchema,
-    outputs: [{ key: 'imageId' }, { key: 'imageName' }],
+    outputs: [
+        { key: 'imageId' },
+        { key: 'imageName' },
+        { key: 'localImageName', internal: true },
+        { key: 'pushedImages', type: 'array', internal: true },
+        { key: 'runnerId', internal: true },
+    ],
     handles: {
         inputs: [{ id: 'input', position: 'left' }],
         outputs: [{ id: 'output', position: 'right' }],

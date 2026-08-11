@@ -48,6 +48,7 @@ import { scanImageExecutor } from '../scan-image/executor';
 import { sendNotificationExecutor } from '../send-notification/executor';
 import { setEnvVarsExecutor } from '../set-env-vars/executor';
 import { setEnvironmentExecutor } from '../set-environment/executor';
+import { setRunnerExecutor } from '../set-runner/executor';
 import { sonarqubeScanExecutor } from '../sonarqube-scan/executor';
 import { startContainerExecutor } from '../start-container/executor';
 import { stopContainerExecutor } from '../stop-container/executor';
@@ -112,6 +113,7 @@ const executors: INodeExecutor[] = [
     sendNotificationExecutor,
     setEnvVarsExecutor,
     setEnvironmentExecutor,
+    setRunnerExecutor,
     sonarqubeScanExecutor,
     startContainerExecutor,
     stopContainerExecutor,

@@ -48,6 +48,7 @@ import scanImageEn from '../scan-image/locales/en.json';
 import sendNotificationEn from '../send-notification/locales/en.json';
 import setEnvVarsEn from '../set-env-vars/locales/en.json';
 import setEnvironmentEn from '../set-environment/locales/en.json';
+import setRunnerEn from '../set-runner/locales/en.json';
 import sonarqubeScanEn from '../sonarqube-scan/locales/en.json';
 import startContainerEn from '../start-container/locales/en.json';
 import stopContainerEn from '../stop-container/locales/en.json';
@@ -112,6 +113,7 @@ import scanImageFr from '../scan-image/locales/fr.json';
 import sendNotificationFr from '../send-notification/locales/fr.json';
 import setEnvVarsFr from '../set-env-vars/locales/fr.json';
 import setEnvironmentFr from '../set-environment/locales/fr.json';
+import setRunnerFr from '../set-runner/locales/fr.json';
 import sonarqubeScanFr from '../sonarqube-scan/locales/fr.json';
 import startContainerFr from '../start-container/locales/fr.json';
 import stopContainerFr from '../stop-container/locales/fr.json';
@@ -176,6 +178,7 @@ import scanImageIt from '../scan-image/locales/it.json';
 import sendNotificationIt from '../send-notification/locales/it.json';
 import setEnvVarsIt from '../set-env-vars/locales/it.json';
 import setEnvironmentIt from '../set-environment/locales/it.json';
+import setRunnerIt from '../set-runner/locales/it.json';
 import sonarqubeScanIt from '../sonarqube-scan/locales/it.json';
 import startContainerIt from '../start-container/locales/it.json';
 import stopContainerIt from '../stop-container/locales/it.json';
@@ -240,6 +243,7 @@ import scanImageEs from '../scan-image/locales/es.json';
 import sendNotificationEs from '../send-notification/locales/es.json';
 import setEnvVarsEs from '../set-env-vars/locales/es.json';
 import setEnvironmentEs from '../set-environment/locales/es.json';
+import setRunnerEs from '../set-runner/locales/es.json';
 import sonarqubeScanEs from '../sonarqube-scan/locales/es.json';
 import startContainerEs from '../start-container/locales/es.json';
 import stopContainerEs from '../stop-container/locales/es.json';
@@ -323,6 +327,7 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         sendNotificationEn,
         setEnvVarsEn,
         setEnvironmentEn,
+        setRunnerEn,
         sonarqubeScanEn,
         startContainerEn,
         stopContainerEn,
@@ -388,6 +393,7 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         sendNotificationFr,
         setEnvVarsFr,
         setEnvironmentFr,
+        setRunnerFr,
         sonarqubeScanFr,
         startContainerFr,
         stopContainerFr,
@@ -453,6 +459,7 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         sendNotificationIt,
         setEnvVarsIt,
         setEnvironmentIt,
+        setRunnerIt,
         sonarqubeScanIt,
         startContainerIt,
         stopContainerIt,
@@ -518,6 +525,7 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         sendNotificationEs,
         setEnvVarsEs,
         setEnvironmentEs,
+        setRunnerEs,
         sonarqubeScanEs,
         startContainerEs,
         stopContainerEs,

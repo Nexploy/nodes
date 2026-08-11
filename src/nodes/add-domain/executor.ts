@@ -13,16 +13,7 @@ export class AddDomainExecutor implements INodeExecutor {
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof addDomainConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
         const { nodeId, nodeConfig, allOutputs, edges, logger, abortSignal, services } = ctx;
-        const {
-            host,
-            path,
-            internalPath,
-            stripPath,
-            containerName,
-            containerPort,
-            https,
-            certificateId,
-        } = nodeConfig;
+        const { host, path, internalPath, stripPath, containerName, containerPort, https, certificateId } = nodeConfig;
 
         const dnsCredentialId = nodeConfig.dnsCredentialId ?? nodeConfig.cloudflareCredentialId;
         const dnsZoneId = nodeConfig.dnsZoneId ?? nodeConfig.cloudflareZoneId;

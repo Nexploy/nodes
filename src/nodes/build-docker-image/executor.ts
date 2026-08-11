@@ -16,10 +16,10 @@ export class BuildDockerImageExecutor implements INodeExecutor {
         const { buildConfig, allOutputs, logger, nodeId, abortSignal, nodeConfig, edges, services } = ctx;
         const dockerService = createDockerService(services.docker);
 
-        const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
-        if (!workDir) {
-            throw new Error('No workDir found in input nodes — connect this node after a Source node');
-        }
+        const runnerId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'runnerId');
+        const runnerName = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'runnerName');
+        const runnerRegistryId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'runnerRegistryId');
+        const runnerFallback = getFromClosestAncestor<boolean>(allOutputs, edges, nodeId, 'runnerFallback');
 
         const dockerfileName = nodeConfig.dockerfilePath;
         const dockerfileFilePath = nodeConfig.dockerfileFilePath;
@@ -35,8 +35,6 @@ export class BuildDockerImageExecutor implements INodeExecutor {
                 ? customImageName
                 : `${customImageName}:${buildConfig.buildId}`
             : `${repositorySlug}-${nodeId}:${buildConfig.buildId}`;
-
-        await logger.info(nodeId, `Building Docker image: ${imageName}`);
 
         const onLog = async (message: string) => {
             await logger.info(nodeId, message);
@@ -58,6 +56,60 @@ export class BuildDockerImageExecutor implements INodeExecutor {
         };
 
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
+
+        if (runnerId && services.runner) {
+            await logger.info(nodeId, `Building ${imageName} on runner ${runnerName || runnerId}`);
+
+            try {
+                const result = await services.runner.dispatchBuild(
+                    {
+                        runnerId,
+                        buildConfig,
+                        nodeId,
+                        branch,
+                        commitHash,
+                        build: {
+                            imageName,
+                            dockerfilePath,
+                            labels,
+                        },
+                        registryId: runnerRegistryId || undefined,
+                    },
+                    { signal: abortSignal, onLog },
+                );
+
+                const deployableImage = result.pushedImages[0] ?? result.imageName;
+
+                await logger.info(nodeId, `Runner build finished: ${deployableImage}`);
+
+                return {
+                    output: {
+                        imageId: result.imageId,
+                        imageName: deployableImage,
+                        localImageName: result.imageName,
+                        pushedImages: result.pushedImages,
+                        runnerId,
+                    },
+                };
+            } catch (error) {
+                if (error instanceof Error && error.name === 'AbortError') throw error;
+
+                const message = error instanceof Error ? error.message : 'Unknown error';
+
+                if (!runnerFallback) {
+                    throw new Error(`Runner build failed: ${message}`);
+                }
+
+                await logger.warn(nodeId, `Runner build failed (${message}), retrying on this server`);
+            }
+        }
+
+        const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
+        if (!workDir) {
+            throw new Error('No workDir found in input nodes — connect this node after a Source node');
+        }
+
+        await logger.info(nodeId, `Building Docker image: ${imageName}`);
 
         try {
             const result = await dockerService.buildImage(

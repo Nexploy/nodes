@@ -95,7 +95,18 @@
     "emailPlaceholder": "you@example.com",
     "tlsCertPlaceholder": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
     "tlsKeyPlaceholder": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
-    "commandPlaceholder": "npm run migrate"
+    "commandPlaceholder": "npm run migrate",
+    "buildRunner": "Build runner",
+    "selectBuildRunner": "Select a build runner",
+    "buildRunnersLoading": "Loading build runners…",
+    "buildRunnerUnavailable": "Build runner unavailable",
+    "noBuildRunnersFound": "No build runner registered. Add one in Admin > Servers.",
+    "runnerFallbackToLocal": "Fall back to this server",
+    "runnerFallbackToLocalDescription": "Build here when the runner is offline instead of failing the pipeline",
+    "runnerRegistry": "Registry for the runner",
+    "selectRunnerRegistry": "Select a registry",
+    "noRunnerRegistryFound": "No registry configured. Add one in Docker > Registry.",
+    "runnerRegistryDescription": "The runner pushes the built image here so this server can pull it. Without a registry the image stays on the runner."
   },
   "inputs": {
     "workDir": "Working directory",
@@ -277,6 +288,10 @@
     "provider": "Provider",
     "desc_provider": "Git provider the commit status was sent to",
     "sha": "Commit SHA",
-    "desc_sha": "Commit the status was attached to"
+    "desc_sha": "Commit the status was attached to",
+    "runnerId": "Runner ID",
+    "desc_runnerId": "ID of the build runner selected for downstream nodes",
+    "runnerName": "Runner name",
+    "desc_runnerName": "Name of the build runner selected for downstream nodes"
   }
 }
