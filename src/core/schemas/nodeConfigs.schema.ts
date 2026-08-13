@@ -13,13 +13,15 @@ const httpGitUrl = (label: string) =>
             }
         }, `${label} must be a valid http(s) URL`);
 
-const relativePath = (label: string) =>
-    z
-        .string()
-        .min(1, `${label} is required`)
+const relativePathRules = (schema: z.ZodString, label: string) =>
+    schema
         .refine((v) => !v.startsWith('/'), `${label} must be a relative path`)
         .refine((v) => !v.split('/').some((seg) => seg === '..'), `${label} must not contain '..'`)
         .refine((v) => !/[`$\\|;&<>()\n\r]/.test(v), `${label} contains invalid characters`);
+
+const relativePath = (label: string) => relativePathRules(z.string().min(1, `${label} is required`), label);
+
+const optionalRelativePath = (label: string) => relativePathRules(z.string(), label);
 
 export const cloneRepositoryConfigSchema = z.object({
     branch: z.string().default('main'),
@@ -58,7 +60,7 @@ export const validateDockerfileConfigSchema = z.object({
 
 export const composeFileConfigSchema = z.object({
     composeFileName: refable(z.string().min(1, 'Compose file name is required')).default('docker-compose.yml'),
-    composeFilePath: refable(relativePath('Compose file path')).optional(),
+    composeFilePath: refable(optionalRelativePath('Compose file path')).optional(),
     noCache: z.boolean().default(false),
 });
 
