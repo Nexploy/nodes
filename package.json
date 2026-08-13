@@ -1,6 +1,6 @@
 {
   "name": "@nexploy/nodes",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Pipeline node library for Nexploy — descriptors, executors and configuration panels.",
   "license": "GPL-3.0",
   "repository": {
