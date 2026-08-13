@@ -19,6 +19,7 @@ import { Button } from '@nexploy/nodes/vendor/ui/components/button';
 import { Checkbox } from '@nexploy/nodes/vendor/ui/components/checkbox';
 import { Label } from '@nexploy/nodes/vendor/ui/components/label';
 import { Alert, AlertDescription, AlertTitle } from '@nexploy/nodes/vendor/ui/components/alert';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@nexploy/nodes/vendor/ui/components/tooltip';
 import { MERGE_REQUEST_ACTIONS, WEBHOOK_TRIGGER_EVENTS } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 
 interface WebhookStatus {
@@ -59,50 +60,58 @@ export function WebhookCloneConfig() {
         <div className="space-y-4">
             {webhookStatus?.isConfigured ? (
                 <Alert className="border-green-500/30 bg-green-500/10 text-green-600 [&>svg]:text-green-600">
-                    <CheckCircle />
-                    <AlertDescription className="flex items-center justify-between gap-3 text-green-600">
+                    <CheckCircle/>
+                    <AlertDescription className="flex justify-between gap-3 text-green-600">
                         <span>{t('webhookStatusConfigured')}</span>
                         <PermissionGate resource="repository" action="update">
-                            <Button
-                                type="button"
-                                size="sm"
-                                variant="outline"
-                                icon={RefreshCw}
-                                isLoading={isPending}
-                                disabled={isPending}
-                                onClick={() =>
-                                    execute({
-                                        repositoryId: params.repositoryId,
-                                        refresh: true,
-                                    })
-                                }
-                                className="shrink-0 border-green-500/40 text-green-600 hover:bg-green-500/10 hover:text-green-700"
-                            >
-                                {t('webhookResyncButton')}
-                            </Button>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Button
+                                        type="button"
+                                        size="icon-sm"
+                                        variant="outline"
+                                        icon={RefreshCw}
+                                        isLoading={isPending}
+                                        disabled={isPending}
+                                        aria-label={t('webhookResyncButton')}
+                                        onClick={() =>
+                                            execute({
+                                                repositoryId: params.repositoryId,
+                                                refresh: true,
+                                            })
+                                        }
+                                        className="shrink-0 border-green-500/40 text-green-600 hover:bg-green-500/10 hover:text-green-700"
+                                    />
+                                </TooltipTrigger>
+                                <TooltipContent>{t('webhookResyncButton')}</TooltipContent>
+                            </Tooltip>
                         </PermissionGate>
                     </AlertDescription>
                 </Alert>
             ) : (
                 webhookStatus && (
                     <Alert className="border-yellow-500/30 bg-yellow-500/10 text-yellow-600 [&>svg]:text-yellow-600">
-                        <AlertTriangle />
+                        <AlertTriangle/>
                         <AlertTitle className="text-yellow-600">{t('webhookStatusNotConfigured')}</AlertTitle>
-                        <AlertDescription className="flex items-center justify-between gap-3">
+                        <AlertDescription className="flex justify-between gap-3">
                             <span className="text-yellow-600/80">{t('webhookStatusNotConfiguredDescription')}</span>
                             <PermissionGate resource="repository" action="update">
-                                <Button
-                                    type="button"
-                                    size="sm"
-                                    variant="outline"
-                                    icon={RefreshCw}
-                                    isLoading={isPending}
-                                    disabled={isPending}
-                                    onClick={() => execute({ repositoryId: params.repositoryId })}
-                                    className="shrink-0 border-yellow-500/40 text-yellow-600 hover:bg-yellow-500/10 hover:text-yellow-700"
-                                >
-                                    {t('webhookSetupButton')}
-                                </Button>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Button
+                                            type="button"
+                                            size="icon-sm"
+                                            variant="outline"
+                                            icon={RefreshCw}
+                                            isLoading={isPending}
+                                            disabled={isPending}
+                                            aria-label={t('webhookSetupButton')}
+                                            onClick={() => execute({ repositoryId: params.repositoryId })}
+                                            className="shrink-0 border-yellow-500/40 text-yellow-600 hover:bg-yellow-500/10 hover:text-yellow-700"
+                                        />
+                                    </TooltipTrigger>
+                                    <TooltipContent>{t('webhookSetupButton')}</TooltipContent>
+                                </Tooltip>
                             </PermissionGate>
                         </AlertDescription>
                     </Alert>
@@ -136,7 +145,7 @@ export function WebhookCloneConfig() {
                             <FormDescription className={'text-xs'}>
                                 {t('webhookTriggerEventsDescription')}
                             </FormDescription>
-                            <FormMessage className="text-xs" />
+                            <FormMessage className="text-xs"/>
                         </FormItem>
                     );
                 }}
@@ -149,10 +158,10 @@ export function WebhookCloneConfig() {
                     <FormItem>
                         <FormLabel>{t('webhookBranchFilter')}</FormLabel>
                         <FormControl>
-                            <Input {...field} value={field.value} placeholder={t('webhookBranchFilterPlaceholder')} />
+                            <Input {...field} value={field.value} placeholder={t('webhookBranchFilterPlaceholder')}/>
                         </FormControl>
                         <FormDescription className={'text-xs'}>{t('webhookBranchFilterDescription')}</FormDescription>
-                        <FormMessage />
+                        <FormMessage/>
                     </FormItem>
                 )}
             />
@@ -190,7 +199,7 @@ export function WebhookCloneConfig() {
                                 <FormDescription className={'text-xs'}>
                                     {t('webhookMergeRequestActionsDescription')}
                                 </FormDescription>
-                                <FormMessage className="text-xs" />
+                                <FormMessage className="text-xs"/>
                             </FormItem>
                         );
                     }}
@@ -212,7 +221,7 @@ export function WebhookCloneConfig() {
                                 />
                             </FormControl>
                             <FormDescription className={'text-xs'}>{t('webhookTagFilterDescription')}</FormDescription>
-                            <FormMessage className="text-xs" />
+                            <FormMessage className="text-xs"/>
                         </FormItem>
                     )}
                 />
