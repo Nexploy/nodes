@@ -70,7 +70,7 @@ export function matchesWebhookTrigger(
         }
     }
 
-    if (filters.branchFilter) {
+    if (filters.branchFilter && trigger.event !== 'tag') {
         const branchToMatch = trigger.event === 'push' ? branch : trigger.targetBranch;
         if (branchToMatch && !matchesRefFilter(branchToMatch, filters.branchFilter)) {
             return { matched: false, reason: 'branch-filter', detail: branchToMatch };
