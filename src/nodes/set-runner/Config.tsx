@@ -68,19 +68,19 @@ export function SetRunnerConfig() {
                                     }}
                                     disabled={isLoading}
                                 >
-                                    <SelectTrigger className={'w-full overflow-hidden'}>
+                                    <SelectTrigger className={'w-full overflow-hidden pl-0! data-[placeholder]:pl-3!'}>
                                         {isLoading ? (
                                             <span className="text-muted-foreground flex items-center gap-2">
-                                                <Loader2 className="h-3 w-3 animate-spin" />
+                                                <Loader2 className="h-3 w-3 animate-spin"/>
                                                 {t('buildRunnersLoading')}
                                             </span>
                                         ) : isStale ? (
                                             <span className="flex items-center gap-1.5">
-                                                <AlertTriangle className="h-3 w-3 shrink-0" />
+                                                <AlertTriangle className="h-3 w-3 shrink-0"/>
                                                 {t('buildRunnerUnavailable')}
                                             </span>
                                         ) : (
-                                            <SelectValue placeholder={t('selectBuildRunner')} />
+                                            <SelectValue placeholder={t('selectBuildRunner')}/>
                                         )}
                                     </SelectTrigger>
                                     <SelectContent>
@@ -102,7 +102,7 @@ export function SetRunnerConfig() {
                                                             }
                                                             variant="outline"
                                                         >
-                                                            <StatusIndicator className="pl-2" />
+                                                            <StatusIndicator className="pl-2"/>
                                                             <span className="truncate">{runner.name}</span>
                                                         </Status>
                                                     </SelectItem>
@@ -112,7 +112,7 @@ export function SetRunnerConfig() {
                                     </SelectContent>
                                 </Select>
                             </FormControl>
-                            <FormMessage className="text-xs" />
+                            <FormMessage className="text-xs"/>
                         </FormItem>
                     );
                 }}
@@ -127,7 +127,7 @@ export function SetRunnerConfig() {
                         <FormControl>
                             <Select {...field} onValueChange={field.onChange}>
                                 <SelectTrigger className={'w-full overflow-hidden'}>
-                                    <SelectValue placeholder={t('selectRunnerRegistry')} />
+                                    <SelectValue placeholder={t('selectRunnerRegistry')}/>
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
@@ -148,7 +148,7 @@ export function SetRunnerConfig() {
                             </Select>
                         </FormControl>
                         <FormDescription>{t('runnerRegistryDescription')}</FormDescription>
-                        <FormMessage className="text-xs" />
+                        <FormMessage className="text-xs"/>
                     </FormItem>
                 )}
             />
@@ -159,7 +159,7 @@ export function SetRunnerConfig() {
                 render={({ field }) => (
                     <FormItem className="flex items-center gap-3">
                         <FormControl>
-                            <Switch checked={field.value} onCheckedChange={field.onChange} />
+                            <Switch checked={field.value} onCheckedChange={field.onChange}/>
                         </FormControl>
                         <div>
                             <FormLabel className="cursor-pointer">{t('runnerFallbackToLocal')}</FormLabel>
