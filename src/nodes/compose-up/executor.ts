@@ -10,7 +10,7 @@ export class ComposeUpExecutor implements INodeExecutor {
     readonly configSchema = composeUpConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof composeUpConfigSchema>>): Promise<NodeExecutionResult> {
-        const { allOutputs, logger, nodeId, nodeConfig, abortSignal, edges, services } = ctx;
+        const { allOutputs, logger, nodeId, nodeConfig, abortSignal, edges, services, reporter } = ctx;
         const dockerService = createDockerService(services.docker);
 
         const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
@@ -46,6 +46,12 @@ export class ComposeUpExecutor implements INodeExecutor {
                 nodeId,
                 `Docker Compose stack started: ${projectName} (${result.containers.length} containers)`,
             );
+
+            await reporter.reportSummary(nodeId, {
+                key: 'started',
+                values: { project: projectName, containers: result.containers.length },
+                tone: 'positive',
+            });
 
             return {
                 output: {

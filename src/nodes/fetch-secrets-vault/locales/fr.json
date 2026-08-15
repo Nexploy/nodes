@@ -2,7 +2,10 @@
   "nodes": {
     "fetch-secrets-vault": {
       "name": "Secrets Vault",
-      "description": "Récupère les secrets depuis HashiCorp Vault KV. Les variables s'accumulent tout au long du pipeline."
+      "description": "Récupère les secrets depuis HashiCorp Vault KV. Les variables s'accumulent tout au long du pipeline.",
+      "summary": {
+        "injected": "{count} secrets injectés"
+      }
     }
   },
   "config": {

@@ -1,5 +1,6 @@
 import { getFromClosestAncestor } from '@nexploy/nodes/core/helpers';
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
+import { createProgressTracker } from '@nexploy/nodes/core/nodeProgress';
 import { createDockerService } from '@nexploy/nodes/core/dockerService';
 import { NEXPLOY_LABELS } from '@nexploy/nodes/core/nexployLabels';
 import { buildDockerImageConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
@@ -13,8 +14,9 @@ export class BuildDockerImageExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof buildDockerImageConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { buildConfig, allOutputs, logger, nodeId, abortSignal, nodeConfig, edges, services } = ctx;
+        const { buildConfig, allOutputs, logger, nodeId, abortSignal, nodeConfig, edges, services, reporter } = ctx;
         const dockerService = createDockerService(services.docker);
+        const tracker = createProgressTracker(reporter, nodeId, 2);
 
         const runnerId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'runnerId');
         const runnerName = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'runnerName');
@@ -36,8 +38,21 @@ export class BuildDockerImageExecutor implements INodeExecutor {
                 : `${customImageName}:${buildConfig.buildId}`
             : `${repositorySlug}-${nodeId}:${buildConfig.buildId}`;
 
+        const dockerStepPattern = /^Step (\d+)\/(\d+)\s*:\s*(.*)$/;
+        let layersSeen = 0;
+
         const onLog = async (message: string) => {
             await logger.info(nodeId, message);
+            const match = dockerStepPattern.exec(message.trim());
+            if (!match) return;
+            layersSeen = Number(match[1]);
+            await reporter.reportProgress(nodeId, {
+                current: layersSeen,
+                total: Number(match[2]),
+                labelKey: 'layer',
+                labelValues: { current: layersSeen, total: Number(match[2]) },
+                detail: match[3]!.slice(0, 80),
+            });
         };
 
         const branch = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'branch');
@@ -58,6 +73,7 @@ export class BuildDockerImageExecutor implements INodeExecutor {
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
 
         if (runnerId && services.runner) {
+            await tracker.step('dispatchRunner', { runner: runnerName || runnerId });
             await logger.info(nodeId, `Building ${imageName} on runner ${runnerName || runnerId}`);
 
             try {
@@ -81,6 +97,13 @@ export class BuildDockerImageExecutor implements INodeExecutor {
                 const deployableImage = result.pushedImages[0] ?? result.imageName;
 
                 await logger.info(nodeId, `Runner build finished: ${deployableImage}`);
+
+                await tracker.done();
+                await reporter.reportSummary(nodeId, {
+                    key: 'builtOnRunner',
+                    values: { image: deployableImage, runner: runnerName || runnerId },
+                    tone: 'positive',
+                });
 
                 return {
                     output: {
@@ -109,6 +132,7 @@ export class BuildDockerImageExecutor implements INodeExecutor {
             throw new Error('No workDir found in input nodes — connect this node after a Source node');
         }
 
+        await tracker.step('buildImage', { image: imageName });
         await logger.info(nodeId, `Building Docker image: ${imageName}`);
 
         try {
@@ -126,6 +150,13 @@ export class BuildDockerImageExecutor implements INodeExecutor {
                 nodeId,
                 `Docker image built successfully${result.imageId ? `: ${result.imageId.slice(0, 12)}` : ''}`,
             );
+
+            await tracker.done();
+            await reporter.reportSummary(nodeId, {
+                key: layersSeen > 0 ? 'builtWithLayers' : 'built',
+                values: { image: imageName, layers: layersSeen },
+                tone: 'positive',
+            });
 
             return {
                 output: {

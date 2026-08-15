@@ -14,7 +14,7 @@ export class ComposeBuildExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof composeBuildConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { buildConfig, allOutputs, logger, nodeId, nodeConfig, abortSignal, edges, services } = ctx;
+        const { buildConfig, allOutputs, logger, nodeId, nodeConfig, abortSignal, edges, services, reporter } = ctx;
         const dockerService = createDockerService(services.docker);
 
         const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
@@ -89,6 +89,12 @@ export class ComposeBuildExecutor implements INodeExecutor {
                 nodeId,
                 `Compose images ready (${result.builtServices.length} built, ${result.services.length} service(s) total)`,
             );
+
+            await reporter.reportSummary(nodeId, {
+                key: 'built',
+                values: { built: result.builtServices.length, total: result.services.length },
+                tone: 'positive',
+            });
 
             return {
                 output: {

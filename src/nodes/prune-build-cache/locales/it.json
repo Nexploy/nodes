@@ -2,7 +2,10 @@
   "nodes": {
     "prune-build-cache": {
       "name": "Svuota la cache di build",
-      "description": "Svuota la cache di build Docker per liberare spazio su disco"
+      "description": "Svuota la cache di build Docker per liberare spazio su disco",
+      "summary": {
+        "pruned": "{count} voci · {size} MB"
+      }
     }
   },
   "config": {

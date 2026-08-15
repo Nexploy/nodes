@@ -2,7 +2,10 @@
   "nodes": {
     "fetch-secrets-infisical": {
       "name": "Segreti Infisical",
-      "description": "Recupera i segreti da Infisical (cloud o self-hosted). Le variabili si accumulano lungo tutta la pipeline."
+      "description": "Recupera i segreti da Infisical (cloud o self-hosted). Le variabili si accumulano lungo tutta la pipeline.",
+      "summary": {
+        "injected": "{count} segreti iniettati"
+      }
     }
   },
   "config": {

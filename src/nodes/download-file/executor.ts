@@ -16,7 +16,7 @@ export class DownloadFileExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof downloadFileConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const url = nodeConfig.url;
         const destinationPath = nodeConfig.destinationPath;
@@ -41,6 +41,12 @@ export class DownloadFileExecutor implements INodeExecutor {
 
         const sizeKb = (buffer.byteLength / 1024).toFixed(1);
         await logger.info(nodeId, `Downloaded ${sizeKb} KB to ${path.join(destinationPath, finalFilename)}`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'downloaded',
+            values: { file: finalFilename, size: sizeKb },
+            tone: 'positive',
+        });
 
         return {
             output: {

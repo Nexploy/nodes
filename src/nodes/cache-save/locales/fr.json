@@ -2,7 +2,11 @@
   "nodes": {
     "cache-save": {
       "name": "Sauvegarder le cache",
-      "description": "Sauvegarde un répertoire du dossier de travail dans un volume Docker"
+      "description": "Sauvegarde un répertoire du dossier de travail dans un volume Docker",
+      "summary": {
+        "saved": "Enregistré · {size} Mo",
+        "failed": "Échec de l'enregistrement"
+      }
     }
   },
   "config": {

@@ -1,5 +1,6 @@
 import { getFromClosestAncestor } from '@nexploy/nodes/core/helpers';
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
+import { createProgressTracker } from '@nexploy/nodes/core/nodeProgress';
 import { createContainerConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 import { ResolveRefs } from '@nexploy/nodes/core/schemas/nodeFieldRef.schema';
 import { NEXPLOY_LABELS } from '@nexploy/nodes/core/nexployLabels';
@@ -12,12 +13,14 @@ export class CreateContainerExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof createContainerConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, buildConfig, logger, nodeId, abortSignal, edges, services } = ctx;
+        const { nodeConfig, allOutputs, buildConfig, logger, nodeId, abortSignal, edges, services, reporter } = ctx;
+        const tracker = createProgressTracker(reporter, nodeId, 2);
 
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
         const containerName = nodeConfig.containerName;
         const imageName = nodeConfig.imageName;
 
+        await tracker.step('resolveEnv');
         const repoEnvs = buildConfig.stageId ? await services.build.getStageEnvVariables(buildConfig.stageId) : [];
         const envVarMap = Object.fromEntries(repoEnvs.map((e) => [e.key, e.value]));
         for (const e of [...(nodeConfig.envVarsSource ?? []), ...nodeConfig.envVars]) {
@@ -25,6 +28,7 @@ export class CreateContainerExecutor implements INodeExecutor {
         }
         const envVars = Object.entries(envVarMap).map(([key, value]) => ({ key, value }));
 
+        await tracker.step('createContainer', { image: imageName });
         await logger.info(
             nodeId,
             `Creating container from image: ${imageName}${containerName ? ` (name: ${containerName})` : ''}`,
@@ -58,6 +62,15 @@ export class CreateContainerExecutor implements INodeExecutor {
                 .json<{ id: string }>();
 
             await logger.info(nodeId, `Container created: ${result.id.slice(0, 12)}`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'created',
+                values: {
+                    container: containerName ?? result.id.slice(0, 12),
+                    ports: [...(nodeConfig.portsSource ?? []), ...nodeConfig.ports].length,
+                },
+                tone: 'positive',
+            });
 
             return {
                 output: {

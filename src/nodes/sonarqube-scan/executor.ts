@@ -13,7 +13,7 @@ export class SonarqubeScanExecutor implements INodeExecutor {
     readonly configSchema = sonarqubeScanConfigSchema;
 
     async execute(ctx: NodeExecutionContext<Config>): Promise<NodeExecutionResult> {
-        const { buildConfig, nodeId, nodeConfig, allOutputs, logger, abortSignal, edges } = ctx;
+        const { buildConfig, nodeId, nodeConfig, allOutputs, logger, abortSignal, edges, reporter } = ctx;
 
         const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
         if (!workDir) {
@@ -62,6 +62,7 @@ export class SonarqubeScanExecutor implements INodeExecutor {
             timeoutSeconds,
             docker: ctx.services.docker,
             logger,
+            reporter,
             abortSignal,
         };
 
@@ -97,6 +98,7 @@ export class SonarqubeScanExecutor implements INodeExecutor {
         organization: string | undefined;
         docker: DockerApiClient;
         logger: NodeExecutionContext<Config>['logger'];
+        reporter: NodeExecutionContext<Config>['reporter'];
         abortSignal: AbortSignal;
     }): Promise<NodeExecutionResult> {
         const {
@@ -116,6 +118,7 @@ export class SonarqubeScanExecutor implements INodeExecutor {
             organization,
             docker,
             logger,
+            reporter,
             abortSignal,
         } = opts;
 
@@ -168,6 +171,12 @@ export class SonarqubeScanExecutor implements INodeExecutor {
             ? await this.enforceMinScore(serverUrl, projectKey, token, scoreMetric, minScore, logger, nodeId)
             : undefined;
 
+        await reporter.reportSummary(nodeId, {
+            key: scoreResult ? 'scanned' : 'gatePassed',
+            values: { project: projectKey, score: scoreResult ? String(scoreResult.value) : '' },
+            tone: 'positive',
+        });
+
         return {
             output: {
                 qualityGatePassed,
@@ -194,6 +203,7 @@ export class SonarqubeScanExecutor implements INodeExecutor {
         sonarqubePort: number;
         docker: DockerApiClient;
         logger: NodeExecutionContext<Config>['logger'];
+        reporter: NodeExecutionContext<Config>['reporter'];
         abortSignal: AbortSignal;
     }): Promise<NodeExecutionResult> {
         const {
@@ -213,6 +223,7 @@ export class SonarqubeScanExecutor implements INodeExecutor {
             sonarqubePort,
             docker,
             logger,
+            reporter,
             abortSignal,
         } = opts;
 
@@ -344,6 +355,12 @@ export class SonarqubeScanExecutor implements INodeExecutor {
         const scoreResult = enforceMinScore
             ? await this.enforceMinScore(localServerUrl, projectKey, scanToken, scoreMetric, minScore, logger, nodeId)
             : undefined;
+
+        await reporter.reportSummary(nodeId, {
+            key: scoreResult ? 'scanned' : 'gatePassed',
+            values: { project: projectKey, score: scoreResult ? String(scoreResult.value) : '' },
+            tone: 'positive',
+        });
 
         return {
             output: {

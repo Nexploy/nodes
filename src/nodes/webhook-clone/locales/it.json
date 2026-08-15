@@ -2,7 +2,10 @@
   "nodes": {
     "webhook-clone": {
       "name": "Clone da webhook",
-      "description": "Clona il repository quando viene ricevuto un evento push da webhook"
+      "description": "Clona il repository quando viene ricevuto un evento push da webhook",
+      "summary": {
+        "cloned": "{ref} · {commit}"
+      }
     }
   },
   "config": {

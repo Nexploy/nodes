@@ -2,7 +2,11 @@
   "nodes": {
     "add-ssl-certificate": {
       "name": "Add SSL Certificate",
-      "description": "Provision an SSL certificate for a domain"
+      "description": "Provision an SSL certificate for a domain",
+      "summary": {
+        "letsEncrypt": "{domain} · Let's Encrypt",
+        "custom": "{domain} · custom cert"
+      }
     }
   },
   "config": {

@@ -12,7 +12,7 @@ export class GitTagExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof gitTagConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, edges, services } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, edges, services, reporter } = ctx;
         const gitService = createGitService(services);
 
         const { tagName, message, remote } = nodeConfig;
@@ -31,6 +31,11 @@ export class GitTagExecutor implements INodeExecutor {
         await gitService.pushTag(workDir, remote, tagName);
 
         await logger.info(nodeId, `Tag "${tagName}" pushed to ${remote}`);
+        await reporter.reportSummary(nodeId, {
+            key: alreadyExists ? 'pushedExisting' : 'pushed',
+            values: { tag: String(tagName), remote: String(remote) },
+            tone: alreadyExists ? 'warning' : 'positive',
+        });
         return { output: { tagName, remote } };
     }
 }

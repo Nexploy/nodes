@@ -2,7 +2,10 @@
   "nodes": {
     "fetch-secrets-infisical": {
       "name": "Secretos de Infisical",
-      "description": "Obtiene los secretos de Infisical (cloud o autoalojado). Las variables se acumulan a lo largo de la pipeline."
+      "description": "Obtiene los secretos de Infisical (cloud o autoalojado). Las variables se acumulan a lo largo de la pipeline.",
+      "summary": {
+        "injected": "{count} secretos inyectados"
+      }
     }
   },
   "config": {

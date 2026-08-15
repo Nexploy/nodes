@@ -2,7 +2,10 @@
   "nodes": {
     "create-service": {
       "name": "Crea servizio",
-      "description": "Crea un nuovo servizio Docker Swarm da un'immagine"
+      "description": "Crea un nuovo servizio Docker Swarm da un'immagine",
+      "summary": {
+        "created": "{service} creato"
+      }
     }
   },
   "config": {

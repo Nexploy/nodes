@@ -2,7 +2,10 @@
   "nodes": {
     "set-environment": {
       "name": "Definir entorno",
-      "description": "Define el entorno de despliegue para todos los nodos posteriores de esta pipeline"
+      "description": "Define el entorno de despliegue para todos los nodos posteriores de esta pipeline",
+      "summary": {
+        "selected": "{environment}"
+      }
     }
   }
 }

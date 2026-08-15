@@ -2,7 +2,11 @@
   "nodes": {
     "trigger-stage-build": {
       "name": "Avvia la build di una fase",
-      "description": "Avvia una build su un'altra fase quando questa pipeline riesce"
+      "description": "Avvia una build su un'altra fase quando questa pipeline riesce",
+      "summary": {
+        "triggered": "Build #{build} su {stage}",
+        "notTriggered": "Non attivato"
+      }
     }
   },
   "config": {

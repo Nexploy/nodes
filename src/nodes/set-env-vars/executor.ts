@@ -8,7 +8,7 @@ export class SetEnvVarsExecutor implements INodeExecutor {
     readonly configSchema = setEnvVarsConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof setEnvVarsConfigSchema>>): Promise<NodeExecutionResult> {
-        const { logger, nodeId, nodeConfig, allOutputs, edges } = ctx;
+        const { logger, nodeId, nodeConfig, allOutputs, edges, reporter } = ctx;
 
         const rawVars = Array.isArray(nodeConfig.vars) ? nodeConfig.vars : [];
         const ownMap = Object.fromEntries(rawVars.filter((e) => e.key).map((e) => [e.key, e.value]));
@@ -22,10 +22,17 @@ export class SetEnvVarsExecutor implements INodeExecutor {
 
         if (envVariables.length === 0) {
             await logger.info(nodeId, 'No variables defined, skipping');
+            await reporter.reportSummary(nodeId, { key: 'none', tone: 'warning' });
             return { output: { envVariables: [] }, skipped: true };
         }
 
         await logger.info(nodeId, `Injecting ${envVariables.length} environment variable(s) into the pipeline`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'injected',
+            values: { count: envVariables.length },
+            tone: 'positive',
+        });
 
         return { output: { envVariables } };
     }

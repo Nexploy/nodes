@@ -2,7 +2,14 @@
   "nodes": {
     "start-container": {
       "name": "Iniciar contenedor",
-      "description": "Inicia un contenedor Docker existente"
+      "description": "Inicia un contenedor Docker existente",
+      "steps": {
+        "start": "Iniciando {container}"
+      },
+      "summary": {
+        "started": "{container} en ejecución",
+        "alreadyRunning": "{container} ya en ejecución"
+      }
     }
   }
 }

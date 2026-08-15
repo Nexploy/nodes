@@ -2,7 +2,11 @@
   "nodes": {
     "run-command-in-container": {
       "name": "Esegui un comando nel container",
-      "description": "Esegue un comando in un container Docker in esecuzione"
+      "description": "Esegue un comando in un container Docker in esecuzione",
+      "summary": {
+        "succeeded": "Uscita 0",
+        "exitedNonZero": "Uscita {code} · proseguito"
+      }
     }
   },
   "config": {

@@ -2,7 +2,11 @@
   "nodes": {
     "compose-run": {
       "name": "Compose Run",
-      "description": "Run a one-off command in a Compose service"
+      "description": "Run a one-off command in a Compose service",
+      "summary": {
+        "exited": "{service} · exit {code}",
+        "failedContinued": "Failed · continued"
+      }
     }
   },
   "config": {

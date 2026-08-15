@@ -2,7 +2,11 @@
   "nodes": {
     "check-container-logs": {
       "name": "Vérifier les logs du conteneur",
-      "description": "Recherche un pattern regex dans les logs d'un conteneur"
+      "description": "Recherche un pattern regex dans les logs d'un conteneur",
+      "summary": {
+        "patternFound": "Motif trouvé",
+        "patternNotFound": "Motif absent"
+      }
     }
   },
   "config": {

@@ -24,7 +24,7 @@ export class CheckContainerLogsExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof checkContainerLogsConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const containerId = nodeConfig.containerId;
         const pattern = nodeConfig.pattern;
@@ -83,6 +83,7 @@ export class CheckContainerLogsExecutor implements INodeExecutor {
             if (failIfFound) {
                 throw new Error(`Pattern "${pattern}" was found in container logs (failIfFound = true)`);
             }
+            await reporter.reportSummary(nodeId, { key: 'patternFound', text: matchedLine, tone: 'warning' });
             return { output: { found: true, matchedLine, containerId } };
         } else {
             await logger.info(nodeId, `Pattern not found in container logs within ${timeout}s`);
@@ -91,6 +92,7 @@ export class CheckContainerLogsExecutor implements INodeExecutor {
                     `Pattern "${pattern}" was not found in container "${containerId}" logs within ${timeout}s`,
                 );
             }
+            await reporter.reportSummary(nodeId, { key: 'patternNotFound', tone: 'positive' });
             return { output: { found: false, containerId } };
         }
     }

@@ -1,5 +1,6 @@
 import { getFromClosestAncestor } from '@nexploy/nodes/core/helpers';
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
+import { createProgressTracker } from '@nexploy/nodes/core/nodeProgress';
 import { createDockerService } from '@nexploy/nodes/core/dockerService';
 import { getComposeProjectName, resolveComposeEnvVars, resolveComposeLabels } from '@nexploy/nodes/core/composeContext';
 import { composeFileConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
@@ -14,8 +15,9 @@ export class DeployComposeExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof composeFileConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { buildConfig, allOutputs, logger, nodeId, nodeConfig, abortSignal, edges, services } = ctx;
+        const { buildConfig, allOutputs, logger, nodeId, nodeConfig, abortSignal, edges, services, reporter } = ctx;
         const dockerService = createDockerService(services.docker);
+        const tracker = createProgressTracker(reporter, nodeId, 3);
 
         const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
 
@@ -30,6 +32,7 @@ export class DeployComposeExecutor implements INodeExecutor {
             : composeFileName;
         const projectName = getComposeProjectName(buildConfig.repositoryId);
 
+        await tracker.step('resolveEnv');
         const envVars = await resolveComposeEnvVars(ctx);
         const labels = resolveComposeLabels(ctx);
 
@@ -41,6 +44,7 @@ export class DeployComposeExecutor implements INodeExecutor {
 
         if (runnerId && services.runner) {
             try {
+                await tracker.step('buildOnRunner');
                 const runnerResult = await buildComposeOnRunner(ctx, {
                     workDir,
                     composePath,
@@ -64,9 +68,16 @@ export class DeployComposeExecutor implements INodeExecutor {
             }
         }
 
+        await tracker.step('deployStack', { project: projectName });
         await logger.info(nodeId, `Deploying Docker Compose stack: ${projectName}`);
 
-        const onLog = async (message: string) => logger.info(nodeId, message);
+        const composeServicePattern = /^\s*(?:Container|Service)\s+(\S+)\s+(Creating|Created|Starting|Started)\b/i;
+
+        const onLog = async (message: string) => {
+            await logger.info(nodeId, message);
+            const match = composeServicePattern.exec(message);
+            if (match) await tracker.detail(`${match[1]} ${match[2]!.toLowerCase()}`);
+        };
 
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
 
@@ -91,6 +102,13 @@ export class DeployComposeExecutor implements INodeExecutor {
                     result.containers ? ` (${result.containers.length} containers)` : ''
                 }`,
             );
+
+            await tracker.done();
+            await reporter.reportSummary(nodeId, {
+                key: 'deployed',
+                values: { project: projectName, containers: result.containers?.length ?? 0 },
+                tone: 'positive',
+            });
 
             return {
                 output: {

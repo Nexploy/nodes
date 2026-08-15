@@ -71,6 +71,12 @@ export class WebhookCloneExecutor implements INodeExecutor {
                 `Repository cloned successfully from webhook (${refLabel}, commit: ${resolvedHash ?? 'unknown'})`,
             );
 
+            await reporter.reportSummary(nodeId, {
+                key: 'cloned',
+                values: { ref: refLabel, commit: resolvedHash?.substring(0, 7) ?? '—' },
+                tone: 'positive',
+            });
+
             return {
                 output: {
                     workDir,

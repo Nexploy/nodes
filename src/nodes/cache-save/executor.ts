@@ -8,7 +8,7 @@ export class CacheSaveExecutor implements INodeExecutor {
     readonly configSchema = cacheSaveConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof cacheSaveConfigSchema>>): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const volumeName = nodeConfig.volumeName;
         const sourcePath = nodeConfig.sourcePath;
@@ -44,13 +44,13 @@ export class CacheSaveExecutor implements INodeExecutor {
 
             const mb = ((result.sizeBytes ?? 0) / 1024 / 1024).toFixed(2);
             await logger.info(nodeId, `Cache saved (${mb} MB)`);
+            await reporter.reportSummary(nodeId, { key: 'saved', values: { size: mb }, tone: 'positive' });
 
             return { output: {} };
         } catch (error) {
-            await logger.warn(
-                nodeId,
-                `Cache save failed (continuing): ${error instanceof Error ? error.message : 'Unknown error'}`,
-            );
+            const message = error instanceof Error ? error.message : 'Unknown error';
+            await logger.warn(nodeId, `Cache save failed (continuing): ${message}`);
+            await reporter.reportSummary(nodeId, { key: 'failed', text: message, tone: 'warning' });
             return { output: { error: true }, skipped: false };
         }
     }

@@ -2,7 +2,10 @@
   "nodes": {
     "backup-volume-bucket-storage": {
       "name": "Copia de seguridad del volumen en bucket",
-      "description": "Archiva un volumen Docker y lo sube a un bucket"
+      "description": "Archiva un volumen Docker y lo sube a un bucket",
+      "summary": {
+        "uploaded": "{file} → {bucket}"
+      }
     }
   }
 }

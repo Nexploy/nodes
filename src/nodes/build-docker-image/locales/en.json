@@ -2,7 +2,17 @@
   "nodes": {
     "build-docker-image": {
       "name": "Build Docker Image",
-      "description": "Build a Docker image from a Dockerfile"
+      "description": "Build a Docker image from a Dockerfile",
+      "steps": {
+        "buildImage": "Building {image}",
+        "dispatchRunner": "Dispatching to {runner}",
+        "layer": "Layer {current}/{total}"
+      },
+      "summary": {
+        "built": "{image}",
+        "builtWithLayers": "{image} · {layers} layers",
+        "builtOnRunner": "{image} · on {runner}"
+      }
     }
   },
   "config": {

@@ -2,7 +2,10 @@
   "nodes": {
     "remove-container": {
       "name": "Supprimer un conteneur",
-      "description": "Supprimer un conteneur Docker"
+      "description": "Supprimer un conteneur Docker",
+      "summary": {
+        "removed": "{container} supprimé"
+      }
     }
   }
 }

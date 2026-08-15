@@ -2,7 +2,11 @@
   "nodes": {
     "set-env-vars": {
       "name": "Definir variables de entorno",
-      "description": "Inyecta variables de entorno adicionales en la pipeline. Las variables se acumulan a lo largo de la pipeline."
+      "description": "Inyecta variables de entorno adicionales en la pipeline. Las variables se acumulan a lo largo de la pipeline.",
+      "summary": {
+        "injected": "{count} variables inyectadas",
+        "none": "Sin variables"
+      }
     }
   },
   "config": {

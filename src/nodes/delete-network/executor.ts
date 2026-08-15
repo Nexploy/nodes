@@ -11,7 +11,7 @@ export class DeleteNetworkExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof deleteNetworkConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const networkId = nodeConfig.networkId;
         const force = nodeConfig.force;
@@ -47,6 +47,11 @@ export class DeleteNetworkExecutor implements INodeExecutor {
         }
 
         await logger.info(nodeId, `Network deleted: ${networkId}`);
+        await reporter.reportSummary(nodeId, {
+            key: 'deleted',
+            values: { network: String(networkId) },
+            tone: 'positive',
+        });
         return { output: { deletedNetwork: networkId } };
     }
 }

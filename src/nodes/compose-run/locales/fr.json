@@ -2,7 +2,11 @@
   "nodes": {
     "compose-run": {
       "name": "Compose Run",
-      "description": "Exécuter une commande ponctuelle dans un service Compose"
+      "description": "Exécuter une commande ponctuelle dans un service Compose",
+      "summary": {
+        "exited": "{service} · code {code}",
+        "failedContinued": "Échec · poursuivi"
+      }
     }
   },
   "config": {

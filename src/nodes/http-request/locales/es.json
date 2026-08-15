@@ -2,7 +2,11 @@
   "nodes": {
     "http-request": {
       "name": "Petición HTTP",
-      "description": "Realiza una petición HTTP a una URL externa"
+      "description": "Realiza una petición HTTP a una URL externa",
+      "summary": {
+        "completed": "HTTP {status}",
+        "failedContinued": "Fallo · continuado"
+      }
     }
   },
   "config": {

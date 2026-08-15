@@ -11,7 +11,7 @@ export class DeleteVolumeExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof deleteVolumeConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const volumeName = nodeConfig.volumeName.trim();
         const force = nodeConfig.force;
@@ -31,11 +31,22 @@ export class DeleteVolumeExecutor implements INodeExecutor {
 
             await logger.info(nodeId, `Volume deleted: ${volumeName}`);
 
+            await reporter.reportSummary(nodeId, {
+                key: 'deleted',
+                values: { volume: String(volumeName) },
+                tone: 'positive',
+            });
+
             return { output: { deletedVolume: volumeName } };
         } catch (error) {
             const msg = error instanceof Error ? error.message.toLowerCase() : '';
             if (msg.includes('not found') || msg.includes('no such volume')) {
                 await logger.info(nodeId, `Volume not found, skipping: ${volumeName}`);
+                await reporter.reportSummary(nodeId, {
+                    key: 'notFound',
+                    values: { volume: String(volumeName) },
+                    tone: 'warning',
+                });
                 return { output: { deletedVolume: volumeName }, skipped: true };
             }
             throw new Error(`Failed to delete volume: ${error instanceof Error ? error.message : 'Unknown error'}`);

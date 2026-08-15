@@ -2,7 +2,11 @@
   "nodes": {
     "set-env-vars": {
       "name": "Set Env Vars",
-      "description": "Inject additional environment variables into the pipeline. Variables accumulate throughout the pipeline."
+      "description": "Inject additional environment variables into the pipeline. Variables accumulate throughout the pipeline.",
+      "summary": {
+        "injected": "{count} variables injected",
+        "none": "No variables"
+      }
     }
   },
   "config": {

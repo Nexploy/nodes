@@ -2,7 +2,14 @@
   "nodes": {
     "clean-workdir": {
       "name": "Nettoyer le répertoire de travail",
-      "description": "Supprime le répertoire du dépôt cloné"
+      "description": "Supprime le répertoire du dépôt cloné",
+      "steps": {
+        "remove": "Suppression de {path}"
+      },
+      "summary": {
+        "cleaned": "Espace de travail supprimé",
+        "cleanupWarning": "Nettoyage incomplet"
+      }
     }
   },
   "config": {

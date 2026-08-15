@@ -2,7 +2,15 @@
   "nodes": {
     "clone-repository": {
       "name": "Clonar el repositorio",
-      "description": "Clona el repositorio Git vinculado en el espacio de trabajo de la build"
+      "description": "Clona el repositorio Git vinculado en el espacio de trabajo de la build",
+      "steps": {
+        "clone": "Clonando {branch}",
+        "checkout": "Checkout {commit}",
+        "readCommit": "Leyendo el commit"
+      },
+      "summary": {
+        "cloned": "{branch} · {commit}"
+      }
     }
   },
   "config": {

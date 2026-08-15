@@ -11,7 +11,7 @@ export class TagImageExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof tagImageConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const sourceImage = nodeConfig.sourceImage.trim();
         const targetTag = nodeConfig.targetTag.trim();
@@ -33,6 +33,11 @@ export class TagImageExecutor implements INodeExecutor {
                 .json();
 
             await logger.info(nodeId, `Image tagged as ${repo}:${targetTag}`);
+            await reporter.reportSummary(nodeId, {
+                key: 'tagged',
+                values: { image: `${repo}:${targetTag}` },
+                tone: 'positive',
+            });
             return {
                 output: {
                     sourceImage,

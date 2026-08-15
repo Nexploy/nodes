@@ -2,7 +2,14 @@
   "nodes": {
     "wait-for-health": {
       "name": "Attendre le healthcheck",
-      "description": "Attend qu'un conteneur Docker passe son healthcheck"
+      "description": "Attend qu'un conteneur Docker passe son healthcheck",
+      "steps": {
+        "probe": "Sondage de {container}"
+      },
+      "summary": {
+        "healthy": "Sain · {attempts} vérifications",
+        "runningNoHealthcheck": "Démarré · pas de healthcheck"
+      }
     }
   }
 }

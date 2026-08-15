@@ -10,12 +10,13 @@ export class TriggerStageBuildExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<z.infer<typeof triggerStageBuildConfigSchema>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, buildConfig, logger, abortSignal, pipelineHasFailed, services } = ctx;
+        const { nodeId, nodeConfig, buildConfig, logger, abortSignal, pipelineHasFailed, services, reporter } = ctx;
 
         const { stageId: targetStageId, triggerOnFailure } = nodeConfig;
 
         if (pipelineHasFailed && !triggerOnFailure) {
             await logger.info(nodeId, 'Pipeline failed — skipping downstream stage build trigger');
+            await reporter.reportSummary(nodeId, { key: 'notTriggered', tone: 'warning' });
             return { output: { triggered: false }, skipped: true };
         }
 
@@ -49,6 +50,12 @@ export class TriggerStageBuildExecutor implements INodeExecutor {
         }
 
         await logger.info(nodeId, `Started build #${triggered.numberBuild} on stage "${targetStage.name}"`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'triggered',
+            values: { build: triggered.numberBuild, stage: targetStage.name },
+            tone: 'positive',
+        });
 
         return {
             output: {

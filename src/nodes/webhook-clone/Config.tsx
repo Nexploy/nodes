@@ -60,7 +60,7 @@ export function WebhookCloneConfig() {
         <div className="space-y-4">
             {webhookStatus?.isConfigured ? (
                 <Alert className="border-green-500/30 bg-green-500/10 text-green-600 [&>svg]:text-green-600">
-                    <CheckCircle/>
+                    <CheckCircle />
                     <AlertDescription className="flex justify-between gap-3 text-green-600">
                         <span>{t('webhookStatusConfigured')}</span>
                         <PermissionGate resource="repository" action="update">
@@ -91,7 +91,7 @@ export function WebhookCloneConfig() {
             ) : (
                 webhookStatus && (
                     <Alert className="border-yellow-500/30 bg-yellow-500/10 text-yellow-600 [&>svg]:text-yellow-600">
-                        <AlertTriangle/>
+                        <AlertTriangle />
                         <AlertTitle className="text-yellow-600">{t('webhookStatusNotConfigured')}</AlertTitle>
                         <AlertDescription className="flex justify-between gap-3">
                             <span className="text-yellow-600/80">{t('webhookStatusNotConfiguredDescription')}</span>
@@ -145,7 +145,7 @@ export function WebhookCloneConfig() {
                             <FormDescription className={'text-xs'}>
                                 {t('webhookTriggerEventsDescription')}
                             </FormDescription>
-                            <FormMessage className="text-xs"/>
+                            <FormMessage className="text-xs" />
                         </FormItem>
                     );
                 }}
@@ -158,10 +158,10 @@ export function WebhookCloneConfig() {
                     <FormItem>
                         <FormLabel>{t('webhookBranchFilter')}</FormLabel>
                         <FormControl>
-                            <Input {...field} value={field.value} placeholder={t('webhookBranchFilterPlaceholder')}/>
+                            <Input {...field} value={field.value} placeholder={t('webhookBranchFilterPlaceholder')} />
                         </FormControl>
                         <FormDescription className={'text-xs'}>{t('webhookBranchFilterDescription')}</FormDescription>
-                        <FormMessage/>
+                        <FormMessage />
                     </FormItem>
                 )}
             />
@@ -199,7 +199,7 @@ export function WebhookCloneConfig() {
                                 <FormDescription className={'text-xs'}>
                                     {t('webhookMergeRequestActionsDescription')}
                                 </FormDescription>
-                                <FormMessage className="text-xs"/>
+                                <FormMessage className="text-xs" />
                             </FormItem>
                         );
                     }}
@@ -221,7 +221,7 @@ export function WebhookCloneConfig() {
                                 />
                             </FormControl>
                             <FormDescription className={'text-xs'}>{t('webhookTagFilterDescription')}</FormDescription>
-                            <FormMessage className="text-xs"/>
+                            <FormMessage className="text-xs" />
                         </FormItem>
                     )}
                 />

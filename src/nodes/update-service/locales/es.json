@@ -2,7 +2,10 @@
   "nodes": {
     "update-service": {
       "name": "Actualizar servicio",
-      "description": "Actualiza un servicio de Docker Swarm a una nueva imagen"
+      "description": "Actualiza un servicio de Docker Swarm a una nueva imagen",
+      "summary": {
+        "updated": "{service} → {image}"
+      }
     }
   },
   "config": {

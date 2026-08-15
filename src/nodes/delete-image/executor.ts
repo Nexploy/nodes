@@ -12,7 +12,7 @@ export class DeleteImageExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof deleteImageConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const imageId = nodeConfig.imageId.trim();
         const force = nodeConfig.force;
@@ -40,10 +40,21 @@ export class DeleteImageExecutor implements INodeExecutor {
                         skipReasonToMessage[skipped.reason] ?? `Image skipped (${skipped.reason}): ${skipped.name}`;
                     await logger.warn(nodeId, message);
                 }
+                await reporter.reportSummary(nodeId, {
+                    key: 'skipped',
+                    values: { count: result.skipped.length },
+                    tone: 'warning',
+                });
                 return { output: { deletedImageId: imageId }, skipped: true };
             }
 
             await logger.info(nodeId, `Image deleted: ${imageId}`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'deleted',
+                values: { image: String(imageId) },
+                tone: 'positive',
+            });
 
             return { output: { deletedImageId: imageId } };
         } catch (error) {

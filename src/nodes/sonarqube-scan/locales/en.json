@@ -2,7 +2,11 @@
   "nodes": {
     "sonarqube-scan": {
       "name": "SonarQube Scan",
-      "description": "Analyze code quality with SonarQube or SonarCloud"
+      "description": "Analyze code quality with SonarQube or SonarCloud",
+      "summary": {
+        "scanned": "{project} · score {score}",
+        "gatePassed": "{project} · gate passed"
+      }
     }
   },
   "config": {

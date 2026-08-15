@@ -2,7 +2,13 @@
   "nodes": {
     "wait-for-url": {
       "name": "Attendi l'URL",
-      "description": "Interroga un URL fino a quando restituisce lo stato HTTP atteso"
+      "description": "Interroga un URL fino a quando restituisce lo stato HTTP atteso",
+      "steps": {
+        "probe": "{method} {url}"
+      },
+      "summary": {
+        "reachable": "HTTP {status} · {attempts} tentativi"
+      }
     }
   },
   "config": {

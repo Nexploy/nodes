@@ -2,7 +2,14 @@
   "nodes": {
     "set-runner": {
       "name": "Build Runner",
-      "description": "Sends the build work of every downstream node to a remote build runner instead of this server"
+      "description": "Sends the build work of every downstream node to a remote build runner instead of this server",
+      "steps": {
+        "checkAvailability": "Checking {runner}"
+      },
+      "summary": {
+        "selected": "{runner}",
+        "fallbackToLocal": "{runner} unavailable · building locally"
+      }
     }
   }
 }

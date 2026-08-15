@@ -2,7 +2,10 @@
   "nodes": {
     "cherry-pick-commit": {
       "name": "Cherry-pick d'un commit",
-      "description": "Appliquer un commit spécifique sur la branche courante"
+      "description": "Appliquer un commit spécifique sur la branche courante",
+      "summary": {
+        "applied": "{commit} appliqué"
+      }
     }
   },
   "config": {

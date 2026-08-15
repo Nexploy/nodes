@@ -47,7 +47,7 @@ export class HttpRequestExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof httpRequestConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, logger, nodeId, abortSignal } = ctx;
+        const { nodeConfig, logger, nodeId, abortSignal, reporter } = ctx;
 
         const { url, method, headers: headersArr, body, expectedStatus, continueOnError } = nodeConfig;
 
@@ -84,12 +84,18 @@ export class HttpRequestExecutor implements INodeExecutor {
             }
 
             await logger.info(nodeId, `HTTP request completed successfully`);
+            await reporter.reportSummary(nodeId, {
+                key: 'completed',
+                values: { status: response.status },
+                tone: 'positive',
+            });
             return { output: { status: response.status, body: responseText.slice(0, 1000) } };
         } catch (error) {
             if ((error as Error).name === 'AbortError') throw new Error('Aborted');
             const msg = error instanceof Error ? error.message : 'Unknown error';
             if (continueOnError) {
                 await logger.warn(nodeId, `Request failed: ${msg} (continuing due to continueOnError)`);
+                await reporter.reportSummary(nodeId, { key: 'failedContinued', text: msg, tone: 'warning' });
                 return { output: { failed: true, error: msg }, skipped: false };
             }
             throw new Error(`HTTP request failed: ${msg}`);

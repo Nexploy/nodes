@@ -2,7 +2,10 @@
   "nodes": {
     "prune-images": {
       "name": "Prune Images",
-      "description": "Remove unused Docker images to free disk space"
+      "description": "Remove unused Docker images to free disk space",
+      "summary": {
+        "pruned": "{count} images · {size} MB"
+      }
     }
   },
   "config": {

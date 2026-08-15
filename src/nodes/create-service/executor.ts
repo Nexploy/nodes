@@ -11,7 +11,7 @@ export class CreateServiceExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof createServiceConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
 
@@ -55,6 +55,12 @@ export class CreateServiceExecutor implements INodeExecutor {
                 .json<{ id: string }>();
 
             await logger.info(nodeId, `Service "${serviceName}" created (ID: ${result.id.slice(0, 12)})`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'created',
+                values: { service: String(serviceName) },
+                tone: 'positive',
+            });
 
             return {
                 output: {

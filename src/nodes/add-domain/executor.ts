@@ -12,7 +12,7 @@ export class AddDomainExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof addDomainConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, allOutputs, edges, logger, abortSignal, services } = ctx;
+        const { nodeId, nodeConfig, allOutputs, edges, logger, abortSignal, services, reporter } = ctx;
         const { host, path, internalPath, stripPath, containerName, containerPort, https, certificateId } = nodeConfig;
 
         const dnsCredentialId = nodeConfig.dnsCredentialId ?? nodeConfig.cloudflareCredentialId;
@@ -61,6 +61,12 @@ export class AddDomainExecutor implements INodeExecutor {
             nodeId,
             `Domain configured: ${host}:${containerPort}` + (environmentId ? ` (environment: ${environmentId})` : ''),
         );
+
+        await reporter.reportSummary(nodeId, {
+            key: 'configured',
+            values: { host: String(host), port: String(containerPort) },
+            tone: 'positive',
+        });
 
         return { output: { host, containerPort, domainId, environmentId } };
     }

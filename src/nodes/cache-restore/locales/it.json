@@ -2,7 +2,12 @@
   "nodes": {
     "cache-restore": {
       "name": "Ripristina cache",
-      "description": "Ripristina una cache di build da un volume Docker nella directory di lavoro"
+      "description": "Ripristina una cache di build da un volume Docker nella directory di lavoro",
+      "summary": {
+        "restored": "Ripristinato · {size} MB",
+        "miss": "Nessuna cache · avvio pulito",
+        "failed": "Ripristino fallito"
+      }
     }
   },
   "config": {

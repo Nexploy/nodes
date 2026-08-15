@@ -11,7 +11,7 @@ export class ScaleServiceExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof scaleServiceConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const serviceId = nodeConfig.serviceId;
         const serviceName = nodeConfig.serviceName;
@@ -32,6 +32,12 @@ export class ScaleServiceExecutor implements INodeExecutor {
                 .json();
 
             await logger.info(nodeId, `Service "${serviceName}" scaled to ${replicas} replica(s)`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'scaled',
+                values: { service: String(serviceName), replicas: Number(replicas) },
+                tone: 'positive',
+            });
 
             return { output: { serviceName, replicas } };
         } catch (error) {

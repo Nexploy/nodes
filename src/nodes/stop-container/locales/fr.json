@@ -2,7 +2,10 @@
   "nodes": {
     "stop-container": {
       "name": "Arrêter un conteneur",
-      "description": "Arrêter un conteneur Docker en cours d'exécution"
+      "description": "Arrêter un conteneur Docker en cours d'exécution",
+      "summary": {
+        "stopped": "{container} arrêté"
+      }
     }
   }
 }

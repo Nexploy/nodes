@@ -2,7 +2,10 @@
   "nodes": {
     "delay": {
       "name": "Délai",
-      "description": "Met la pipeline en pause pendant un nombre de secondes fixe"
+      "description": "Met la pipeline en pause pendant un nombre de secondes fixe",
+      "summary": {
+        "waited": "Attente de {seconds}s"
+      }
     }
   },
   "config": {

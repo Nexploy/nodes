@@ -2,7 +2,11 @@
   "nodes": {
     "delete-image": {
       "name": "Elimina immagine",
-      "description": "Elimina un'immagine Docker specifica per nome o ID"
+      "description": "Elimina un'immagine Docker specifica per nome o ID",
+      "summary": {
+        "deleted": "{image} eliminata",
+        "skipped": "{count} ignorata/e"
+      }
     }
   }
 }

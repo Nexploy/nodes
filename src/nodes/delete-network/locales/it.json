@@ -2,7 +2,10 @@
   "nodes": {
     "delete-network": {
       "name": "Elimina rete",
-      "description": "Elimina una rete Docker per nome o ID"
+      "description": "Elimina una rete Docker per nome o ID",
+      "summary": {
+        "deleted": "{network} eliminata"
+      }
     }
   },
   "config": {

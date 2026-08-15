@@ -2,7 +2,11 @@
   "nodes": {
     "sonarqube-scan": {
       "name": "Analisi SonarQube",
-      "description": "Analizza la qualità del codice con SonarQube o SonarCloud"
+      "description": "Analizza la qualità del codice con SonarQube o SonarCloud",
+      "summary": {
+        "scanned": "{project} · punteggio {score}",
+        "gatePassed": "{project} · gate superata"
+      }
     }
   },
   "config": {

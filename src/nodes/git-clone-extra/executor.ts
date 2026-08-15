@@ -10,7 +10,7 @@ export class GitCloneExtraExecutor implements INodeExecutor {
     readonly configSchema = gitCloneExtraConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof gitCloneExtraConfigSchema>>): Promise<NodeExecutionResult> {
-        const { buildConfig, nodeConfig, allOutputs, logger, nodeId, edges, services } = ctx;
+        const { buildConfig, nodeConfig, allOutputs, logger, nodeId, edges, services, reporter } = ctx;
         const gitService = createGitService(services);
 
         const { repoUrl, branch, targetDir, token } = nodeConfig;
@@ -32,6 +32,11 @@ export class GitCloneExtraExecutor implements INodeExecutor {
         });
 
         await logger.info(nodeId, `Repository cloned to ${targetDir}`);
+        await reporter.reportSummary(nodeId, {
+            key: 'cloned',
+            values: { branch: String(branch) },
+            tone: 'positive',
+        });
         return { output: { repoUrl, branch, targetDir: cloneDest } };
     }
 }

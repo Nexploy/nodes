@@ -2,7 +2,11 @@
   "nodes": {
     "merge-branch": {
       "name": "Merge Branch",
-      "description": "Merge a branch into the current branch"
+      "description": "Merge a branch into the current branch",
+      "summary": {
+        "merged": "{source} → {target}",
+        "mergedAndPushed": "{source} → {target} · pushed"
+      }
     }
   },
   "config": {

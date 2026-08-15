@@ -2,7 +2,10 @@
   "nodes": {
     "download-file": {
       "name": "Download File",
-      "description": "Download a file from a URL into the work directory"
+      "description": "Download a file from a URL into the work directory",
+      "summary": {
+        "downloaded": "{file} · {size} KB"
+      }
     }
   },
   "config": {

@@ -2,7 +2,10 @@
   "nodes": {
     "fetch-secrets-vault": {
       "name": "Segreti Vault",
-      "description": "Recupera i segreti dal motore KV di HashiCorp Vault. Le variabili si accumulano lungo tutta la pipeline."
+      "description": "Recupera i segreti dal motore KV di HashiCorp Vault. Le variabili si accumulano lungo tutta la pipeline.",
+      "summary": {
+        "injected": "{count} segreti iniettati"
+      }
     }
   },
   "config": {

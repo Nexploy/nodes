@@ -4,7 +4,11 @@
       "name": "Condición",
       "description": "Bloquea la pipeline según un valor de la salida de un nodo anterior",
       "outputTrue": "Verdadero",
-      "outputFalse": "Falso"
+      "outputFalse": "Falso",
+      "summary": {
+        "passed": "Superada · {inputs} entradas",
+        "notPassed": "No superada · {inputs} entradas"
+      }
     }
   },
   "config": {

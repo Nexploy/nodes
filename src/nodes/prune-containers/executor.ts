@@ -10,7 +10,7 @@ export class PruneContainersExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<z.infer<typeof pruneContainersConfigSchema>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const filter = nodeConfig.filter;
         const olderThan = nodeConfig.olderThan;
@@ -36,6 +36,12 @@ export class PruneContainersExecutor implements INodeExecutor {
 
             const mb = (result.reclaimedSpace / 1024 / 1024).toFixed(2);
             await logger.info(nodeId, `Pruned ${result.removedContainers} containers, reclaimed ${mb} MB`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'pruned',
+                values: { count: result.removedContainers, size: mb },
+                tone: result.removedContainers > 0 ? 'positive' : 'neutral',
+            });
 
             return {
                 output: {

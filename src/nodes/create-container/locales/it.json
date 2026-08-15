@@ -2,7 +2,14 @@
   "nodes": {
     "create-container": {
       "name": "Crea container",
-      "description": "Crea e avvia un container Docker da un'immagine"
+      "description": "Crea e avvia un container Docker da un'immagine",
+      "steps": {
+        "resolveEnv": "Risoluzione dell'ambiente",
+        "createContainer": "Creazione da {image}"
+      },
+      "summary": {
+        "created": "{container} · {ports} porte"
+      }
     }
   },
   "config": {

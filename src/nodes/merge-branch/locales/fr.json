@@ -2,7 +2,11 @@
   "nodes": {
     "merge-branch": {
       "name": "Fusionner une branche",
-      "description": "Fusionner une branche dans la branche courante"
+      "description": "Fusionner une branche dans la branche courante",
+      "summary": {
+        "merged": "{source} → {target}",
+        "mergedAndPushed": "{source} → {target} · poussé"
+      }
     }
   },
   "config": {

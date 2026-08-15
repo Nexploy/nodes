@@ -2,7 +2,14 @@
   "nodes": {
     "clean-workdir": {
       "name": "Clean Work Dir",
-      "description": "Removes the cloned repository directory"
+      "description": "Removes the cloned repository directory",
+      "steps": {
+        "remove": "Removing {path}"
+      },
+      "summary": {
+        "cleaned": "Workspace removed",
+        "cleanupWarning": "Cleanup incomplete"
+      }
     }
   },
   "config": {

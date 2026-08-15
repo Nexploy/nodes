@@ -11,7 +11,7 @@ export class BackupVolumeBucketStorageExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof backupVolumeBucketStorageConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, allOutputs, logger, abortSignal, edges, services } = ctx;
+        const { nodeId, nodeConfig, allOutputs, logger, abortSignal, edges, services, reporter } = ctx;
 
         const volumeName = nodeConfig.volumeName;
         const accountId = nodeConfig.accountId;
@@ -38,6 +38,12 @@ export class BackupVolumeBucketStorageExecutor implements INodeExecutor {
         await services.bucketStorage.putObject(accountId, bucket, fileName, new Uint8Array(buffer), 'application/gzip');
 
         await logger.info(nodeId, `Volume backup uploaded successfully: ${fileName}`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'uploaded',
+            values: { file: String(fileName), bucket: String(bucket) },
+            tone: 'positive',
+        });
 
         return {
             output: { fileName, bucket, volumeName },

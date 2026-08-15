@@ -2,7 +2,15 @@
   "nodes": {
     "deploy-compose": {
       "name": "Desplegar Compose",
-      "description": "Despliega un stack de Docker Compose"
+      "description": "Despliega un stack de Docker Compose",
+      "steps": {
+        "resolveEnv": "Resolviendo el entorno",
+        "buildOnRunner": "Compilando en el runner",
+        "deployStack": "Desplegando {project}"
+      },
+      "summary": {
+        "deployed": "{project} · {containers} contenedores"
+      }
     }
   }
 }

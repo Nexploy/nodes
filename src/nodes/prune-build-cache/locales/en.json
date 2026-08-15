@@ -2,7 +2,10 @@
   "nodes": {
     "prune-build-cache": {
       "name": "Prune Build Cache",
-      "description": "Clear the Docker build cache to free disk space"
+      "description": "Clear the Docker build cache to free disk space",
+      "summary": {
+        "pruned": "{count} entries · {size} MB"
+      }
     }
   },
   "config": {

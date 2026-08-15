@@ -2,7 +2,11 @@
   "nodes": {
     "compose-run": {
       "name": "Ejecución de Compose",
-      "description": "Ejecuta un comando puntual en un servicio de Compose"
+      "description": "Ejecuta un comando puntual en un servicio de Compose",
+      "summary": {
+        "exited": "{service} · salida {code}",
+        "failedContinued": "Fallo · continuado"
+      }
     }
   },
   "config": {

@@ -2,7 +2,11 @@
   "nodes": {
     "merge-branch": {
       "name": "Fusionar rama",
-      "description": "Fusiona una rama en la rama actual"
+      "description": "Fusiona una rama en la rama actual",
+      "summary": {
+        "merged": "{source} → {target}",
+        "mergedAndPushed": "{source} → {target} · subido"
+      }
     }
   },
   "config": {

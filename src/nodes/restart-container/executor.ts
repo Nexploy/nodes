@@ -12,7 +12,7 @@ export class RestartContainerExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof restartContainerConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const containerId = nodeConfig.containerId;
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
@@ -31,6 +31,11 @@ export class RestartContainerExecutor implements INodeExecutor {
         }
 
         await logger.info(nodeId, `Container restarted: ${containerId}`);
+        await reporter.reportSummary(nodeId, {
+            key: 'restarted',
+            values: { container: String(containerId).slice(0, 12) },
+            tone: 'positive',
+        });
         return { output: { containerId } };
     }
 }

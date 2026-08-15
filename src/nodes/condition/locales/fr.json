@@ -4,7 +4,11 @@
       "name": "Condition",
       "description": "Conditionne la pipeline sur les données de sortie d'un nœud précédent",
       "outputTrue": "Vrai",
-      "outputFalse": "Faux"
+      "outputFalse": "Faux",
+      "summary": {
+        "passed": "Validée · {inputs} entrées",
+        "notPassed": "Non validée · {inputs} entrées"
+      }
     }
   },
   "config": {

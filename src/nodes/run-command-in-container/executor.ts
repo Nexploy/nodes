@@ -11,7 +11,7 @@ export class RunCommandInContainerExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof runCommandInContainerConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const containerId = nodeConfig.containerId;
         const command = nodeConfig.command;
@@ -43,12 +43,18 @@ export class RunCommandInContainerExecutor implements INodeExecutor {
                 const msg = `Command exited with code ${result.exitCode}`;
                 if (continueOnError) {
                     await logger.warn(nodeId, `${msg} (continuing due to continueOnError)`);
+                    await reporter.reportSummary(nodeId, {
+                        key: 'exitedNonZero',
+                        values: { code: result.exitCode },
+                        tone: 'warning',
+                    });
                     return { output: { exitCode: result.exitCode } };
                 }
                 throw new Error(msg);
             }
 
             await logger.info(nodeId, `Command completed successfully (exit code 0)`);
+            await reporter.reportSummary(nodeId, { key: 'succeeded', tone: 'positive' });
             return { output: { exitCode: result.exitCode } };
         } catch (error) {
             if (error instanceof Error && error.name === 'AbortError') throw error;

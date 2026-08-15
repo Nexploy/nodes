@@ -8,7 +8,7 @@ export class ConditionExecutor implements INodeExecutor {
     readonly configSchema = conditionConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof conditionConfigSchema>>): Promise<NodeExecutionResult> {
-        const { logger, nodeId, edges, nodes, allOutputs, nodeConfig } = ctx;
+        const { logger, nodeId, edges, nodes, allOutputs, nodeConfig, reporter } = ctx;
 
         const enabledParents = findClosestEnabledNodes(nodeId, nodes, edges);
         const effectiveOutputs = enabledParents
@@ -33,6 +33,12 @@ export class ConditionExecutor implements INodeExecutor {
         const skippedBranchTargets = edges
             .filter((e) => e.source === nodeId && e.sourceHandle === losingHandle)
             .map((e) => e.target);
+
+        await reporter.reportSummary(nodeId, {
+            key: passed ? 'passed' : 'notPassed',
+            values: { inputs: effectiveOutputs.length },
+            tone: passed ? 'positive' : 'warning',
+        });
 
         return {
             output: { passed, branch: passed ? 'true' : 'false' },

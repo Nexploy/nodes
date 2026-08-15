@@ -1,4 +1,5 @@
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
+import { createProgressTracker } from '@nexploy/nodes/core/nodeProgress';
 import { setRunnerConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 import { z } from 'zod';
 
@@ -7,7 +8,8 @@ export class SetRunnerExecutor implements INodeExecutor {
     readonly configSchema = setRunnerConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof setRunnerConfigSchema>>): Promise<NodeExecutionResult> {
-        const { nodeConfig, logger, nodeId, services } = ctx;
+        const { nodeConfig, logger, nodeId, services, reporter } = ctx;
+        const tracker = createProgressTracker(reporter, nodeId, 1);
 
         const { runnerId, runnerName, registryId, fallbackToLocal } = nodeConfig;
 
@@ -17,6 +19,7 @@ export class SetRunnerExecutor implements INodeExecutor {
 
         const label = runnerName || runnerId;
 
+        await tracker.step('checkAvailability', { runner: label });
         const availability = await services.runner?.checkAvailability(runnerId);
 
         if (availability && !availability.available) {
@@ -28,10 +31,18 @@ export class SetRunnerExecutor implements INodeExecutor {
 
             await logger.warn(nodeId, `Build runner "${label}" is not usable (${reason}), building on this server`);
 
+            await reporter.reportSummary(nodeId, {
+                key: 'fallbackToLocal',
+                values: { runner: label },
+                tone: 'warning',
+            });
+
             return { output: { runnerId: '', runnerName: '', runnerRegistryId: '', runnerFallback: true } };
         }
 
         await logger.info(nodeId, `Build runner set: ${label}`);
+
+        await reporter.reportSummary(nodeId, { key: 'selected', values: { runner: label }, tone: 'positive' });
 
         if (!registryId) {
             await logger.warn(

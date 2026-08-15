@@ -2,7 +2,14 @@
   "nodes": {
     "clean-workdir": {
       "name": "Limpiar el directorio de trabajo",
-      "description": "Elimina el directorio del repositorio clonado"
+      "description": "Elimina el directorio del repositorio clonado",
+      "steps": {
+        "remove": "Eliminando {path}"
+      },
+      "summary": {
+        "cleaned": "Espacio de trabajo eliminado",
+        "cleanupWarning": "Limpieza incompleta"
+      }
     }
   },
   "config": {

@@ -2,7 +2,13 @@
   "nodes": {
     "push-to-registry": {
       "name": "Publicar una imagen en un registry",
-      "description": "Publica una imagen Docker en un registry privado o público"
+      "description": "Publica una imagen Docker en un registry privado o público",
+      "steps": {
+        "push": "Subiendo {image}"
+      },
+      "summary": {
+        "pushed": "{count} imágenes · {tag} · {registry}"
+      }
     }
   },
   "config": {

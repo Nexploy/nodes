@@ -11,7 +11,7 @@ export class SendNotificationExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<z.infer<typeof sendNotificationConfigSchema>>,
     ): Promise<NodeExecutionResult> {
-        const { logger, nodeId, nodeConfig, abortSignal, pipelineHasFailed } = ctx;
+        const { logger, nodeId, nodeConfig, abortSignal, pipelineHasFailed, reporter } = ctx;
 
         const { webhookUrl, message: customMessage, triggerOn } = nodeConfig;
 
@@ -27,6 +27,7 @@ export class SendNotificationExecutor implements INodeExecutor {
                 nodeId,
                 `Notification skipped (triggerOn: [${triggerOn.join(', ')}], pipeline status: ${pipelineStatus})`,
             );
+            await reporter.reportSummary(nodeId, { key: 'notTriggered', tone: 'neutral' });
             return { output: { sent: false }, skipped: true };
         }
 
@@ -45,6 +46,7 @@ export class SendNotificationExecutor implements INodeExecutor {
             });
 
             await logger.info(nodeId, 'Notification sent successfully');
+            await reporter.reportSummary(nodeId, { key: 'sent', tone: 'positive' });
             return { output: { sent: true } };
         } catch (error) {
             const message = error instanceof Error ? error.message : 'Unknown error';

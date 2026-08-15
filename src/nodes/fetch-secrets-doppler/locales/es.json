@@ -2,7 +2,10 @@
   "nodes": {
     "fetch-secrets-doppler": {
       "name": "Secretos de Doppler",
-      "description": "Obtiene los secretos de Doppler. Las variables se acumulan a lo largo de la pipeline."
+      "description": "Obtiene los secretos de Doppler. Las variables se acumulan a lo largo de la pipeline.",
+      "summary": {
+        "injected": "{count} secretos inyectados"
+      }
     }
   },
   "config": {

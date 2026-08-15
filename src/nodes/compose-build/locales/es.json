@@ -2,7 +2,10 @@
   "nodes": {
     "compose-build": {
       "name": "Build de Compose",
-      "description": "Construye las imágenes del stack de Compose sin iniciarlo"
+      "description": "Construye las imágenes del stack de Compose sin iniciarlo",
+      "summary": {
+        "built": "{built}/{total} servicios construidos"
+      }
     }
   }
 }

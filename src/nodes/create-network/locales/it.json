@@ -2,7 +2,14 @@
   "nodes": {
     "create-network": {
       "name": "Crea rete",
-      "description": "Crea una rete Docker"
+      "description": "Crea una rete Docker",
+      "steps": {
+        "create": "Creazione di {name}"
+      },
+      "summary": {
+        "created": "{name} · {driver}",
+        "alreadyExists": "{name} esiste già"
+      }
     }
   }
 }

@@ -2,7 +2,10 @@
   "nodes": {
     "delete-container": {
       "name": "Eliminar contenedor",
-      "description": "Elimina un contenedor, con la opción de forzar su eliminación junto con sus volúmenes"
+      "description": "Elimina un contenedor, con la opción de forzar su eliminación junto con sus volúmenes",
+      "summary": {
+        "deleted": "{container} eliminado"
+      }
     }
   }
 }

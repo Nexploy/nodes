@@ -10,7 +10,7 @@ export class RemoveDomainExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof removeDomainConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, logger, abortSignal, services } = ctx;
+        const { nodeId, nodeConfig, logger, abortSignal, services, reporter } = ctx;
         const { host } = nodeConfig;
 
         await logger.info(nodeId, `Removing domain: ${host}`);
@@ -21,6 +21,7 @@ export class RemoveDomainExecutor implements INodeExecutor {
 
         if (!exists) {
             await logger.info(nodeId, `Domain not found, skipping: ${host}`);
+            await reporter.reportSummary(nodeId, { key: 'notFound', values: { host: String(host) }, tone: 'warning' });
             return { output: { host, removed: false }, skipped: true };
         }
 
@@ -28,6 +29,8 @@ export class RemoveDomainExecutor implements INodeExecutor {
         await services.domain.applyDomains(remainingDomains);
 
         await logger.info(nodeId, `Domain removed: ${host}`);
+
+        await reporter.reportSummary(nodeId, { key: 'removed', values: { host: String(host) }, tone: 'positive' });
 
         return { output: { host, removed: true } };
     }

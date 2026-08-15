@@ -13,7 +13,7 @@ export class ComposeRunExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof composeRunConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { allOutputs, logger, nodeId, nodeConfig, abortSignal, edges, services } = ctx;
+        const { allOutputs, logger, nodeId, nodeConfig, abortSignal, edges, services, reporter } = ctx;
         const dockerService = createDockerService(services.docker);
 
         const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
@@ -54,6 +54,12 @@ export class ComposeRunExecutor implements INodeExecutor {
                 },
             );
 
+            await reporter.reportSummary(nodeId, {
+                key: 'exited',
+                values: { service: String(service), code: result.exitCode },
+                tone: result.exitCode === 0 ? 'positive' : 'warning',
+            });
+
             return { output: { exitCode: result.exitCode, service, projectName, composeFile } };
         } catch (error) {
             if (error instanceof Error && error.name === 'AbortError') throw error;
@@ -62,6 +68,7 @@ export class ComposeRunExecutor implements INodeExecutor {
 
             if (nodeConfig.continueOnError) {
                 await logger.warn(nodeId, `Compose run failed (continuing due to continueOnError): ${message}`);
+                await reporter.reportSummary(nodeId, { key: 'failedContinued', text: message, tone: 'warning' });
                 return { output: { exitCode: 1, service, projectName, composeFile } };
             }
 

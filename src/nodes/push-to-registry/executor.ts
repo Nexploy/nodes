@@ -1,4 +1,5 @@
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
+import { createProgressTracker } from '@nexploy/nodes/core/nodeProgress';
 import { createDockerService } from '@nexploy/nodes/core/dockerService';
 import { pushToRegistryConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 import { z } from 'zod';
@@ -11,7 +12,7 @@ export class PushToRegistryExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof pushToRegistryConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { allOutputs, logger, nodeId, nodeConfig, abortSignal, services } = ctx;
+        const { allOutputs, logger, nodeId, nodeConfig, abortSignal, services, reporter } = ctx;
         const dockerService = createDockerService(services.docker);
 
         const registry = await services.registry.getCredentials(nodeConfig.registryId);
@@ -51,12 +52,14 @@ export class PushToRegistryExecutor implements INodeExecutor {
 
         await logger.info(nodeId, `Pushing ${imageNames.length} image(s) to ${registry.url}`);
 
+        const tracker = createProgressTracker(reporter, nodeId, imageNames.length);
         const pushedNames: string[] = [];
 
         for (const imageName of imageNames) {
             const baseImageName = imageName.split(':')[0];
             const targetName = `${registry.url}/${baseImageName}:${customTag}`;
 
+            await tracker.step('push', { image: baseImageName! });
             await logger.info(nodeId, `Pushing ${imageName} → ${targetName}`);
 
             const onLog = async (message: string) => logger.info(nodeId, message);
@@ -73,6 +76,12 @@ export class PushToRegistryExecutor implements INodeExecutor {
             await logger.info(nodeId, `Pushed successfully: ${result.targetName}`);
             pushedNames.push(result.targetName);
         }
+
+        await reporter.reportSummary(nodeId, {
+            key: 'pushed',
+            values: { count: pushedNames.length, registry: registry.url, tag: customTag },
+            tone: 'positive',
+        });
 
         return {
             output: {

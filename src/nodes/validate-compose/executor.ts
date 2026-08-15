@@ -1,6 +1,7 @@
 import { getFromClosestAncestor } from '@nexploy/nodes/core/helpers';
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
 import { createGitService } from '@nexploy/nodes/core/gitService';
+import { createProgressTracker } from '@nexploy/nodes/core/nodeProgress';
 import { composeFileConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 import { z } from 'zod';
 import { ResolveRefs } from '@nexploy/nodes/core/schemas/nodeFieldRef.schema';
@@ -12,8 +13,9 @@ export class ValidateComposeExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof composeFileConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { allOutputs, logger, nodeId, nodeConfig, edges, services } = ctx;
+        const { allOutputs, logger, nodeId, nodeConfig, edges, services, reporter } = ctx;
         const gitService = createGitService(services);
+        const tracker = createProgressTracker(reporter, nodeId, 2);
 
         const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
 
@@ -30,9 +32,18 @@ export class ValidateComposeExecutor implements INodeExecutor {
         await logger.info(nodeId, `Validating Docker Compose file: ${composePath}`);
 
         try {
+            await tracker.step('locateFile', { file: composeFileName });
             const resolvedPath = await gitService.validateComposeFile(workDir, composePath);
+
+            await tracker.step('checkSyntax');
             await gitService.validateComposeSyntax(workDir, resolvedPath);
             await logger.info(nodeId, `Docker Compose file validated: ${resolvedPath}`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'valid',
+                values: { file: resolvedPath },
+                tone: 'positive',
+            });
 
             return {
                 output: { workDir, composePath: resolvedPath },

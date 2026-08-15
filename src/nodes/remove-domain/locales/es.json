@@ -2,7 +2,11 @@
   "nodes": {
     "remove-domain": {
       "name": "Eliminar dominio",
-      "description": "Elimina un dominio del repositorio"
+      "description": "Elimina un dominio del repositorio",
+      "summary": {
+        "removed": "{host} eliminado",
+        "notFound": "{host} no encontrado"
+      }
     }
   },
   "config": {

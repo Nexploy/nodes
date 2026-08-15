@@ -2,7 +2,10 @@
   "nodes": {
     "prune-containers": {
       "name": "Prune Containers",
-      "description": "Remove all stopped containers to free disk space"
+      "description": "Remove all stopped containers to free disk space",
+      "summary": {
+        "pruned": "{count} containers · {size} MB"
+      }
     }
   }
 }

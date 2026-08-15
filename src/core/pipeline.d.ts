@@ -52,6 +52,21 @@ export interface CommitInfo {
     commitHash?: string;
     commitMessage?: string;
 }
+export type NodeReportValues = Record<string, string | number>;
+export interface NodeProgress {
+    current: number;
+    total: number;
+    labelKey: string;
+    labelValues?: NodeReportValues;
+    detail?: string;
+}
+export type NodeSummaryTone = 'neutral' | 'positive' | 'warning' | 'negative';
+export interface NodeSummary {
+    key: string;
+    text?: string;
+    values?: NodeReportValues;
+    tone?: NodeSummaryTone;
+}
 export interface PipelineReporter {
     markCompleted(nodeId: string): Promise<void>;
     markRunning(nodeId: string): Promise<void>;
@@ -60,6 +75,13 @@ export interface PipelineReporter {
     markCancelled(nodeId: string): Promise<void>;
     markNotConfigured(nodeId: string): Promise<void>;
     publishCommitInfo(data: CommitInfo): Promise<void>;
+    reportProgress(nodeId: string, progress: NodeProgress): Promise<void>;
+    reportSummary(nodeId: string, summary: NodeSummary): Promise<void>;
+}
+export interface NodeProgressTracker {
+    step(labelKey: string, labelValues?: NodeReportValues, detail?: string): Promise<void>;
+    detail(detail: string): Promise<void>;
+    done(): Promise<void>;
 }
 export interface InngestStepRunner {
     run<T>(id: string, fn: () => Promise<T>): Promise<unknown>;

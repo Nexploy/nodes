@@ -12,7 +12,7 @@ export class PullFromRegistryExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<z.infer<typeof pullFromRegistryConfigSchema>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, services } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, services, reporter } = ctx;
 
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
 
@@ -50,12 +50,23 @@ export class PullFromRegistryExecutor implements INodeExecutor {
             const msg = error instanceof Error ? error.message.toLowerCase() : '';
             if (msg.includes('already') || msg.includes('existe')) {
                 await logger.info(nodeId, `Image already exists locally: ${fullImageName}`);
+                await reporter.reportSummary(nodeId, {
+                    key: 'alreadyLocal',
+                    values: { image: fullImageName },
+                    tone: 'warning',
+                });
                 return { output: { imageName: fullImageName }, skipped: true };
             }
             throw new Error(`Failed to pull image: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
 
         await logger.info(nodeId, `Image pulled successfully: ${fullImageName}`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'pulled',
+            values: { image: fullImageName },
+            tone: 'positive',
+        });
 
         return {
             output: {

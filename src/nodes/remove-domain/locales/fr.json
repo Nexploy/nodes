@@ -2,7 +2,11 @@
   "nodes": {
     "remove-domain": {
       "name": "Supprimer un domaine",
-      "description": "Supprimer un domaine du dépôt"
+      "description": "Supprimer un domaine du dépôt",
+      "summary": {
+        "removed": "{host} supprimé",
+        "notFound": "{host} introuvable"
+      }
     }
   },
   "config": {

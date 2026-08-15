@@ -12,7 +12,7 @@ export class DeleteContainerExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof deleteContainerConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const { containerId, force } = nodeConfig;
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
@@ -34,6 +34,11 @@ export class DeleteContainerExecutor implements INodeExecutor {
         }
 
         await logger.info(nodeId, `Container deleted: ${containerId}`);
+        await reporter.reportSummary(nodeId, {
+            key: 'deleted',
+            values: { container: String(containerId).slice(0, 12) },
+            tone: 'positive',
+        });
         return { output: {} };
     }
 }

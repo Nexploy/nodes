@@ -2,7 +2,10 @@
   "nodes": {
     "prune-images": {
       "name": "Nettoyer les images",
-      "description": "Supprime les images Docker inutilisées pour libérer de l'espace disque"
+      "description": "Supprime les images Docker inutilisées pour libérer de l'espace disque",
+      "summary": {
+        "pruned": "{count} images · {size} Mo"
+      }
     }
   },
   "config": {

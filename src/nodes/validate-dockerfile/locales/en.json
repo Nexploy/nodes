@@ -2,7 +2,10 @@
   "nodes": {
     "validate-dockerfile": {
       "name": "Validate Dockerfile",
-      "description": "Check that the Dockerfile exists and is readable"
+      "description": "Check that the Dockerfile exists and is readable",
+      "summary": {
+        "valid": "{file} · valid"
+      }
     }
   }
 }

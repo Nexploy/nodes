@@ -2,7 +2,10 @@
   "nodes": {
     "restart-container": {
       "name": "Restart Container",
-      "description": "Restart a Docker container"
+      "description": "Restart a Docker container",
+      "summary": {
+        "restarted": "{container} restarted"
+      }
     }
   }
 }

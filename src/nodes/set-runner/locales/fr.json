@@ -2,7 +2,14 @@
   "nodes": {
     "set-runner": {
       "name": "Runner de build",
-      "description": "Envoie le travail de build de tous les nœuds en aval vers un runner distant plutôt que sur ce serveur"
+      "description": "Envoie le travail de build de tous les nœuds en aval vers un runner distant plutôt que sur ce serveur",
+      "steps": {
+        "checkAvailability": "Vérification de {runner}"
+      },
+      "summary": {
+        "selected": "{runner}",
+        "fallbackToLocal": "{runner} indisponible · build local"
+      }
     }
   }
 }

@@ -2,7 +2,10 @@
   "nodes": {
     "remove-container": {
       "name": "Rimuovi container",
-      "description": "Rimuove un container Docker"
+      "description": "Rimuove un container Docker",
+      "summary": {
+        "removed": "{container} rimosso"
+      }
     }
   }
 }

@@ -2,7 +2,14 @@
   "nodes": {
     "set-runner": {
       "name": "Runner de compilación",
-      "description": "Envía el trabajo de compilación de todos los nodos posteriores a un runner remoto en lugar de a este servidor"
+      "description": "Envía el trabajo de compilación de todos los nodos posteriores a un runner remoto en lugar de a este servidor",
+      "steps": {
+        "checkAvailability": "Comprobando {runner}"
+      },
+      "summary": {
+        "selected": "{runner}",
+        "fallbackToLocal": "{runner} no disponible · compilación local"
+      }
     }
   }
 }

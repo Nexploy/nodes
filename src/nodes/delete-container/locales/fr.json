@@ -2,7 +2,10 @@
   "nodes": {
     "delete-container": {
       "name": "Détruire un conteneur",
-      "description": "Détruit un conteneur, avec suppression forcée et de ses volumes en option"
+      "description": "Détruit un conteneur, avec suppression forcée et de ses volumes en option",
+      "summary": {
+        "deleted": "{container} supprimé"
+      }
     }
   }
 }

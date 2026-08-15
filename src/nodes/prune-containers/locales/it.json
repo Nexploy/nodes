@@ -2,7 +2,10 @@
   "nodes": {
     "prune-containers": {
       "name": "Elimina i container inutilizzati",
-      "description": "Rimuove tutti i container arrestati per liberare spazio su disco"
+      "description": "Rimuove tutti i container arrestati per liberare spazio su disco",
+      "summary": {
+        "pruned": "{count} container · {size} MB"
+      }
     }
   }
 }

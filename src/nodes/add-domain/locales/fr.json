@@ -2,7 +2,10 @@
   "nodes": {
     "add-domain": {
       "name": "Ajouter un domaine",
-      "description": "Ajouter un domaine au dépôt"
+      "description": "Ajouter un domaine au dépôt",
+      "summary": {
+        "configured": "{host}:{port}"
+      }
     }
   },
   "config": {

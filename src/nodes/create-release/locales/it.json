@@ -2,7 +2,10 @@
   "nodes": {
     "create-release": {
       "name": "Crea release",
-      "description": "Crea una nuova release su GitHub o GitLab"
+      "description": "Crea una nuova release su GitHub o GitLab",
+      "summary": {
+        "created": "{tag} pubblicata"
+      }
     }
   },
   "config": {

@@ -2,7 +2,10 @@
   "nodes": {
     "add-domain": {
       "name": "Aggiungi dominio",
-      "description": "Aggiunge un dominio al repository"
+      "description": "Aggiunge un dominio al repository",
+      "summary": {
+        "configured": "{host}:{port}"
+      }
     }
   },
   "config": {

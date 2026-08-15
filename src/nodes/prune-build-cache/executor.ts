@@ -29,7 +29,7 @@ export class PruneBuildCacheExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<z.infer<typeof pruneBuildCacheConfigSchema>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const all = nodeConfig.all ?? false;
         const filter = nodeConfig.filter;
@@ -57,6 +57,12 @@ export class PruneBuildCacheExecutor implements INodeExecutor {
 
             const mb = (result.reclaimedSpace / 1024 / 1024).toFixed(2);
             await logger.info(nodeId, `Pruned ${result.deletedCaches} build cache entries, reclaimed ${mb} MB`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'pruned',
+                values: { count: result.deletedCaches, size: mb },
+                tone: result.deletedCaches > 0 ? 'positive' : 'neutral',
+            });
 
             return {
                 output: {

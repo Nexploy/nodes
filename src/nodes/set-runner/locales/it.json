@@ -2,7 +2,14 @@
   "nodes": {
     "set-runner": {
       "name": "Runner di build",
-      "description": "Invia il lavoro di build di tutti i nodi successivi a un runner remoto invece che a questo server"
+      "description": "Invia il lavoro di build di tutti i nodi successivi a un runner remoto invece che a questo server",
+      "steps": {
+        "checkAvailability": "Verifica di {runner}"
+      },
+      "summary": {
+        "selected": "{runner}",
+        "fallbackToLocal": "{runner} non disponibile · build locale"
+      }
     }
   }
 }

@@ -2,7 +2,14 @@
   "nodes": {
     "create-container": {
       "name": "Create Container",
-      "description": "Create and start a Docker container from an image"
+      "description": "Create and start a Docker container from an image",
+      "steps": {
+        "resolveEnv": "Resolving environment",
+        "createContainer": "Creating from {image}"
+      },
+      "summary": {
+        "created": "{container} · {ports} ports"
+      }
     }
   },
   "config": {

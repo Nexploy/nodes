@@ -2,7 +2,10 @@
   "nodes": {
     "compose-up": {
       "name": "Compose Up",
-      "description": "Démarrer la stack Compose construite au préalable"
+      "description": "Démarrer la stack Compose construite au préalable",
+      "summary": {
+        "started": "{project} · {containers} conteneurs"
+      }
     }
   },
   "config": {

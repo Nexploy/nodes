@@ -11,7 +11,7 @@ export class CreateReleaseExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof createReleaseConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, buildConfig, allOutputs, logger, abortSignal, edges, services } = ctx;
+        const { nodeId, nodeConfig, buildConfig, allOutputs, logger, abortSignal, edges, services, reporter } = ctx;
 
         const tagName =
             nodeConfig.tagName || getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'tagName') || '';
@@ -40,6 +40,12 @@ export class CreateReleaseExecutor implements INodeExecutor {
         });
 
         await logger.info(nodeId, `Release created: ${releaseUrl}`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'created',
+            values: { tag: String(tagName) },
+            tone: 'positive',
+        });
 
         return { output: { releaseId, releaseUrl, tagName } };
     }

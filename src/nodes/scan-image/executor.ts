@@ -8,7 +8,7 @@ export class ScanImageExecutor implements INodeExecutor {
     readonly configSchema = scanImageConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof scanImageConfigSchema>>): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, buildId, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, buildId, edges, reporter } = ctx;
 
         const image = nodeConfig.image;
         const severity = nodeConfig.severity;
@@ -55,6 +55,12 @@ export class ScanImageExecutor implements INodeExecutor {
                     `Image ${image} has ${result.vulnerabilities} ${severity}+ vulnerabilities (CRITICAL: ${result.critical}, HIGH: ${result.high})`,
                 );
             }
+
+            await reporter.reportSummary(nodeId, {
+                key: result.vulnerabilities > 0 ? 'vulnerabilitiesFound' : 'clean',
+                values: { total: result.vulnerabilities, critical: result.critical, high: result.high },
+                tone: result.vulnerabilities > 0 ? 'warning' : 'positive',
+            });
 
             return {
                 output: {

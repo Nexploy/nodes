@@ -2,7 +2,10 @@
   "nodes": {
     "restart-container": {
       "name": "Riavvia container",
-      "description": "Riavvia un container Docker"
+      "description": "Riavvia un container Docker",
+      "summary": {
+        "restarted": "{container} riavviato"
+      }
     }
   }
 }

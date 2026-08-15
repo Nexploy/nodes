@@ -2,7 +2,11 @@
   "nodes": {
     "cache-save": {
       "name": "Salva cache",
-      "description": "Salva una directory della directory di lavoro in una cache su volume Docker"
+      "description": "Salva una directory della directory di lavoro in una cache su volume Docker",
+      "summary": {
+        "saved": "Salvato · {size} MB",
+        "failed": "Salvataggio fallito"
+      }
     }
   },
   "config": {

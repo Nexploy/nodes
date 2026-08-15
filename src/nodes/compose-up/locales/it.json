@@ -2,7 +2,10 @@
   "nodes": {
     "compose-up": {
       "name": "Avvia Compose",
-      "description": "Avvia lo stack Compose costruito in precedenza"
+      "description": "Avvia lo stack Compose costruito in precedenza",
+      "summary": {
+        "started": "{project} · {containers} container"
+      }
     }
   },
   "config": {

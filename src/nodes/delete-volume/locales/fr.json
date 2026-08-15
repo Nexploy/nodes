@@ -2,7 +2,11 @@
   "nodes": {
     "delete-volume": {
       "name": "Supprimer un volume",
-      "description": "Supprime un volume Docker par nom"
+      "description": "Supprime un volume Docker par nom",
+      "summary": {
+        "deleted": "{volume} supprimé",
+        "notFound": "{volume} introuvable"
+      }
     }
   }
 }

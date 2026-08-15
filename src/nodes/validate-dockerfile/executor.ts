@@ -11,7 +11,7 @@ export class ValidateDockerfileExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<z.infer<typeof validateDockerfileConfigSchema>>,
     ): Promise<NodeExecutionResult> {
-        const { allOutputs, logger, nodeId, nodeConfig, edges, services } = ctx;
+        const { allOutputs, logger, nodeId, nodeConfig, edges, services, reporter } = ctx;
         const gitService = createGitService(services);
 
         const workDir = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'workDir');
@@ -27,6 +27,12 @@ export class ValidateDockerfileExecutor implements INodeExecutor {
         try {
             await gitService.validateDockerfile(workDir, dockerfilePath);
             await logger.info(nodeId, `Dockerfile validated: ${dockerfilePath}`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'valid',
+                values: { file: String(dockerfilePath) },
+                tone: 'positive',
+            });
 
             return {
                 output: { workDir, dockerfilePath },

@@ -2,7 +2,10 @@
   "nodes": {
     "scale-service": {
       "name": "Escalar servicio",
-      "description": "Cambia el número de réplicas de un servicio de Swarm"
+      "description": "Cambia el número de réplicas de un servicio de Swarm",
+      "summary": {
+        "scaled": "{service} · {replicas} réplicas"
+      }
     }
   },
   "config": {

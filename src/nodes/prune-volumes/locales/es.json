@@ -2,7 +2,10 @@
   "nodes": {
     "prune-volumes": {
       "name": "Eliminar los volúmenes sin usar",
-      "description": "Elimina los volúmenes Docker sin usar para liberar espacio en disco"
+      "description": "Elimina los volúmenes Docker sin usar para liberar espacio en disco",
+      "summary": {
+        "pruned": "{count} volúmenes · {size} MB"
+      }
     }
   },
   "config": {

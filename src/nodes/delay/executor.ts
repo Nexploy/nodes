@@ -7,7 +7,7 @@ export class DelayExecutor implements INodeExecutor {
     readonly configSchema = delayConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof delayConfigSchema>>): Promise<NodeExecutionResult> {
-        const { nodeConfig, logger, nodeId, abortSignal } = ctx;
+        const { nodeConfig, logger, nodeId, abortSignal, reporter } = ctx;
 
         const seconds = nodeConfig.seconds;
 
@@ -22,6 +22,7 @@ export class DelayExecutor implements INodeExecutor {
         });
 
         await logger.info(nodeId, `Delay of ${seconds}s complete`);
+        await reporter.reportSummary(nodeId, { key: 'waited', values: { seconds } });
         return { output: { delayed: seconds } };
     }
 }

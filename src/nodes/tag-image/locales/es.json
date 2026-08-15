@@ -2,7 +2,10 @@
   "nodes": {
     "tag-image": {
       "name": "Etiquetar imagen",
-      "description": "Añade una etiqueta a una imagen Docker"
+      "description": "Añade una etiqueta a una imagen Docker",
+      "summary": {
+        "tagged": "{image}"
+      }
     }
   },
   "config": {

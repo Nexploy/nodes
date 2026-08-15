@@ -2,7 +2,10 @@
   "nodes": {
     "git-clone-extra": {
       "name": "Clonado Git adicional",
-      "description": "Clona un repositorio adicional en un subdirectorio del directorio de trabajo"
+      "description": "Clona un repositorio adicional en un subdirectorio del directorio de trabajo",
+      "summary": {
+        "cloned": "{branch} clonado"
+      }
     }
   },
   "config": {

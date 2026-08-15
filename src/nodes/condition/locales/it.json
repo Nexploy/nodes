@@ -4,7 +4,11 @@
       "name": "Condizione",
       "description": "Blocca la pipeline in base a un valore dell'output di un nodo precedente",
       "outputTrue": "Vero",
-      "outputFalse": "Falso"
+      "outputFalse": "Falso",
+      "summary": {
+        "passed": "Superata · {inputs} ingressi",
+        "notPassed": "Non superata · {inputs} ingressi"
+      }
     }
   },
   "config": {

@@ -1,5 +1,6 @@
 import { getFromClosestAncestor } from '@nexploy/nodes/core/helpers';
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
+import { createProgressTracker } from '@nexploy/nodes/core/nodeProgress';
 import { startContainerConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 import { ResolveRefs } from '@nexploy/nodes/core/schemas/nodeFieldRef.schema';
 import { HTTPError } from 'ky';
@@ -12,12 +13,14 @@ export class StartContainerExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof startContainerConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
+        const tracker = createProgressTracker(reporter, nodeId, 1);
 
         const containerId = nodeConfig.containerId;
         const environmentId = getFromClosestAncestor<string>(allOutputs, edges, nodeId, 'environmentId');
         const opts = { signal: abortSignal, environmentId };
 
+        await tracker.step('start', { container: containerId.slice(0, 12) });
         await logger.info(nodeId, `Starting container: ${containerId}`);
 
         try {
@@ -25,12 +28,22 @@ export class StartContainerExecutor implements INodeExecutor {
         } catch (error) {
             if (error instanceof HTTPError && error.response.status === 409) {
                 await logger.warn(nodeId, error.message);
+                await reporter.reportSummary(nodeId, {
+                    key: 'alreadyRunning',
+                    values: { container: containerId.slice(0, 12) },
+                    tone: 'warning',
+                });
                 return { output: { containerId } };
             }
             throw error;
         }
 
         await logger.info(nodeId, `Container started: ${containerId}`);
+        await reporter.reportSummary(nodeId, {
+            key: 'started',
+            values: { container: containerId.slice(0, 12) },
+            tone: 'positive',
+        });
         return { output: { containerId } };
     }
 }

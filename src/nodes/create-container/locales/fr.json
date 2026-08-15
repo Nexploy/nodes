@@ -2,7 +2,14 @@
   "nodes": {
     "create-container": {
       "name": "Créer un conteneur",
-      "description": "Créer et démarrer un conteneur Docker à partir d'une image"
+      "description": "Créer et démarrer un conteneur Docker à partir d'une image",
+      "steps": {
+        "resolveEnv": "Résolution de l'environnement",
+        "createContainer": "Création depuis {image}"
+      },
+      "summary": {
+        "created": "{container} · {ports} ports"
+      }
     }
   },
   "config": {

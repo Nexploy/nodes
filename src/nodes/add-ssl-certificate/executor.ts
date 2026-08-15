@@ -9,7 +9,7 @@ export class AddSslCertificateExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<z.infer<typeof addSslCertificateConfigSchema>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, buildConfig, logger, abortSignal, services } = ctx;
+        const { nodeId, nodeConfig, buildConfig, logger, abortSignal, services, reporter } = ctx;
         const { certType, name, domain, email, agreedToTos, certificate, privateKey } = nodeConfig;
 
         await logger.info(nodeId, `Adding SSL certificate: ${name} (${certType})`);
@@ -35,6 +35,12 @@ export class AddSslCertificateExecutor implements INodeExecutor {
             certificateId = cert.id;
             await logger.info(nodeId, `Custom certificate created for domain: ${domain}`);
         }
+
+        await reporter.reportSummary(nodeId, {
+            key: certType === 'LETS_ENCRYPT' ? 'letsEncrypt' : 'custom',
+            values: { domain: String(domain) },
+            tone: 'positive',
+        });
 
         return { output: { certificateId, domain } };
     }

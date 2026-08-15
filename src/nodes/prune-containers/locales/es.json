@@ -2,7 +2,10 @@
   "nodes": {
     "prune-containers": {
       "name": "Eliminar los contenedores sin usar",
-      "description": "Elimina todos los contenedores detenidos para liberar espacio en disco"
+      "description": "Elimina todos los contenedores detenidos para liberar espacio en disco",
+      "summary": {
+        "pruned": "{count} contenedores · {size} MB"
+      }
     }
   }
 }

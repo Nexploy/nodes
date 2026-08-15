@@ -12,7 +12,7 @@ export class WaitForHealthExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof waitForHealthConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const containerId = nodeConfig.containerId;
         const timeout = nodeConfig.timeout;
@@ -22,9 +22,19 @@ export class WaitForHealthExecutor implements INodeExecutor {
         await logger.info(nodeId, `Waiting for container "${containerId}" to be healthy (timeout: ${timeout}s)`);
 
         const deadline = Date.now() + timeout * 1000;
+        const maxAttempts = Math.max(1, Math.ceil(timeout / interval));
+        let attempt = 0;
 
         while (Date.now() < deadline) {
             if (abortSignal.aborted) throw new Error('Aborted');
+
+            attempt += 1;
+            await reporter.reportProgress(nodeId, {
+                current: Math.min(attempt, maxAttempts),
+                total: maxAttempts,
+                labelKey: 'probe',
+                labelValues: { container: containerId.slice(0, 12) },
+            });
 
             try {
                 const result = await ctx.services.docker
@@ -39,11 +49,21 @@ export class WaitForHealthExecutor implements INodeExecutor {
 
                 if (!healthStatus && runningStatus === 'running') {
                     await logger.info(nodeId, `Container "${containerId}" is running (no healthcheck configured)`);
+                    await reporter.reportSummary(nodeId, {
+                        key: 'runningNoHealthcheck',
+                        values: { attempts: attempt },
+                        tone: 'warning',
+                    });
                     return { output: { containerId, healthy: true } };
                 }
 
                 if (healthStatus === 'healthy') {
                     await logger.info(nodeId, `Container "${containerId}" is healthy`);
+                    await reporter.reportSummary(nodeId, {
+                        key: 'healthy',
+                        values: { attempts: attempt },
+                        tone: 'positive',
+                    });
                     return { output: { containerId, healthy: true } };
                 }
 

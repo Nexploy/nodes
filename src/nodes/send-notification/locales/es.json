@@ -2,7 +2,11 @@
   "nodes": {
     "send-notification": {
       "name": "Enviar notificación",
-      "description": "Envía una notificación mediante webhook"
+      "description": "Envía una notificación mediante webhook",
+      "summary": {
+        "sent": "Notificación enviada",
+        "notTriggered": "No activada"
+      }
     }
   },
   "config": {

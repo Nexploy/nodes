@@ -6,7 +6,7 @@ export class SaveVersionExecutor implements INodeExecutor {
     readonly isAttachNode = true;
 
     async execute(ctx: NodeExecutionContext): Promise<NodeExecutionResult> {
-        const { buildConfig, logger, nodeId, inputNodes, allOutputs, edges, services } = ctx;
+        const { buildConfig, logger, nodeId, inputNodes, allOutputs, edges, services, reporter } = ctx;
 
         await logger.info(nodeId, 'Saving version...');
 
@@ -45,6 +45,12 @@ export class SaveVersionExecutor implements INodeExecutor {
         });
 
         await logger.info(nodeId, `Version v${versionNumber} saved`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'saved',
+            values: { version: String(versionNumber) },
+            tone: 'positive',
+        });
 
         return {
             output: { versionNumber },

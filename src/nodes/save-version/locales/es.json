@@ -2,7 +2,10 @@
   "nodes": {
     "save-version": {
       "name": "Guardar versión",
-      "description": "Guarda la build actual como una nueva versión"
+      "description": "Guarda la build actual como una nueva versión",
+      "summary": {
+        "saved": "v{version} guardada"
+      }
     }
   },
   "config": {

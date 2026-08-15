@@ -2,7 +2,12 @@
   "nodes": {
     "cache-restore": {
       "name": "Restaurar caché",
-      "description": "Restaura una caché de build desde un volumen Docker en el directorio de trabajo"
+      "description": "Restaura una caché de build desde un volumen Docker en el directorio de trabajo",
+      "summary": {
+        "restored": "Restaurado · {size} MB",
+        "miss": "Sin caché · empezando de cero",
+        "failed": "Fallo al restaurar"
+      }
     }
   },
   "config": {

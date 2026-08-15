@@ -2,7 +2,14 @@
   "nodes": {
     "wait-for-health": {
       "name": "Attendi l'integrità",
-      "description": "Attende che un container Docker superi il suo healthcheck"
+      "description": "Attende che un container Docker superi il suo healthcheck",
+      "steps": {
+        "probe": "Sondaggio di {container}"
+      },
+      "summary": {
+        "healthy": "Integro · {attempts} controlli",
+        "runningNoHealthcheck": "In esecuzione · nessun healthcheck"
+      }
     }
   }
 }

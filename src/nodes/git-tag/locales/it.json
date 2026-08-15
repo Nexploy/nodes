@@ -2,7 +2,11 @@
   "nodes": {
     "git-tag": {
       "name": "Tag Git",
-      "description": "Crea un tag git e lo invia al remote"
+      "description": "Crea un tag git e lo invia al remote",
+      "summary": {
+        "pushed": "{tag} → {remote}",
+        "pushedExisting": "{tag} → {remote} · esisteva già"
+      }
     }
   },
   "config": {

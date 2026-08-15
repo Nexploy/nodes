@@ -11,7 +11,7 @@ export class UpdateCommitStatusExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof updateCommitStatusConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, buildConfig, allOutputs, logger, services } = ctx;
+        const { nodeId, nodeConfig, buildConfig, allOutputs, logger, services, reporter } = ctx;
 
         const { state, context, description } = nodeConfig;
 
@@ -31,6 +31,11 @@ export class UpdateCommitStatusExecutor implements INodeExecutor {
         await services.git.updateCommitStatus(buildConfig, { sha, state, description, context });
 
         await logger.info(nodeId, `Commit status updated to "${state}"`);
+        await reporter.reportSummary(nodeId, {
+            key: 'updated',
+            values: { state: String(state) },
+            tone: 'positive',
+        });
         return { output: { provider, state, sha, context, description } };
     }
 }

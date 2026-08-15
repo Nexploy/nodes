@@ -11,7 +11,7 @@ export class CacheRestoreExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof cacheRestoreConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const volumeName = nodeConfig.volumeName;
         const cachePath = nodeConfig.cachePath;
@@ -47,16 +47,17 @@ export class CacheRestoreExecutor implements INodeExecutor {
             if (result.restored) {
                 const mb = ((result.sizeBytes ?? 0) / 1024 / 1024).toFixed(2);
                 await logger.info(nodeId, `Cache restored (${mb} MB)`);
+                await reporter.reportSummary(nodeId, { key: 'restored', values: { size: mb }, tone: 'positive' });
             } else {
                 await logger.info(nodeId, 'No cache found — starting fresh');
+                await reporter.reportSummary(nodeId, { key: 'miss', tone: 'warning' });
             }
 
             return { output: {} };
         } catch (error) {
-            await logger.warn(
-                nodeId,
-                `Cache restore failed (continuing): ${error instanceof Error ? error.message : 'Unknown error'}`,
-            );
+            const message = error instanceof Error ? error.message : 'Unknown error';
+            await logger.warn(nodeId, `Cache restore failed (continuing): ${message}`);
+            await reporter.reportSummary(nodeId, { key: 'failed', text: message, tone: 'warning' });
             return { output: { error: true }, skipped: false };
         }
     }

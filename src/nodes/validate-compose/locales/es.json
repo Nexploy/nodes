@@ -2,7 +2,14 @@
   "nodes": {
     "validate-compose": {
       "name": "Validar Compose",
-      "description": "Comprueba la sintaxis del archivo de Docker Compose"
+      "description": "Comprueba la sintaxis del archivo de Docker Compose",
+      "steps": {
+        "locateFile": "Buscando {file}",
+        "checkSyntax": "Comprobando la sintaxis"
+      },
+      "summary": {
+        "valid": "{file} · válido"
+      }
     }
   },
   "config": {

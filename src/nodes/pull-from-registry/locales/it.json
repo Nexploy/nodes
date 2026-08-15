@@ -2,7 +2,11 @@
   "nodes": {
     "pull-from-registry": {
       "name": "Scarica un'immagine",
-      "description": "Scarica un'immagine Docker da Docker Hub o da un registry privato"
+      "description": "Scarica un'immagine Docker da Docker Hub o da un registry privato",
+      "summary": {
+        "pulled": "{image}",
+        "alreadyLocal": "{image} · già in locale"
+      }
     }
   },
   "config": {

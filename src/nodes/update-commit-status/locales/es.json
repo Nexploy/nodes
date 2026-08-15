@@ -2,7 +2,10 @@
   "nodes": {
     "update-commit-status": {
       "name": "Actualizar el estado del commit",
-      "description": "Actualiza el estado de un commit en GitHub o GitLab"
+      "description": "Actualiza el estado de un commit en GitHub o GitLab",
+      "summary": {
+        "updated": "Estado: {state}"
+      }
     }
   },
   "config": {

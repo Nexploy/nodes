@@ -10,7 +10,7 @@ export class WaitForPortExecutor implements INodeExecutor {
     readonly configSchema = waitForPortConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof waitForPortConfigSchema>>): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const containerId = nodeConfig.containerId as string;
         const port = nodeConfig.port as number;
@@ -45,6 +45,11 @@ export class WaitForPortExecutor implements INodeExecutor {
             const open = await checkPort(host, hostPort, Math.min(interval * 1000, 5000));
             if (open) {
                 await logger.info(nodeId, `Port ${containerName}:${port} is open`);
+                await reporter.reportSummary(nodeId, {
+                    key: 'open',
+                    values: { port: Number(port) },
+                    tone: 'positive',
+                });
                 return { output: { containerId, port, open: true } };
             }
 

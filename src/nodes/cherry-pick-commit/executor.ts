@@ -12,7 +12,7 @@ export class CherryPickCommitExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof cherryPickCommitConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, allOutputs, logger, abortSignal, edges, services } = ctx;
+        const { nodeId, nodeConfig, allOutputs, logger, abortSignal, edges, services, reporter } = ctx;
         const gitService = createGitService(services);
 
         const { targetBranch, noCommit, remote } = nodeConfig;
@@ -31,6 +31,12 @@ export class CherryPickCommitExecutor implements INodeExecutor {
         await gitService.cherryPick(workDir, commitHash, { noCommit, remote, targetBranch });
 
         await logger.info(nodeId, `Cherry-pick of ${commitHash} applied successfully`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'applied',
+            values: { commit: String(commitHash).substring(0, 7) },
+            tone: 'positive',
+        });
 
         return { output: { workDir, commitHash } };
     }

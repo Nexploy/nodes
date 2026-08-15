@@ -11,7 +11,7 @@ export class UpdateServiceExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof updateServiceConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const serviceId = nodeConfig.serviceId;
         const serviceName = nodeConfig.serviceName;
@@ -36,6 +36,12 @@ export class UpdateServiceExecutor implements INodeExecutor {
                 .json();
 
             await logger.info(nodeId, `Service "${serviceName}" updated to ${image}`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'updated',
+                values: { service: String(serviceName), image: String(image) },
+                tone: 'positive',
+            });
 
             return {
                 output: { serviceName, image },

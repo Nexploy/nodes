@@ -2,7 +2,14 @@
   "nodes": {
     "create-volume": {
       "name": "Crear volumen",
-      "description": "Crea un volumen Docker"
+      "description": "Crea un volumen Docker",
+      "steps": {
+        "create": "Creando {name}"
+      },
+      "summary": {
+        "created": "{name}",
+        "alreadyExists": "{name} ya existe"
+      }
     }
   },
   "config": {

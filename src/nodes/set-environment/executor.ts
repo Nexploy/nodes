@@ -7,11 +7,17 @@ export class SetEnvironmentExecutor implements INodeExecutor {
     readonly configSchema = setEnvironmentConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof setEnvironmentConfigSchema>>): Promise<NodeExecutionResult> {
-        const { nodeConfig, logger, nodeId } = ctx;
+        const { nodeConfig, logger, nodeId, reporter } = ctx;
 
         const environmentId = nodeConfig.environmentId;
 
         await logger.info(nodeId, `Environment set: ${environmentId}`);
+
+        await reporter.reportSummary(nodeId, {
+            key: 'selected',
+            values: { environment: String(environmentId) },
+            tone: 'positive',
+        });
 
         return {
             output: { environmentId },

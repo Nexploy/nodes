@@ -12,7 +12,7 @@ export class MergeBranchExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof mergeBranchConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, allOutputs, logger, abortSignal, edges, services } = ctx;
+        const { nodeId, nodeConfig, allOutputs, logger, abortSignal, edges, services, reporter } = ctx;
         const gitService = createGitService(services);
 
         const { targetBranch, strategy, message, remote, push } = nodeConfig;
@@ -40,6 +40,12 @@ export class MergeBranchExecutor implements INodeExecutor {
         });
 
         await logger.info(nodeId, `Merge complete${push ? ` — pushed to ${remote}/${mergedInto}` : ''}`);
+
+        await reporter.reportSummary(nodeId, {
+            key: push ? 'mergedAndPushed' : 'merged',
+            values: { source: String(sourceBranch), target: String(mergedInto) },
+            tone: 'positive',
+        });
 
         return { output: { workDir, targetBranch: mergedInto, sourceBranch } };
     }

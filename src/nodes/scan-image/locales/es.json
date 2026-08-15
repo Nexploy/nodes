@@ -2,7 +2,11 @@
   "nodes": {
     "scan-image": {
       "name": "Analizar imagen",
-      "description": "Realiza un análisis de seguridad de una imagen Docker con Trivy"
+      "description": "Realiza un análisis de seguridad de una imagen Docker con Trivy",
+      "summary": {
+        "clean": "Sin vulnerabilidades",
+        "vulnerabilitiesFound": "{total} vulns · {critical} críticas · {high} altas"
+      }
     }
   },
   "config": {

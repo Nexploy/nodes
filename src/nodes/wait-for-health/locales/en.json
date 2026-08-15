@@ -2,7 +2,14 @@
   "nodes": {
     "wait-for-health": {
       "name": "Wait for Health",
-      "description": "Wait until a Docker container passes its healthcheck"
+      "description": "Wait until a Docker container passes its healthcheck",
+      "steps": {
+        "probe": "Probing {container}"
+      },
+      "summary": {
+        "healthy": "Healthy · {attempts} checks",
+        "runningNoHealthcheck": "Running · no healthcheck"
+      }
     }
   }
 }

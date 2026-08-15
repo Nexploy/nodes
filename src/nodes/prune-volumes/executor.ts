@@ -8,7 +8,7 @@ export class PruneVolumesExecutor implements INodeExecutor {
     readonly configSchema = pruneVolumesConfigSchema;
 
     async execute(ctx: NodeExecutionContext<z.infer<typeof pruneVolumesConfigSchema>>): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const all = nodeConfig.all ?? false;
         const filter = nodeConfig.filter;
@@ -31,6 +31,12 @@ export class PruneVolumesExecutor implements INodeExecutor {
 
             const mb = (result.reclaimedSpace / 1024 / 1024).toFixed(2);
             await logger.info(nodeId, `Pruned ${result.removedVolumes} volumes, reclaimed ${mb} MB`);
+
+            await reporter.reportSummary(nodeId, {
+                key: 'pruned',
+                values: { count: result.removedVolumes, size: mb },
+                tone: result.removedVolumes > 0 ? 'positive' : 'neutral',
+            });
 
             return {
                 output: {

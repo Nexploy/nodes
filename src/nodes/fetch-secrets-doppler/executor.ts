@@ -12,7 +12,7 @@ export class FetchSecretsDopplerExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof fetchSecretsDopplerConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges } = ctx;
+        const { nodeConfig, allOutputs, logger, nodeId, abortSignal, edges, reporter } = ctx;
 
         const { serviceToken, project, config } = nodeConfig;
 
@@ -42,6 +42,11 @@ export class FetchSecretsDopplerExecutor implements INodeExecutor {
         const envVariables = Object.entries(merged).map(([key, value]) => ({ key, value }));
 
         await logger.info(nodeId, `Injecting ${envVariables.length} secret(s) as environment variables`);
+        await reporter.reportSummary(nodeId, {
+            key: 'injected',
+            values: { count: envVariables.length },
+            tone: 'positive',
+        });
         return { output: { envVariables, secretCount: count } };
     }
 }

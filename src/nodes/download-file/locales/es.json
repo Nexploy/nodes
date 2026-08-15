@@ -2,7 +2,10 @@
   "nodes": {
     "download-file": {
       "name": "Descargar archivo",
-      "description": "Descarga un archivo desde una URL al directorio de trabajo"
+      "description": "Descarga un archivo desde una URL al directorio de trabajo",
+      "summary": {
+        "downloaded": "{file} · {size} KB"
+      }
     }
   },
   "config": {
