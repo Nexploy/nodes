@@ -48,6 +48,8 @@ import { PushToRegistryConfig } from '../push-to-registry/Config';
 import { RemoveContainerConfig } from '../remove-container/Config';
 import { RemoveDomainConfig } from '../remove-domain/Config';
 import { RestartContainerConfig } from '../restart-container/Config';
+import { ResolveLatestTagConfig } from '../resolve-latest-tag/Config';
+import { RunScriptConfig } from '../run-script/Config';
 import { RunCommandInContainerConfig } from '../run-command-in-container/Config';
 import { SaveVersionConfig } from '../save-version/Config';
 import { ScaleServiceConfig } from '../scale-service/Config';
@@ -113,6 +115,8 @@ const configPanels: Record<string, ComponentType> = {
     'remove-container': RemoveContainerConfig,
     'remove-domain': RemoveDomainConfig,
     'restart-container': RestartContainerConfig,
+    'resolve-latest-tag': ResolveLatestTagConfig,
+    'run-script': RunScriptConfig,
     'run-command-in-container': RunCommandInContainerConfig,
     'save-version': SaveVersionConfig,
     'scale-service': ScaleServiceConfig,

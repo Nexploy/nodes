@@ -1,0 +1,24 @@
+{
+  "nodes": {
+    "run-script": {
+      "name": "Esegui uno script",
+      "description": "Esegue un comando di shell nel repository clonato",
+      "steps": {
+        "running": "Esecuzione in {directory}"
+      },
+      "summary": {
+        "succeeded": "Eseguito in {directory}",
+        "failedButContinued": "Codice di uscita {exitCode} · proseguito",
+        "timedOut": "Scaduto dopo {timeout} s"
+      }
+    }
+  },
+  "config": {
+    "runScriptCommand": "Comando",
+    "runScriptCommandPlaceholder": "./generate-secrets.sh --domain example.com",
+    "runScriptWorkingDirectory": "Directory di lavoro",
+    "runScriptWorkingDirectoryPlaceholder": "infra/selfhost",
+    "runScriptTimeout": "Tempo massimo (secondi)",
+    "runScriptContinueOnError": "Continuare se il comando fallisce"
+  }
+}

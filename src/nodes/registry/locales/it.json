@@ -297,6 +297,8 @@
     "runnerId": "ID del runner",
     "desc_runnerId": "ID del runner di build selezionato per i nodi successivi",
     "runnerName": "Nome del runner",
-    "desc_runnerName": "Nome del runner di build selezionato per i nodi successivi"
+    "desc_runnerName": "Nome del runner di build selezionato per i nodi successivi",
+    "stdout": "Output standard",
+    "desc_stdout": "Output prodotto dal comando"
   }
 }

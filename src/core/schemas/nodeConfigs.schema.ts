@@ -420,6 +420,19 @@ export const gitTagConfigSchema = z.object({
     remote: z.string().default('origin'),
 });
 
+export const resolveLatestTagConfigSchema = z.object({
+    repoUrl: refable(z.string()).default(''),
+    pattern: z.string().default('v*'),
+    excludePrereleases: z.boolean().default(true),
+});
+
+export const runScriptConfigSchema = z.object({
+    command: refable(z.string().min(1, 'Command is required')).default(''),
+    workingDirectory: refable(optionalRelativePath('Working directory')).default(''),
+    timeoutSeconds: z.number().int().min(1).max(3600).default(600),
+    continueOnError: z.boolean().default(false),
+});
+
 export const gitCloneExtraConfigSchema = z.object({
     repoUrl: httpGitUrl('Repository URL').default(''),
     branch: z.string().default('main'),

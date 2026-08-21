@@ -41,6 +41,8 @@ import pushToRegistryEn from '../push-to-registry/locales/en.json';
 import removeContainerEn from '../remove-container/locales/en.json';
 import removeDomainEn from '../remove-domain/locales/en.json';
 import restartContainerEn from '../restart-container/locales/en.json';
+import resolveLatestTagEn from '../resolve-latest-tag/locales/en.json';
+import runScriptEn from '../run-script/locales/en.json';
 import runCommandInContainerEn from '../run-command-in-container/locales/en.json';
 import saveVersionEn from '../save-version/locales/en.json';
 import scaleServiceEn from '../scale-service/locales/en.json';
@@ -106,6 +108,8 @@ import pushToRegistryFr from '../push-to-registry/locales/fr.json';
 import removeContainerFr from '../remove-container/locales/fr.json';
 import removeDomainFr from '../remove-domain/locales/fr.json';
 import restartContainerFr from '../restart-container/locales/fr.json';
+import resolveLatestTagFr from '../resolve-latest-tag/locales/fr.json';
+import runScriptFr from '../run-script/locales/fr.json';
 import runCommandInContainerFr from '../run-command-in-container/locales/fr.json';
 import saveVersionFr from '../save-version/locales/fr.json';
 import scaleServiceFr from '../scale-service/locales/fr.json';
@@ -171,6 +175,8 @@ import pushToRegistryIt from '../push-to-registry/locales/it.json';
 import removeContainerIt from '../remove-container/locales/it.json';
 import removeDomainIt from '../remove-domain/locales/it.json';
 import restartContainerIt from '../restart-container/locales/it.json';
+import resolveLatestTagIt from '../resolve-latest-tag/locales/it.json';
+import runScriptIt from '../run-script/locales/it.json';
 import runCommandInContainerIt from '../run-command-in-container/locales/it.json';
 import saveVersionIt from '../save-version/locales/it.json';
 import scaleServiceIt from '../scale-service/locales/it.json';
@@ -236,6 +242,8 @@ import pushToRegistryEs from '../push-to-registry/locales/es.json';
 import removeContainerEs from '../remove-container/locales/es.json';
 import removeDomainEs from '../remove-domain/locales/es.json';
 import restartContainerEs from '../restart-container/locales/es.json';
+import resolveLatestTagEs from '../resolve-latest-tag/locales/es.json';
+import runScriptEs from '../run-script/locales/es.json';
 import runCommandInContainerEs from '../run-command-in-container/locales/es.json';
 import saveVersionEs from '../save-version/locales/es.json';
 import scaleServiceEs from '../scale-service/locales/es.json';
@@ -320,6 +328,8 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         removeContainerEn,
         removeDomainEn,
         restartContainerEn,
+        resolveLatestTagEn,
+        runScriptEn,
         runCommandInContainerEn,
         saveVersionEn,
         scaleServiceEn,
@@ -386,6 +396,8 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         removeContainerFr,
         removeDomainFr,
         restartContainerFr,
+        resolveLatestTagFr,
+        runScriptFr,
         runCommandInContainerFr,
         saveVersionFr,
         scaleServiceFr,
@@ -452,6 +464,8 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         removeContainerIt,
         removeDomainIt,
         restartContainerIt,
+        resolveLatestTagIt,
+        runScriptIt,
         runCommandInContainerIt,
         saveVersionIt,
         scaleServiceIt,
@@ -518,6 +532,8 @@ export const builtinNodeMessages: Record<string, MessageTree> = {
         removeContainerEs,
         removeDomainEs,
         restartContainerEs,
+        resolveLatestTagEs,
+        runScriptEs,
         runCommandInContainerEs,
         saveVersionEs,
         scaleServiceEs,

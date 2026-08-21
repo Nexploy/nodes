@@ -297,6 +297,8 @@
     "runnerId": "ID del runner",
     "desc_runnerId": "ID del runner de compilación seleccionado para los nodos posteriores",
     "runnerName": "Nombre del runner",
-    "desc_runnerName": "Nombre del runner de compilación seleccionado para los nodos posteriores"
+    "desc_runnerName": "Nombre del runner de compilación seleccionado para los nodos posteriores",
+    "stdout": "Salida estándar",
+    "desc_stdout": "Salida producida por el comando"
   }
 }

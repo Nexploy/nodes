@@ -41,6 +41,8 @@ import { pushToRegistryExecutor } from '../push-to-registry/executor';
 import { removeContainerExecutor } from '../remove-container/executor';
 import { removeDomainExecutor } from '../remove-domain/executor';
 import { restartContainerExecutor } from '../restart-container/executor';
+import { resolveLatestTagExecutor } from '../resolve-latest-tag/executor';
+import { runScriptExecutor } from '../run-script/executor';
 import { runCommandInContainerExecutor } from '../run-command-in-container/executor';
 import { saveVersionExecutor } from '../save-version/executor';
 import { scaleServiceExecutor } from '../scale-service/executor';
@@ -106,6 +108,8 @@ const executors: INodeExecutor[] = [
     removeContainerExecutor,
     removeDomainExecutor,
     restartContainerExecutor,
+    resolveLatestTagExecutor,
+    runScriptExecutor,
     runCommandInContainerExecutor,
     saveVersionExecutor,
     scaleServiceExecutor,

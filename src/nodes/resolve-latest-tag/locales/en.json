@@ -1,0 +1,21 @@
+{
+  "nodes": {
+    "resolve-latest-tag": {
+      "name": "Resolve Latest Tag",
+      "description": "Resolve the newest tag of a remote repository",
+      "steps": {
+        "listing": "Listing tags",
+        "selecting": "Selecting newest {pattern}"
+      },
+      "summary": {
+        "resolved": "{tag} · {count} candidates"
+      }
+    }
+  },
+  "config": {
+    "resolveTagRepoUrl": "Repository URL",
+    "resolveTagRepoUrlPlaceholder": "Leave empty to use the linked repository",
+    "resolveTagPattern": "Tag pattern",
+    "resolveTagExcludePrereleases": "Ignore pre-releases"
+  }
+}

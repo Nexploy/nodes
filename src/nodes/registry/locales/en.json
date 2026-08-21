@@ -297,6 +297,8 @@
     "runnerId": "Runner ID",
     "desc_runnerId": "ID of the build runner selected for downstream nodes",
     "runnerName": "Runner name",
-    "desc_runnerName": "Name of the build runner selected for downstream nodes"
+    "desc_runnerName": "Name of the build runner selected for downstream nodes",
+    "stdout": "Standard output",
+    "desc_stdout": "Output produced by the command"
   }
 }

@@ -1,0 +1,21 @@
+{
+  "nodes": {
+    "resolve-latest-tag": {
+      "name": "Résoudre le dernier tag",
+      "description": "Résout le tag le plus récent d'un dépôt distant",
+      "steps": {
+        "listing": "Lecture des tags",
+        "selecting": "Sélection du plus récent {pattern}"
+      },
+      "summary": {
+        "resolved": "{tag} · {count} candidats"
+      }
+    }
+  },
+  "config": {
+    "resolveTagRepoUrl": "URL du dépôt",
+    "resolveTagRepoUrlPlaceholder": "Laisser vide pour utiliser le dépôt lié",
+    "resolveTagPattern": "Motif de tag",
+    "resolveTagExcludePrereleases": "Ignorer les pré-versions"
+  }
+}

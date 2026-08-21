@@ -41,6 +41,8 @@ import { pushToRegistryDescriptor } from '../push-to-registry/node';
 import { removeContainerDescriptor } from '../remove-container/node';
 import { removeDomainDescriptor } from '../remove-domain/node';
 import { restartContainerDescriptor } from '../restart-container/node';
+import { resolveLatestTagDescriptor } from '../resolve-latest-tag/node';
+import { runScriptDescriptor } from '../run-script/node';
 import { runCommandInContainerDescriptor } from '../run-command-in-container/node';
 import { saveVersionDescriptor } from '../save-version/node';
 import { scaleServiceDescriptor } from '../scale-service/node';
@@ -106,6 +108,8 @@ export const ALL_NODE_DESCRIPTORS: NodeDescriptor[] = [
     removeContainerDescriptor,
     removeDomainDescriptor,
     restartContainerDescriptor,
+    resolveLatestTagDescriptor,
+    runScriptDescriptor,
     runCommandInContainerDescriptor,
     saveVersionDescriptor,
     scaleServiceDescriptor,
