@@ -2,7 +2,7 @@
   "nodes": {
     "run-script": {
       "name": "Ejecutar un script",
-      "description": "Ejecuta un comando de shell en el repositorio clonado",
+      "description": "Ejecuta un comando de shell sobre el repositorio clonado en un contenedor desechable",
       "steps": {
         "running": "Ejecución en {directory}"
       },
@@ -14,10 +14,13 @@
     }
   },
   "config": {
+    "runScriptImage": "Imagen",
+    "runScriptImagePlaceholder": "alpine:3.22",
+    "runScriptImageDescription": "Imagen Docker en la que se ejecuta el comando. Elija una que ya incluya las herramientas que necesita el script.",
     "runScriptCommand": "Comando",
-    "runScriptCommandPlaceholder": "./generate-secrets.sh --domain example.com",
+    "runScriptCommandPlaceholder": "./scripts/setup.sh --flag value",
     "runScriptWorkingDirectory": "Directorio de trabajo",
-    "runScriptWorkingDirectoryPlaceholder": "infra/selfhost",
+    "runScriptWorkingDirectoryPlaceholder": "path/to/directory",
     "runScriptTimeout": "Tiempo máximo (segundos)",
     "runScriptContinueOnError": "Continuar si el comando falla"
   }

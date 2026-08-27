@@ -173,6 +173,19 @@ export interface DockerBuildService {
         containers: string[];
         composeConfig: string;
     }>;
+
+    runScript(
+        workDir: string,
+        image: string,
+        command: string,
+        workingDirectory: string,
+        envVars: Record<string, string>,
+        timeoutSeconds: number,
+        signal: AbortSignal,
+        onLog: LogWriter,
+        labels?: Record<string, string>,
+        owner?: { uid: number; gid: number },
+    ): Promise<{ exitCode: number; timedOut: boolean }>;
 }
 
 export function createDockerService(docker: DockerApiClient): DockerBuildService {
@@ -281,6 +294,26 @@ export function createDockerService(docker: DockerApiClient): DockerBuildService
                 signal,
                 onLog,
                 environmentId,
+            );
+        },
+
+        runScript(workDir, image, command, workingDirectory, envVars, timeoutSeconds, signal, onLog, labels, owner) {
+            return streamSSERequest(
+                docker,
+                'pipeline/events/stream/run-script',
+                {
+                    workDir,
+                    image,
+                    command,
+                    workingDirectory,
+                    envVars,
+                    timeoutSeconds,
+                    labels,
+                    ownerUid: owner?.uid,
+                    ownerGid: owner?.gid,
+                },
+                signal,
+                onLog,
             );
         },
     };

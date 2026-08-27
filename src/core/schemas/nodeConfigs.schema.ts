@@ -427,6 +427,7 @@ export const resolveLatestTagConfigSchema = z.object({
 });
 
 export const runScriptConfigSchema = z.object({
+    image: refable(z.string().min(1, 'Image is required')).default('alpine:3.22'),
     command: refable(z.string().min(1, 'Command is required')).default(''),
     workingDirectory: refable(optionalRelativePath('Working directory')).default(''),
     timeoutSeconds: z.number().int().min(1).max(3600).default(600),

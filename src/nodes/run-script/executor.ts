@@ -1,79 +1,19 @@
-import { spawn } from 'node:child_process';
 import { getFromAllOutputs, getFromInputs } from '@nexploy/nodes/core/helpers';
 import { INodeExecutor, NodeExecutionContext, NodeExecutionResult } from '@nexploy/nodes/core/pipeline';
+import { createDockerService } from '@nexploy/nodes/core/dockerService';
+import { resolveComposeEnvVars, resolveComposeLabels } from '@nexploy/nodes/core/composeContext';
 import { runScriptConfigSchema } from '@nexploy/nodes/core/schemas/nodeConfigs.schema';
 import { ResolveRefs } from '@nexploy/nodes/core/schemas/nodeFieldRef.schema';
 import { safeResolvePath } from '@nexploy/shared/pathSafety';
 import { z } from 'zod';
 
-interface ScriptResult {
-    stdout: string;
-    stderr: string;
-    exitCode: number;
-    timedOut: boolean;
-}
-
 const MAX_CAPTURED_OUTPUT = 256 * 1024;
 
-function runShellCommand(
-    command: string,
-    cwd: string,
-    timeoutMs: number,
-    signal: AbortSignal,
-    onLine: (line: string) => void,
-): Promise<ScriptResult> {
-    return new Promise((resolve, reject) => {
-        const proc = spawn('/bin/sh', ['-c', command], {
-            cwd,
-            env: process.env,
-            stdio: ['ignore', 'pipe', 'pipe'],
-        });
+function resolveWorkspaceOwner(): { uid: number; gid: number } | undefined {
+    const uid = process.getuid?.();
+    const gid = process.getgid?.();
 
-        let stdout = '';
-        let stderr = '';
-        let timedOut = false;
-
-        const timer = setTimeout(() => {
-            timedOut = true;
-            proc.kill('SIGKILL');
-        }, timeoutMs);
-
-        const abort = () => proc.kill('SIGTERM');
-        signal.addEventListener('abort', abort, { once: true });
-
-        const capture = (chunk: Buffer, isError: boolean) => {
-            const text = chunk.toString();
-
-            if (isError) {
-                if (stderr.length < MAX_CAPTURED_OUTPUT) stderr += text;
-            } else if (stdout.length < MAX_CAPTURED_OUTPUT) {
-                stdout += text;
-            }
-
-            for (const line of text.split('\n')) {
-                const trimmed = line.trimEnd();
-                if (trimmed) onLine(trimmed);
-            }
-        };
-
-        proc.stdout.on('data', (chunk: Buffer) => capture(chunk, false));
-        proc.stderr.on('data', (chunk: Buffer) => capture(chunk, true));
-
-        const cleanup = () => {
-            clearTimeout(timer);
-            signal.removeEventListener('abort', abort);
-        };
-
-        proc.on('error', (error) => {
-            cleanup();
-            reject(error);
-        });
-
-        proc.on('close', (code) => {
-            cleanup();
-            resolve({ stdout, stderr, exitCode: code ?? -1, timedOut });
-        });
-    });
+    return uid === undefined || gid === undefined ? undefined : { uid, gid };
 }
 
 export class RunScriptExecutor implements INodeExecutor {
@@ -83,7 +23,8 @@ export class RunScriptExecutor implements INodeExecutor {
     async execute(
         ctx: NodeExecutionContext<ResolveRefs<z.infer<typeof runScriptConfigSchema>>>,
     ): Promise<NodeExecutionResult> {
-        const { nodeId, nodeConfig, inputOutputs, allOutputs, logger, abortSignal, reporter } = ctx;
+        const { nodeId, nodeConfig, inputOutputs, allOutputs, logger, abortSignal, reporter, services } = ctx;
+        const dockerService = createDockerService(services.docker);
 
         const workDir =
             getFromInputs<string>(inputOutputs, 'workDir') ?? getFromAllOutputs<string>(allOutputs, 'workDir');
@@ -98,28 +39,53 @@ export class RunScriptExecutor implements INodeExecutor {
             throw new Error('No command configured');
         }
 
+        const image = nodeConfig.image.trim();
+
+        if (!image) {
+            throw new Error('No image configured');
+        }
+
         const relativeDirectory = nodeConfig.workingDirectory.trim();
         const cwd = relativeDirectory ? safeResolvePath(workDir, relativeDirectory) : workDir;
-        const timeoutMs = nodeConfig.timeoutSeconds * 1000;
+        const envVars = await resolveComposeEnvVars(ctx);
+        const labels = resolveComposeLabels(ctx);
 
-        await logger.info(nodeId, `Running "${command}" in ${relativeDirectory || '.'}`);
+        await logger.info(nodeId, `Running "${command}" in ${relativeDirectory || '.'} using ${image}`);
 
         await reporter.reportProgress(nodeId, {
             current: 0,
             total: 1,
             labelKey: 'running',
-            labelValues: { directory: relativeDirectory || '.' },
+            labelValues: { directory: relativeDirectory || '.', image },
         });
 
-        const result = await runShellCommand(command, cwd, timeoutMs, abortSignal, (line) => {
-            void logger.info(nodeId, line);
-        });
+        let stdout = '';
+        let lastLine = '';
+
+        const onLog = async (message: string) => {
+            if (stdout.length < MAX_CAPTURED_OUTPUT) stdout += `${message}\n`;
+            lastLine = message;
+            await logger.info(nodeId, message);
+        };
+
+        const result = await dockerService.runScript(
+            workDir,
+            image,
+            command,
+            cwd,
+            envVars,
+            nodeConfig.timeoutSeconds,
+            abortSignal,
+            onLog,
+            labels,
+            resolveWorkspaceOwner(),
+        );
 
         await reporter.reportProgress(nodeId, {
             current: 1,
             total: 1,
             labelKey: 'running',
-            labelValues: { directory: relativeDirectory || '.' },
+            labelValues: { directory: relativeDirectory || '.', image },
         });
 
         if (result.timedOut) {
@@ -133,17 +99,15 @@ export class RunScriptExecutor implements INodeExecutor {
                 tone: 'warning',
             });
 
-            return { output: { stdout: result.stdout, exitCode: result.exitCode, failed: true } };
+            return { output: { stdout, exitCode: result.exitCode, failed: true } };
         }
 
         if (result.exitCode !== 0) {
-            const message = result.stderr.trim().split('\n').pop() ?? `Command exited with code ${result.exitCode}`;
+            const message = lastLine.trim() || `Command exited with code ${result.exitCode}`;
 
             if (!nodeConfig.continueOnError) {
                 throw new Error(`Command failed with exit code ${result.exitCode}: ${message}`);
             }
-
-            await logger.warn(nodeId, `Command failed with exit code ${result.exitCode}, continuing`);
 
             await reporter.reportSummary(nodeId, {
                 key: 'failedButContinued',
@@ -151,7 +115,7 @@ export class RunScriptExecutor implements INodeExecutor {
                 tone: 'warning',
             });
 
-            return { output: { stdout: result.stdout, exitCode: result.exitCode, failed: true } };
+            return { output: { stdout, exitCode: result.exitCode, failed: true } };
         }
 
         await reporter.reportSummary(nodeId, {
@@ -160,7 +124,7 @@ export class RunScriptExecutor implements INodeExecutor {
             tone: 'positive',
         });
 
-        return { output: { stdout: result.stdout, exitCode: result.exitCode, failed: false } };
+        return { output: { stdout, exitCode: result.exitCode, failed: false } };
     }
 }
 
