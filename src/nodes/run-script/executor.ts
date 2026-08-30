@@ -33,19 +33,19 @@ export class RunScriptExecutor implements INodeExecutor {
             throw new Error('No workDir found — connect this node after a Clone Repository node');
         }
 
-        const command = nodeConfig.command.trim();
+        const command = (nodeConfig.command ?? '').trim();
 
         if (!command) {
             throw new Error('No command configured');
         }
 
-        const image = nodeConfig.image.trim();
+        const image = (nodeConfig.image ?? '').trim();
 
         if (!image) {
             throw new Error('No image configured');
         }
 
-        const relativeDirectory = nodeConfig.workingDirectory.trim();
+        const relativeDirectory = (nodeConfig.workingDirectory ?? '').trim();
         const cwd = relativeDirectory ? safeResolvePath(workDir, relativeDirectory) : workDir;
         const envVars = await resolveComposeEnvVars(ctx);
         const labels = resolveComposeLabels(ctx);
