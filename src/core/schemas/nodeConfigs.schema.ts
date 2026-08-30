@@ -426,8 +426,16 @@ export const resolveLatestTagConfigSchema = z.object({
     excludePrereleases: z.boolean().default(true),
 });
 
+export const runScriptPackageSchema = z.object({
+    value: z
+        .string()
+        .min(1, 'Package name is required')
+        .regex(/^[a-zA-Z0-9][a-zA-Z0-9._+-]*$/, 'Package name contains invalid characters'),
+});
+
 export const runScriptConfigSchema = z.object({
     image: refable(z.string().min(1, 'Image is required')).default('alpine:3.22'),
+    packages: z.array(runScriptPackageSchema).default([]),
     command: refable(z.string().min(1, 'Command is required')).default(''),
     workingDirectory: refable(optionalRelativePath('Working directory')).default(''),
     timeoutSeconds: z.number().int().min(1).max(3600).default(600),

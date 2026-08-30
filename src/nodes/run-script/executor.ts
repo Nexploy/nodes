@@ -9,6 +9,23 @@ import { z } from 'zod';
 
 const MAX_CAPTURED_OUTPUT = 256 * 1024;
 
+function buildInstallPrelude(packages: string[]): string {
+    return [
+        `nexploy_packages="${packages.join(' ')}"`,
+        'if command -v apk >/dev/null 2>&1; then apk add --no-cache $nexploy_packages',
+        'elif command -v apt-get >/dev/null 2>&1; then apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $nexploy_packages',
+        'elif command -v microdnf >/dev/null 2>&1; then microdnf install -y $nexploy_packages',
+        'elif command -v dnf >/dev/null 2>&1; then dnf install -y $nexploy_packages',
+        'elif command -v yum >/dev/null 2>&1; then yum install -y $nexploy_packages',
+        'elif command -v zypper >/dev/null 2>&1; then zypper --non-interactive install $nexploy_packages',
+        'elif command -v pacman >/dev/null 2>&1; then pacman -Sy --noconfirm $nexploy_packages',
+        'else echo "No supported package manager found in this image" >&2; exit 127',
+        'fi',
+        'nexploy_install_status=$?',
+        'if [ "$nexploy_install_status" -ne 0 ]; then echo "Package installation failed" >&2; exit "$nexploy_install_status"; fi',
+    ].join('\n');
+}
+
 function resolveWorkspaceOwner(): { uid: number; gid: number } | undefined {
     const uid = process.getuid?.();
     const gid = process.getgid?.();
@@ -45,10 +62,17 @@ export class RunScriptExecutor implements INodeExecutor {
             throw new Error('No image configured');
         }
 
+        const packages = (nodeConfig.packages ?? []).map((entry) => entry.value.trim()).filter(Boolean);
+        const script = packages.length > 0 ? `${buildInstallPrelude(packages)}\n${command}` : command;
+
         const relativeDirectory = (nodeConfig.workingDirectory ?? '').trim();
         const cwd = relativeDirectory ? safeResolvePath(workDir, relativeDirectory) : workDir;
         const envVars = await resolveComposeEnvVars(ctx);
         const labels = resolveComposeLabels(ctx);
+
+        if (packages.length > 0) {
+            await logger.info(nodeId, `Installing ${packages.join(', ')} in ${image}`);
+        }
 
         await logger.info(nodeId, `Running "${command}" in ${relativeDirectory || '.'} using ${image}`);
 
@@ -71,7 +95,7 @@ export class RunScriptExecutor implements INodeExecutor {
         const result = await dockerService.runScript(
             workDir,
             image,
-            command,
+            script,
             cwd,
             envVars,
             nodeConfig.timeoutSeconds,

@@ -6,7 +6,7 @@ export const runScriptDescriptor: NodeDescriptor = {
     category: 'script',
     icon: 'Terminal',
     description:
-        'Runs a shell command against the cloned repository inside a throwaway container built from the image you choose. Use it for setup scripts a project ships with, such as generating an .env file before deploying. Pick an image that already carries the tooling the script needs, or install it in the command itself.',
+        'Runs a shell command against the cloned repository inside a throwaway container built from the image you choose. Use it for setup scripts a project ships with, such as generating an .env file before deploying. Pick an image that already carries the tooling the script needs, or list the packages to install before the command runs.',
     consumesFromUpstream: ['workDir'],
     configSchema: runScriptConfigSchema,
     outputs: [{ key: 'stdout' }, { key: 'exitCode', type: 'number' }, { key: 'failed', internal: true }],
